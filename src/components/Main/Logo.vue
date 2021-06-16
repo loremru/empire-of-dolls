@@ -1,5 +1,5 @@
 <template>
-  <img src="@/assets/images/logo.svg" alt="" width="187" />
+  <img src="@/assets/images/logo.svg" alt="" width="187" class="logo" />
 </template>
 
 <script>
@@ -8,4 +8,15 @@ export default {
 }
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+@media (max-width: $media-table) {
+  .logo {
+    width: 140px;
+  }
+}
+@media (max-width: $media-mobile) {
+  .logo {
+    width: 155px;
+  }
+}
+</style>

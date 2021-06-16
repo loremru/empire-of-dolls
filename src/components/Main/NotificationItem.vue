@@ -1,5 +1,5 @@
 <template>
-  <div class="notification">
+  <div class="notification flex">
     <slot></slot>
     <div class="notification__circle">
       <span>{{ amount }}</span>
@@ -36,6 +36,18 @@ export default {
       font-size: 14px;
       display: block;
       transform: translateY(1px);
+    }
+  }
+}
+
+@media (max-width: $media-table) {
+  .notification__circle {
+    width: 15px;
+    height: 15px;
+    top: -5px;
+    right: -5px;
+    span {
+      font-size: 9px;
     }
   }
 }

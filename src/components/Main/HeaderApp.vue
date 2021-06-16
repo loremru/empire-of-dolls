@@ -2,9 +2,17 @@
   <div class="header" ref="header" :class="{ header_fixed: fixed }">
     <div class="content">
       <div class="header__head flex jcsb">
+        <div class="header__links flex aic" v-if="isMobile">
+          <a href="#"
+            ><img src="@/assets/images/menu.svg" alt="" height="13"
+          /></a>
+          <a href="#"
+            ><img src="@/assets/images/search-mobile.svg" height="13" alt=""
+          /></a>
+        </div>
         <Logo />
-        <SearchHeader placeholder="Барби" />
-        <div class="header__socials flex aic">
+        <SearchHeader placeholder="Барби" v-if="!isMobile" />
+        <div class="header__socials flex aic" v-if="!isMobile">
           <a href="#" target="_blank"
             ><img src="@/assets/images/telegram.svg" alt=""
           /></a>
@@ -28,10 +36,11 @@
           ></RouterLink>
         </div>
       </div>
-      <div class="header__bottom flex jcsb aic" v-if="!fixed">
+      <div class="header__bottom flex jcsb aic" v-if="!fixed && !isMobile">
         <City />
         <HeaderNav />
-        <ConnectionLink />
+        <ConnectionLink v-if="isDesktop" />
+        <Subscribe :width="33" v-else />
       </div>
     </div>
   </div>
@@ -44,10 +53,13 @@ import NotificationItem from '@/components/Main/NotificationItem'
 import City from '@/components/Main/City'
 import HeaderNav from '@/components/Main/HeaderNav'
 import ConnectionLink from '@/components/Main/Connection/ConnectionLink'
+import { isDesktop, isMobile } from '@/store/display'
+import Subscribe from '@/components/Main/Subscribe'
 export default {
   name: 'HeaderApp',
   events: ['fixedChange'],
   components: {
+    Subscribe,
     ConnectionLink,
     HeaderNav,
     City,
@@ -60,6 +72,9 @@ export default {
       fixed: false,
       headerHeight: null,
     }
+  },
+  setup() {
+    return { isDesktop: isDesktop, isMobile: isMobile }
   },
   mounted() {
     this.headerHeight = this.$refs.header.offsetHeight
@@ -87,8 +102,9 @@ export default {
   &__links {
     a {
       height: 24px;
-      display: block;
       margin: 0 6px;
+      display: flex;
+      align-items: center;
     }
   }
   &__bottom {
@@ -97,6 +113,30 @@ export default {
   }
   &_fixed {
     position: fixed;
+  }
+}
+@media (max-width: $media-table) {
+  .header {
+    &__bottom {
+      padding-left: 0;
+    }
+    &__links {
+      min-width: 108px;
+      img {
+        height: 16px;
+      }
+    }
+  }
+}
+
+@media (max-width: 410px) {
+  .header {
+    &__links {
+      min-width: auto;
+      a {
+        margin: 0 4px;
+      }
+    }
   }
 }
 </style>
