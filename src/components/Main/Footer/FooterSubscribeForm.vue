@@ -34,7 +34,7 @@ export default {
   width: 350px;
 }
 .subscription-button {
-  background: $violet-button;
+  background: $pink;
   border: none;
   height: 38px;
   line-height: 37px;

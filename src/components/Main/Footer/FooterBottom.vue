@@ -1,6 +1,6 @@
 <template>
   <div class="FooterBottom">
-    <div class="footer-bottom-container">
+    <div class="footer-bottom-container content">
       <FooterContacts />
       <FooterSubscribeAlert />
       <FooterSubscribeForm />
@@ -23,9 +23,8 @@ export default {
   background: #fff;
 }
 .footer-bottom-container {
-  width: 80%;
-  margin: auto;
-  padding: 35px 0;
+  padding-top: 35px;
+  padding-bottom: 35px;
   display: flex;
   justify-content: space-between;
   align-items: center;
