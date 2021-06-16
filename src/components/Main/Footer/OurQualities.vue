@@ -90,4 +90,12 @@ export default {
   margin: 40px auto 0 auto;
   width: 80%;
 }
+@media (max-width: $media-table) {
+  .qualities-item_text_description {
+    font-size: 16.5px;
+  }
+  .qualities-item_text_header {
+    font-size: 16.5px;
+  }
+}
 </style>

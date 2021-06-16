@@ -1,37 +1,34 @@
 <template>
   <div class="FooterSubscribeForm">
-    <form>
-      <BasicInput />
-      <BasicButton />
+    <form class="flex">
+      <BasicInput placeholder="example@mail.ru" />
+      <BasicButton>ПОДПИСАТЬСЯ</BasicButton>
     </form>
-    <p class="subscription-form-text">
-      Нажимая на кнопку “Подписаться”, я даю согласие на обработку персональных
-      данных в соответствии с
-      <a href="#" target="_blank"
-        >“Политикой в области обработки и защиты персональных данных”</a
-      >.
-    </p>
+    <SubscriptionFormText v-if="isDesktop" />
   </div>
 </template>
 
 <script>
 import BasicInput from '@/components/BaseComponents/BasicInput'
 import BasicButton from '@/components/BaseComponents/BasicButton'
+import { isDesktop } from '@/store/display'
+import SubscriptionFormText from '@/components/Main/Footer/SubscriptionFormText'
 export default {
   name: 'FooterSubscribeForm',
-  components: { BasicButton, BasicInput },
+  components: { SubscriptionFormText, BasicButton, BasicInput },
+  setup() {
+    return { isDesktop: isDesktop }
+  },
 }
 </script>
 
 <style scoped lang="scss">
-.subscription-form-text {
-  width: 500px;
-  color: $text;
-  font-size: 14px;
-  margin-top: 5px;
-  a {
-    color: $text;
-    text-decoration: underline;
+.FooterSubscribeForm {
+  padding: 0 15px;
+}
+@media (max-width: $media-table) {
+  .FooterSubscribeForm {
+    width: 50%;
   }
 }
 </style>

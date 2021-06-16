@@ -1,25 +1,24 @@
 <template>
-  <input
-    :style="`width: ${width}px; height:${height}px`"
-    class="subscription-email"
-    type="email"
-    placeholder="example@mail.ru"
-    required
-  />
+  <div :style="`width:100%`">
+    <input
+      :style="`height:${height}px`"
+      class="subscription-email"
+      type="email"
+      :placeholder="`${placeholder}`"
+      required
+    />
+  </div>
 </template>
 
 <script>
 export default {
   name: 'BasicInput',
   props: {
-    width: {
-      type: Number,
-      default: 350,
-    },
     height: {
       type: Number,
-      default: 38,
+      default: 39,
     },
+    placeholder: { type: String },
   },
 }
 </script>
@@ -29,5 +28,6 @@ export default {
   border-radius: 7px;
   border: 1px solid $border-color;
   padding-left: 12px;
+  width: 100%;
 }
 </style>

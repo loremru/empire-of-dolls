@@ -17,11 +17,23 @@ export default {
 .FooterSubscribeAlert {
   display: flex;
   align-items: center;
+  padding: 0 15px;
+  min-width: 325px;
 }
 .subscribe-alert-text {
   font-size: 20px;
   font-weight: 500;
   margin-left: 20px;
   line-height: 1;
+}
+@media (max-width: $media-table) {
+  .FooterSubscribeAlert {
+    img {
+      width: 43px;
+    }
+  }
+  .subscribe-alert-text {
+    font-size: 16.5px;
+  }
 }
 </style>
