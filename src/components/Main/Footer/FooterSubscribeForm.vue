@@ -1,13 +1,8 @@
 <template>
   <div class="FooterSubscribeForm">
     <form>
-      <input
-        class="subscription-email"
-        type="email"
-        placeholder="example@mail.ru"
-        required
-      />
-      <button class="subscription-button">подписаться</button>
+      <BasicInput />
+      <BasicButton />
     </form>
     <p class="subscription-form-text">
       Нажимая на кнопку “Подписаться”, я даю согласие на обработку персональных
@@ -20,31 +15,15 @@
 </template>
 
 <script>
+import BasicInput from '@/components/BaseComponents/BasicInput'
+import BasicButton from '@/components/BaseComponents/BasicButton'
 export default {
   name: 'FooterSubscribeForm',
+  components: { BasicButton, BasicInput },
 }
 </script>
 
 <style scoped lang="scss">
-.subscription-email {
-  border-radius: 7px;
-  border: 1px solid $border-color;
-  padding-left: 12px;
-  height: 38px;
-  width: 350px;
-}
-.subscription-button {
-  background: $pink;
-  border: none;
-  height: 38px;
-  line-height: 37px;
-  width: 150px;
-  color: rgba(250, 250, 250, 0.78);
-  text-transform: uppercase;
-  border-radius: 7px;
-  margin-left: 7px;
-  cursor: pointer;
-}
 .subscription-form-text {
   width: 500px;
   color: $text;
