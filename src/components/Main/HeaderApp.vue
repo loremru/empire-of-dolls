@@ -46,6 +46,7 @@ import HeaderNav from '@/components/Main/HeaderNav'
 import ConnectionLink from '@/components/Main/Connection/ConnectionLink'
 export default {
   name: 'HeaderApp',
+  events: ['fixedChange'],
   components: {
     ConnectionLink,
     HeaderNav,
@@ -57,13 +58,18 @@ export default {
   data() {
     return {
       fixed: false,
+      headerHeight: null,
     }
   },
   mounted() {
-    document.addEventListener(
-      'scroll',
-      () => (this.fixed = window.pageYOffset > this.$refs.header.offsetHeight)
-    )
+    this.headerHeight = this.$refs.header.offsetHeight
+    document.addEventListener('scroll', () => {
+      this.fixed = window.pageYOffset > this.$refs.header.offsetHeight
+      this.$emit('fixedChange', {
+        headerHeight: this.headerHeight,
+        fixed: this.fixed,
+      })
+    })
   },
 }
 </script>
