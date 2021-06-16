@@ -38,6 +38,10 @@ p {
   justify-content: space-between;
 }
 
+.jcsa {
+  justify-content: space-around;
+}
+
 .jcfe {
   justify-content: flex-end;
 }
@@ -69,3 +73,12 @@ p {
   margin: 0 auto;
 }
 
+.bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  background-color: rgba(0,0,0,0.35);
+  width: 100%;
+  height: 100%;
+}
