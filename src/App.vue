@@ -4,13 +4,14 @@
     <router-view />
     <div style="height: 150vh"></div>
   </div>
-  <!--  footer-->
+  <FooterApp />
 </template>
 
 <script>
 import HeaderApp from './components/Main/HeaderApp'
+import FooterApp from '@/components/Main/Footer/FooterApp'
 export default {
-  components: { HeaderApp },
+  components: { FooterApp, HeaderApp },
 }
 </script>
 
