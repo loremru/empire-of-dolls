@@ -7,14 +7,15 @@
     </div>
     <div style="height: 150vh"></div>
   </div>
-  <!--  footer-->
+  <FooterApp />
 </template>
 
 <script>
 import HeaderApp from './components/Main/HeaderApp'
+import FooterApp from '@/components/Main/Footer/FooterApp'
 import CatalogSidebar from '@/components/Main/CatalogSidebar'
 export default {
-  components: { CatalogSidebar, HeaderApp },
+  components: { FooterApp, CatalogSidebar, HeaderApp },
   data() {
     return {
       contentOffset: 0,
