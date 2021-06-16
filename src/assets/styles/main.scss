@@ -1,0 +1,71 @@
+@import "fonts";
+@import "variables";
+
+* {
+  box-sizing: border-box;
+  font-family: "Jost", sans-serif;
+  outline: none;
+}
+
+body {
+  margin: 0;
+  background-color: $body;
+}
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+  max-width: 1060px;
+}
+
+a {
+  text-decoration: none;
+}
+
+p {
+  margin: 0;
+}
+
+.flex {
+  display: flex;
+}
+
+.jcc {
+  justify-content: center;
+}
+
+.jcsb {
+  justify-content: space-between;
+}
+
+.jcfe {
+  justify-content: flex-end;
+}
+
+.aic {
+  align-items: center;
+}
+
+.aife {
+  align-items: flex-end;
+}
+
+.fxdc {
+  flex-direction: column;
+}
+
+.fxww {
+  flex-wrap: wrap;
+}
+
+.tac {
+  text-align: center;
+}
+
+.content {
+  width: 100%;
+  padding: 0 15px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
