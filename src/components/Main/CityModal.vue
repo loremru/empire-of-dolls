@@ -309,7 +309,7 @@ export default {
   emits: ['close'],
   data() {
     return {
-      fullModal: true,
+      fullModal: false,
       swiper: null,
     }
   },

@@ -122,9 +122,6 @@ export default {
     }
     &__links {
       min-width: 108px;
-      img {
-        height: 16px;
-      }
     }
   }
 }
@@ -135,6 +132,9 @@ export default {
       min-width: auto;
       a {
         margin: 0 4px;
+      }
+      img {
+        height: 16px;
       }
     }
   }

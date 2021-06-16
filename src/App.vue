@@ -3,9 +3,10 @@
   <div class="main-content content" :style="`margin-top: ${contentOffset}px`">
     <div class="flex">
       <CatalogSidebar />
-      <router-view />
+      <div id="contentOfPage" style="padding-left: 7px">
+        <router-view />
+      </div>
     </div>
-    <div style="height: 150vh"></div>
   </div>
   <FooterApp />
 </template>
@@ -13,7 +14,7 @@
 <script>
 import HeaderApp from './components/Main/HeaderApp'
 import FooterApp from '@/components/Main/Footer/FooterApp'
-import CatalogSidebar from '@/components/Main/CatalogSidebar'
+import CatalogSidebar from '@/components/Main/Catalog/CatalogSidebar'
 import { setDisplayType } from '@/store/display'
 export default {
   components: { FooterApp, CatalogSidebar, HeaderApp },
@@ -39,5 +40,9 @@ export default {
 <style scoped lang="scss">
 .main-content {
   padding-top: 12px;
+}
+#contentOfPage {
+  flex-grow: 1;
+  min-width: 0;
 }
 </style>
