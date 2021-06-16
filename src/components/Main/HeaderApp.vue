@@ -3,7 +3,7 @@
     <div class="content">
       <div class="header__head flex jcsb">
         <Logo />
-        <SearchHeader />
+        <SearchHeader placeholder="Барби" />
         <div class="header__socials flex aic">
           <a href="#" target="_blank"
             ><img src="@/assets/images/telegram.svg" alt=""

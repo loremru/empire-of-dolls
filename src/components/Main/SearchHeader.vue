@@ -1,6 +1,6 @@
 <template>
   <div class="search" :style="`max-width: ${maxWidth}px`">
-    <input type="text" placeholder="Барби" />
+    <input type="text" :placeholder="placeholder" />
     <img src="@/assets/images/search.svg" alt="" class="search__img" />
   </div>
 </template>
@@ -13,6 +13,7 @@ export default {
       type: Number,
       default: 765,
     },
+    placeholder: String,
   },
 }
 </script>
