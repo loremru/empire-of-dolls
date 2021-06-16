@@ -23,4 +23,12 @@ export default {
     margin: 0 12px;
   }
 }
+
+@media (max-width: $media-table) {
+  .nav {
+    a {
+      font-size: 15px;
+    }
+  }
+}
 </style>

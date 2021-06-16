@@ -14,12 +14,17 @@
 import HeaderApp from './components/Main/HeaderApp'
 import FooterApp from '@/components/Main/Footer/FooterApp'
 import CatalogSidebar from '@/components/Main/CatalogSidebar'
+import { setDisplayType } from '@/store/display'
 export default {
   components: { FooterApp, CatalogSidebar, HeaderApp },
   data() {
     return {
       contentOffset: 0,
     }
+  },
+  mounted() {
+    setDisplayType()
+    window.addEventListener('resize', setDisplayType)
   },
   methods: {
     fixedHeaderChange({ headerHeight, fixed }) {
