@@ -30,7 +30,7 @@
           <RouterLink to="#"
             ><img src="@/assets/images/key.svg" alt=""
           /></RouterLink>
-          <RouterLink to="#"
+          <RouterLink to="/cabinet"
             ><NotificationItem
               ><img src="@/assets/images/cart.svg" alt="" /></NotificationItem
           ></RouterLink>
