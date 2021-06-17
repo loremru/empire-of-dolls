@@ -13,6 +13,7 @@
       class="sidebar__subscribe"
       :class="{ sidebar__subscribe_fixed: isFixedSub }"
       ref="sub"
+      v-if="isDesktop"
     >
       <Subscribe />
     </div>
@@ -22,6 +23,7 @@
 <script>
 import CatalogItem from '@/components/Main/Catalog/CatalogItem'
 import Subscribe from '@/components/Main/Subscribe'
+const { isDesktop } = require('@/store/display')
 export default {
   name: 'CatalogSidebar',
   components: { Subscribe, CatalogItem },
@@ -30,18 +32,23 @@ export default {
       isFixedSub: false,
     }
   },
+  setup() {
+    return { isDesktop }
+  },
   mounted() {
-    setTimeout(() => {
-      this.subPosY =
-        this.$refs.sub.getBoundingClientRect().top + window.pageYOffset
-      document.addEventListener('scroll', () => {
-        this.isFixedSub =
-          window.pageYOffset +
-            window.innerHeight -
-            (60 + this.$refs.sub.offsetHeight) >=
-          this.subPosY
-      })
-    }, 200)
+    if (isDesktop.value) {
+      setTimeout(() => {
+        this.subPosY =
+          this.$refs.sub.getBoundingClientRect().top + window.pageYOffset
+        document.addEventListener('scroll', () => {
+          this.isFixedSub =
+            window.pageYOffset +
+              window.innerHeight -
+              (60 + this.$refs.sub.offsetHeight) >=
+            this.subPosY
+        })
+      }, 200)
+    }
   },
 }
 </script>

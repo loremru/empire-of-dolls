@@ -113,6 +113,7 @@ export default {
   }
   &_fixed {
     position: fixed;
+    z-index: 20;
   }
 }
 @media (max-width: $media-table) {

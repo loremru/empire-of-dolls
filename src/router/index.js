@@ -6,6 +6,9 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
+    meta: {
+      layout: 'with-catalog',
+    },
   },
 ]
 
