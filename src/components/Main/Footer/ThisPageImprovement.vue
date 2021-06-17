@@ -29,4 +29,11 @@ export default {
     }
   }
 }
+@media (max-width: $media-table) {
+  .improvementMessage {
+    a {
+      margin-left: 24px;
+    }
+  }
+}
 </style>

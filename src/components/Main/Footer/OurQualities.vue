@@ -1,6 +1,6 @@
 <template>
   <div class="OurQualities">
-    <div class="qualities">
+    <div class="qualities content">
       <div class="qualities-item">
         <img src="@/assets/images/assortment.svg" alt="assortment" />
         <div class="qualities-item_text">
@@ -56,8 +56,6 @@ export default {
   padding: 25px 0;
 }
 .qualities {
-  width: 60%;
-  margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
 }
@@ -91,5 +89,13 @@ export default {
   color: transparent;
   margin: 40px auto 0 auto;
   width: 80%;
+}
+@media (max-width: $media-table) {
+  .qualities-item_text_description {
+    font-size: 16.5px;
+  }
+  .qualities-item_text_header {
+    font-size: 16.5px;
+  }
 }
 </style>
