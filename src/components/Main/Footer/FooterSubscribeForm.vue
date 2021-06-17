@@ -1,7 +1,11 @@
 <template>
   <div class="FooterSubscribeForm">
     <form class="flex">
-      <BasicInput placeholder="example@mail.ru" />
+      <BasicInput
+        v-model="value"
+        :value="MailToSubscribe"
+        placeholder="example@mail.ru"
+      />
       <BasicButton>ПОДПИСАТЬСЯ</BasicButton>
     </form>
     <SubscriptionFormText v-if="isDesktop" />
@@ -18,6 +22,11 @@ export default {
   components: { SubscriptionFormText, BasicButton, BasicInput },
   setup() {
     return { isDesktop: isDesktop }
+  },
+  data() {
+    return {
+      MailToSubscribe: '',
+    }
   },
 }
 </script>
