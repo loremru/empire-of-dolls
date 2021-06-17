@@ -1,23 +1,19 @@
 <template>
   <HeaderApp @fixedChange="fixedHeaderChange" />
-  <div class="main-content content" :style="`margin-top: ${contentOffset}px`">
-    <div class="flex">
-      <CatalogSidebar />
-      <div id="contentOfPage" style="padding-left: 7px">
-        <router-view />
-      </div>
-    </div>
-  </div>
+  <WithCatalog
+    v-if="$route.meta.layout === 'with-catalog'"
+    :content-offset="contentOffset"
+  />
   <FooterApp />
 </template>
 
 <script>
 import HeaderApp from './components/Main/HeaderApp'
 import FooterApp from '@/components/Main/Footer/FooterApp'
-import CatalogSidebar from '@/components/Main/Catalog/CatalogSidebar'
 import { setDisplayType } from '@/store/display'
+import WithCatalog from '@/layouts/WithCatalog'
 export default {
-  components: { FooterApp, CatalogSidebar, HeaderApp },
+  components: { WithCatalog, FooterApp, HeaderApp },
   data() {
     return {
       contentOffset: 0,
@@ -36,13 +32,3 @@ export default {
   },
 }
 </script>
-
-<style scoped lang="scss">
-.main-content {
-  padding-top: 12px;
-}
-#contentOfPage {
-  flex-grow: 1;
-  min-width: 0;
-}
-</style>
