@@ -62,6 +62,7 @@ export default {
   display: inline-block;
 }
 .itIsNotPublicOffer {
+  font-size: 13px;
   font-weight: 500;
   color: #000;
 }
