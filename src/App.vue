@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import HeaderApp from './components/Main/HeaderApp'
+import HeaderApp from './components/Main/Header/HeaderApp'
 import FooterApp from '@/components/Main/Footer/FooterApp'
 import { setDisplayType } from '@/store/display'
 import WithCatalog from '@/layouts/WithCatalog'

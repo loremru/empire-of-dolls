@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import CityModal from '@/components/Main/CityModal'
+import CityModal from '@/components/Main/City/CityModal'
 export default {
   name: 'City',
   components: { CityModal },

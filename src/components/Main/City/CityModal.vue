@@ -299,7 +299,7 @@ import Modal from '@/components/Main/Modal'
 import SwiperCore, { Controller } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/swiper.scss'
-import SearchHeader from '@/components/Main/SearchHeader'
+import SearchHeader from '@/components/Main/Header/SearchHeader'
 
 SwiperCore.use([Controller])
 

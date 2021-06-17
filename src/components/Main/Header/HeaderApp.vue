@@ -47,11 +47,11 @@
 </template>
 
 <script>
-import Logo from '@/components/Main/Logo'
-import SearchHeader from '@/components/Main/SearchHeader'
-import NotificationItem from '@/components/Main/NotificationItem'
-import City from '@/components/Main/City'
-import HeaderNav from '@/components/Main/HeaderNav'
+import Logo from '@/components/Main/Header/Logo'
+import SearchHeader from '@/components/Main/Header/SearchHeader'
+import NotificationItem from '@/components/Main/Header/NotificationItem'
+import City from '@/components/Main/City/City'
+import HeaderNav from '@/components/Main/Header/HeaderNav'
 import ConnectionLink from '@/components/Main/Connection/ConnectionLink'
 import { isDesktop, isMobile } from '@/store/display'
 import Subscribe from '@/components/Main/Subscribe'
@@ -74,7 +74,7 @@ export default {
     }
   },
   setup() {
-    return { isDesktop: isDesktop, isMobile: isMobile }
+    return { isDesktop, isMobile }
   },
   mounted() {
     this.headerHeight = this.$refs.header.offsetHeight
@@ -113,7 +113,7 @@ export default {
   }
   &_fixed {
     position: fixed;
-    z-index: 20;
+    z-index: 50;
   }
 }
 @media (max-width: $media-table) {
@@ -126,7 +126,6 @@ export default {
     }
   }
 }
-
 @media (max-width: 410px) {
   .header {
     &__links {
