@@ -27,14 +27,14 @@
     <div class="itemBody__price">
       <div>
         <p>
-          Цена: <span>{{ CartItem.price }}р</span>
+          Цена: <span>{{ CartItem.price * count }}р</span>
         </p>
         <p>
-          Скидка: <span>{{ CartItem.sale }}р</span>
+          Скидка: <span>{{ CartItem.sale * count }}р</span>
         </p>
       </div>
     </div>
-    <span @click="count = 0" class="itemBody__delete-button"
+    <span @click="deleteCardItem" class="itemBody__delete-button"
       ><img src="@/assets/images/close.svg" alt=""
     /></span>
   </div>
@@ -67,10 +67,16 @@ export default {
       isAvailable: true,
     }
   },
+  methods: {
+    deleteCardItem() {
+      let i = this.CartItem
+      this.$emit('deleteCardItem', i)
+    },
+  },
   watch: {
     count() {
       if (this.count <= 0) {
-        //удаление
+        this.deleteCardItem()
         this.count = 0
       }
     },
