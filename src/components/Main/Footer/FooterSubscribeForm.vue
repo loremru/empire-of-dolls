@@ -1,7 +1,10 @@
 <template>
   <div class="FooterSubscribeForm">
     <form class="flex">
-      <BasicInput v-model:value="value" placeholder="example@mail.ru" />
+      <BasicInput
+        v-model:value="EmailToSubscribe"
+        placeholder="example@mail.ru"
+      />
       <BasicButton>ПОДПИСАТЬСЯ</BasicButton>
     </form>
     <SubscriptionFormText v-if="isDesktop" />
@@ -21,7 +24,7 @@ export default {
   },
   data() {
     return {
-      value: '1w',
+      EmailToSubscribe: '',
     }
   },
 }

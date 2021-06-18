@@ -1,7 +1,7 @@
 <template>
   <div :style="`width:100%`">
     <input
-      :style="`height:${height}px`"
+      :style="`height:${height}px;text-align:${align}`"
       class="subscription-email"
       type="email"
       :value="value"
@@ -19,6 +19,10 @@ export default {
     height: {
       type: Number,
       default: 39,
+    },
+    align: {
+      type: String,
+      default: 'left',
     },
     placeholder: { type: String },
     value: String,
@@ -39,7 +43,6 @@ export default {
 .subscription-email {
   border-radius: 7px;
   border: 1px solid $border-color;
-  padding-left: 12px;
   width: 100%;
 }
 </style>
