@@ -81,6 +81,7 @@
         </SwiperSlide>
       </SliderWithDots>
       <SearchCityBtn />
+      <CategoryMobile />
     </template>
   </div>
 </template>
@@ -102,10 +103,12 @@ import SearchHeader from '@/components/Main/Header/SearchHeader'
 import DailyProductMobile from '@/components/Main/DailyProduct/DailyProductMobile'
 import SliderWithDots from '@/components/Main/SliderWithDots'
 import SearchCityBtn from '@/components/Main/SearchCityBtn'
+import CategoryMobile from '@/components/Main/CategoryMobile'
 SwiperCore.use([Controller])
 export default {
   name: 'Home',
   components: {
+    CategoryMobile,
     SearchCityBtn,
     SliderWithDots,
     DailyProductMobile,
