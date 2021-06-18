@@ -1,10 +1,24 @@
 <template>
-  <button class="subscription-button"><slot></slot></button>
+  <button
+    class="subscription-button"
+    :style="
+      `height: ${height}px;` + (uppercase ? `text-transform: uppercase` : '')
+    "
+  >
+    <slot></slot>
+  </button>
 </template>
 
 <script>
 export default {
   name: 'BasicButton',
+  props: {
+    height: {
+      type: Number,
+      default: 39,
+    },
+    uppercase: Boolean,
+  },
 }
 </script>
 
@@ -12,10 +26,17 @@ export default {
 .subscription-button {
   background: $pink;
   border: none;
-  color: rgba(250, 250, 250, 0.78);
+  color: #fafafa;
   border-radius: 7px;
   margin-left: 7px;
   cursor: pointer;
-  padding: 10px 20px;
+  padding: 0 20px;
+  font-size: 15px;
+}
+
+@media (max-width: $media-mobile) {
+  .subscription-button {
+    font-size: 13px;
+  }
 }
 </style>

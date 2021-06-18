@@ -6,7 +6,7 @@
           <a href="#"
             ><img src="@/assets/images/menu.svg" alt="" height="13"
           /></a>
-          <a href="#"
+          <a href="#" @click.prevent="goToSearch"
             ><img src="@/assets/images/search-mobile.svg" height="13" alt=""
           /></a>
         </div>
@@ -85,6 +85,33 @@ export default {
         fixed: this.fixed,
       })
     })
+  },
+  methods: {
+    goToSearch() {
+      const Search = document.querySelector('#searchMobile')
+      const Header = document.querySelector('.header')
+      window.scrollTo({
+        top:
+          Search.getBoundingClientRect().y +
+          window.pageYOffset -
+          Header.offsetHeight,
+        behavior: 'smooth',
+      })
+      // this.smoothScroll(
+      //   window.pageYOffset,
+      //   Search.getBoundingClientRect().y + window.pageYOffset
+      // )
+    },
+    // smoothScroll(currentPos, lastPos) {
+    //   console.log(currentPos, lastPos)
+    //   let i = currentPos || 0
+    //   if (i <= lastPos) {
+    //     setTimeout(() => {
+    //       window.scrollTo(0, i)
+    //       this.smoothScroll(i + 10, lastPos)
+    //     }, 10)
+    //   }
+    // },
   },
 }
 </script>

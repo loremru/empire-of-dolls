@@ -18,8 +18,24 @@ export default {
     color: #fff;
     font-size: 25px;
     font-weight: 500;
-    padding: 20px 24px;
+    padding: 13px 24px;
     text-transform: uppercase;
+    white-space: nowrap;
+  }
+}
+@media (max-width: $media-desktop) {
+  .daily-tag {
+    p {
+      font-size: 20px;
+    }
+  }
+}
+@media (max-width: $media-mobile) {
+  .daily-tag {
+    p {
+      font-size: 15px;
+      padding: 12px 13px;
+    }
   }
 }
 </style>

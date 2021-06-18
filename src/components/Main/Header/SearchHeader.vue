@@ -1,5 +1,9 @@
 <template>
-  <div class="search" :style="`max-width: ${maxWidth}px`">
+  <div
+    class="search"
+    :class="{ searchMob: isMobileSearch }"
+    :style="`max-width: ${maxWidth}px`"
+  >
     <input type="text" :placeholder="placeholder" />
     <img src="@/assets/images/search.svg" alt="" class="search__img" />
   </div>
@@ -14,6 +18,7 @@ export default {
       default: 765,
     },
     placeholder: String,
+    isMobileSearch: Boolean,
   },
 }
 </script>
@@ -38,6 +43,20 @@ export default {
     right: 10px;
     cursor: pointer;
     width: 17px;
+  }
+}
+
+.searchMob {
+  margin: 9px auto;
+}
+
+@media (max-width: $media-mobile) {
+  .search {
+    height: 28px;
+    &__img {
+      top: 6px;
+      right: 8px;
+    }
   }
 }
 </style>

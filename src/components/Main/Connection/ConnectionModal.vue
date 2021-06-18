@@ -28,12 +28,21 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 .connect {
   top: 34px;
   right: 0;
   width: 260px;
   height: 259px;
+}
+
+@media (max-width: $media-mobile) {
+  .connect {
+    position: fixed !important;
+    right: 50%;
+    top: 120px;
+    transform: translateX(50%);
+  }
 }
 </style>
 
@@ -43,7 +52,7 @@ export default {
     text-align: center;
     h3 {
       margin: 0;
-      color: $purple;
+      color: $pink;
       font-weight: 600;
       font-size: 25px;
     }
