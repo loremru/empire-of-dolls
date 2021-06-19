@@ -40,7 +40,9 @@
         <City />
         <HeaderNav />
         <ConnectionLink v-if="isDesktop" />
-        <Subscribe :width="33" v-else />
+        <div style="position: relative" v-else>
+          <Subscribe :width="33" />
+        </div>
       </div>
     </div>
   </div>
@@ -54,7 +56,7 @@ import City from '@/components/Main/City/City'
 import HeaderNav from '@/components/Main/Header/HeaderNav'
 import ConnectionLink from '@/components/Main/Connection/ConnectionLink'
 import { isDesktop, isMobile } from '@/store/display'
-import Subscribe from '@/components/Main/Subscribe'
+import Subscribe from '@/components/Main/Subscribe/Subscribe'
 export default {
   name: 'HeaderApp',
   events: ['fixedChange'],
@@ -115,6 +117,16 @@ export default {
   },
 }
 </script>
+
+<style>
+.sub-mod {
+  left: 32px;
+  top: 49px;
+  transform: translate(-100%, 0);
+  background-color: #fff !important;
+  min-height: min-content;
+}
+</style>
 
 <style scoped lang="scss">
 .header {

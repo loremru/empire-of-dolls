@@ -25,7 +25,7 @@
 
 <script>
 import CatalogItem from '@/components/Main/Catalog/CatalogItem'
-import Subscribe from '@/components/Main/Subscribe'
+import Subscribe from '@/components/Main/Subscribe/Subscribe'
 const { isDesktop } = require('@/store/display')
 export default {
   name: 'CatalogSidebar',
@@ -79,9 +79,13 @@ export default {
   }
   &__subscribe {
     margin-top: 74px;
+    display: flex;
+    align-items: flex-end;
+    position: relative;
     &_fixed {
       position: fixed;
       bottom: 60px;
+      z-index: 800;
     }
     &_bottom {
       position: absolute;

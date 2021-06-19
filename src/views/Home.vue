@@ -81,7 +81,7 @@
         </SwiperSlide>
       </SliderWithDots>
       <SearchCityBtn />
-      <CategoryMobile />
+      <CategoryMobile v-for="i in 10" :key="i + 'cat'" />
     </template>
   </div>
 </template>

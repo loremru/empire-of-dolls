@@ -24,12 +24,15 @@ export default {
 .category {
   width: 100%;
   overflow: hidden;
-  margin-bottom: 9px;
+  max-height: 163px;
   height: 163px;
+  margin: 0 auto 9px;
   &__img {
+    min-width: 162px;
     width: 162px;
     border-radius: 7.7px;
     overflow: hidden;
+    height: 100%;
     img {
       width: 100%;
       height: 100%;
@@ -42,6 +45,7 @@ export default {
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
+    flex-grow: 1;
   }
   &__name {
     margin: 0;

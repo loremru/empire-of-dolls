@@ -1,12 +1,12 @@
 <template>
-  <div :style="`width:100%`">
+  <div style="width: 100%">
     <input
       :style="`height:${height}px;text-align:${align}`"
       class="subscription-email"
-      type="email"
+      :type="type"
       :value="value"
       @keyup="change"
-      :placeholder="`${placeholder}`"
+      :placeholder="placeholder"
       required
     />
   </div>
@@ -26,6 +26,10 @@ export default {
     },
     placeholder: { type: String },
     value: String,
+    type: {
+      type: String,
+      default: () => 'text',
+    },
   },
   emits: ['update:value'],
   methods: {
@@ -44,5 +48,6 @@ export default {
   border-radius: 7px;
   border: 1px solid $border-color;
   width: 100%;
+  padding: 0 16px;
 }
 </style>

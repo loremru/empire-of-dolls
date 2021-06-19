@@ -1,5 +1,5 @@
 <template>
-  <div class="bg" @click="$emit('close')"></div>
+  <div class="bg" @click="$emit('close')" :style="`z-index: ${bgZIndex}`"></div>
   <div class="modal" :class="classOfModal">
     <img
       src="@/assets/images/close.svg"
@@ -19,6 +19,13 @@ export default {
     classOfModal: {
       type: String,
     },
+    bgZIndex: Number,
+  },
+  mounted() {
+    document.querySelector('body').classList.add('no-scroll')
+  },
+  beforeUnmount() {
+    document.querySelector('body').classList.remove('no-scroll')
   },
 }
 </script>
@@ -35,6 +42,14 @@ export default {
     top: 16px;
     right: 16px;
     cursor: pointer;
+    width: 18px;
+  }
+}
+@media (max-width: $media-mobile) {
+  .modal {
+    &__close {
+      width: 14px;
+    }
   }
 }
 </style>

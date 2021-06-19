@@ -1,5 +1,5 @@
 <template>
-  <Modal class-of-modal="connect" @close="$emit('close')">
+  <Modal class-of-modal="connect" :bgZIndex="1000" @close="$emit('close')">
     <div class="connect__body flex fxdc aic">
       <div class="connect__body__content flex fxdc aic jcsa">
         <div class="connect__number">
@@ -34,6 +34,7 @@ export default {
   right: 0;
   width: 260px;
   height: 259px;
+  z-index: 1001 !important;
 }
 
 @media (max-width: $media-mobile) {

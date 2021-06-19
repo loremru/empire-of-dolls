@@ -1,0 +1,52 @@
+<template>
+  <Modal class-of-modal="sub-mod" @close="$emit('close')">
+    <form class="sub-modal flex fxdc jcsb aic">
+      <h3 class="sub-modal__head">
+        Наши друзья первыми узнают о распродажах и новинках
+      </h3>
+      <p class="sub-modal__text txt">Куда присылать новости?</p>
+      <BasicInput :height="36" />
+      <BasicButton :height="49" uppercase>Подписаться</BasicButton>
+    </form>
+  </Modal>
+</template>
+
+<script>
+import Modal from '@/components/Main/Modal'
+import BasicInput from '@/components/BaseComponents/BasicInput'
+import BasicButton from '@/components/BaseComponents/BasicButton'
+export default {
+  name: 'SubscribeModal',
+  components: { BasicButton, BasicInput, Modal },
+  emits: ['close'],
+}
+</script>
+
+<style>
+.sub-mod {
+  bottom: 0;
+  left: 80px;
+  width: 380px;
+}
+</style>
+
+<style scoped lang="scss">
+.sub-modal {
+  padding: 44px 25px 25px;
+  &__head {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1;
+    margin: 0 auto 30px;
+    color: #333;
+  }
+  &__text {
+    margin-bottom: 9px;
+  }
+  .subscription-button {
+    margin-top: 9px;
+    margin-left: 0;
+  }
+}
+</style>
