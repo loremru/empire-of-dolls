@@ -15,6 +15,7 @@
       :isActive="idx === activeIndex"
       @check="() => (activeIndex = idx)"
     />
+    {{ activeIndex }}
   </div>
 </template>
 

@@ -14,10 +14,7 @@ export default {
     RadioItem: {
       type: Object,
     },
-    isActive: {
-      type: Boolean,
-      default: false,
-    },
+    isActive: Boolean,
   },
   methods: {
     check() {
