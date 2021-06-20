@@ -17,11 +17,11 @@
       <p v-if="isAvailable" class="available">В наличии</p>
       <p v-if="!isAvailable" class="not-available">Нет в наличии</p>
       <div class="counter-block flex">
-        <BasicButton @click="count--" height="34">-</BasicButton>
+        <BasicButton @click="count--" :height="34">-</BasicButton>
         <div class="itemBody__counter__input">
           <BasicInput align="center" :height="34" v-model:value="count" />
         </div>
-        <BasicButton @click="count++" height="34">+</BasicButton>
+        <BasicButton @click="count++" :height="34">+</BasicButton>
       </div>
     </div>
     <div class="itemBody__price">

@@ -1,7 +1,7 @@
 <template>
   <div class="radio-item">
     <div @click="check" class="radio-border">
-      <div v-if="RadioItem.isChecked" class="radio-checked"></div>
+      <div v-if="isActive" class="radio-checked"></div>
     </div>
     <span @click="check" class="radio-label">{{ RadioItem.label }}</span>
   </div>
@@ -13,19 +13,15 @@ export default {
   props: {
     RadioItem: {
       type: Object,
-      default: function () {
-        return {
-          label: 'Название',
-          value: 'value-name',
-          isChecked: false,
-        }
-      },
+    },
+    isActive: {
+      type: Boolean,
+      default: false,
     },
   },
   methods: {
     check() {
-      let i = this.RadioItem
-      this.$emit('check', i)
+      this.$emit('check')
     },
   },
 }

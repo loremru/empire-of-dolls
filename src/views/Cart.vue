@@ -8,7 +8,13 @@
   />
   <div class="delivery-block">
     <p>Выберите вариант доставки</p>
-    <Radio v-for="el in RadioArray" :key="el" :RadioItem="el" @check="check" />
+    <Radio
+      v-for="(el, idx) in RadioArray"
+      :RadioItem="el"
+      :key="el.key"
+      :isActive="idx === activeIndex"
+      @check="() => (activeIndex = idx)"
+    />
   </div>
 </template>
 
@@ -16,6 +22,7 @@
 import Breadcrumb from '../components/BaseComponents/Breadcrumb'
 import CartItem from '@/components/Cart/CartItem'
 import Radio from '@/components/BaseComponents/Radio'
+
 export default {
   name: 'Cart',
   components: { Radio, CartItem, Breadcrumb },
@@ -57,36 +64,28 @@ export default {
         {
           label: 'Курьерская доставка по Перми',
           value: 'courierPerm',
-          isChecked: true,
         },
         {
           label: 'Доставка через Почту России (в среднем 4-10 дней)',
           value: 'russianPost',
-          isChecked: false,
         },
         {
           label:
             'Доставка через службу экспресс-доставки EMS (в среднем 3-7 дней)',
           value: 'ems',
-          isChecked: false,
         },
         {
           label: 'Доставка в другой город',
           value: 'ems',
-          isChecked: false,
         },
       ],
+      activeIndex: 0,
     }
   },
   methods: {
     deleteCardItem(i) {
       const qwe = this.CartItems.findIndex((el) => el == i)
       this.CartItems.splice(qwe, 1)
-    },
-    check(i) {
-      this.RadioArray.forEach((el) => (el.isChecked = false))
-      i.isChecked = true
-      console.log(this.RadioArray)
     },
   },
 }
