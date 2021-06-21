@@ -31,7 +31,7 @@ export default {
   border-bottom: 1px solid $text-gray;
 }
 .breadcrumb {
-  margin: 10px 0 0 30px;
+  //margin: 10px 0 0 30px;
   font-size: 13.5px;
   span {
     margin: 0 5px;

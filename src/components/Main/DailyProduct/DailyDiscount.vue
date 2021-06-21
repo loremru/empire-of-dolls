@@ -1,5 +1,6 @@
 <template>
   <div class="daily__img__discount" :style="styles">
+    <img src="@/assets/images/discount.svg" alt="" />
     <p><slot></slot></p>
   </div>
 </template>
@@ -19,16 +20,23 @@ export default {
 <style scoped lang="scss">
 .daily__img__discount {
   position: absolute;
-  background: url('~@/assets/images/discount.svg') center no-repeat;
-  background-size: contain;
+  display: flex;
+  img {
+    width: 54px;
+    height: 54px;
+  }
   p {
+    position: absolute;
     color: #fff;
-    font-size: 17.5px;
+    font-size: 16.5px;
+    z-index: 2;
+    display: flex;
     width: 100%;
     height: 100%;
-    position: relative;
-    z-index: 2;
-    padding: 17px 12px;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
   }
 }
 
@@ -36,6 +44,10 @@ export default {
   .daily__img__discount {
     p {
       font-size: 14px;
+    }
+    img {
+      width: 48px;
+      height: 48px;
     }
   }
 }

@@ -26,7 +26,7 @@ export default {
 .daily-mob {
   width: 100%;
   min-height: 153px;
-  max-width: 320px;
+  max-width: 580px;
   &__image {
     width: 154px;
     height: 100%;
@@ -40,6 +40,7 @@ export default {
   &__body {
     padding: 6px 11px 8px 12px;
     flex-grow: 1;
+    max-width: 175px;
     .txt {
       max-width: 110px;
     }

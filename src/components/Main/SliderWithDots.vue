@@ -56,6 +56,8 @@ export default {
       width: 9px;
       height: 9px;
       background-color: #d7c3cd;
+      margin: 0 4px !important;
+      border-radius: 100% !important;
       &-active {
         background-color: $pink;
       }

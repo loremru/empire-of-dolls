@@ -2,7 +2,11 @@
   <div class="header" ref="header" :class="{ header_fixed: fixed }">
     <div class="content">
       <div class="header__head flex jcsb">
-        <div class="header__links flex aic" v-if="isMobile">
+        <div
+          class="header__links flex aic"
+          v-if="isMobile"
+          @click="isMenu = !isMenu"
+        >
           <a href="#"
             ><img src="@/assets/images/menu.svg" alt="" height="13"
           /></a>
@@ -40,12 +44,13 @@
         <City />
         <HeaderNav />
         <ConnectionLink v-if="isDesktop" />
-        <div style="position: relative" v-else>
+        <div id="headerSub" v-else>
           <Subscribe :width="33" />
         </div>
       </div>
     </div>
   </div>
+  <MobileMenu v-if="isMenu" @close="isMenu = false" />
 </template>
 
 <script>
@@ -57,10 +62,12 @@ import HeaderNav from '@/components/Main/Header/HeaderNav'
 import ConnectionLink from '@/components/Main/Connection/ConnectionLink'
 import { isDesktop, isMobile } from '@/store/display'
 import Subscribe from '@/components/Main/Subscribe/Subscribe'
+import MobileMenu from '@/components/Main/MobileMenu/MobileMenu'
 export default {
   name: 'HeaderApp',
-  events: ['fixedChange'],
+  emits: ['fixedChange'],
   components: {
+    MobileMenu,
     Subscribe,
     ConnectionLink,
     HeaderNav,
@@ -72,14 +79,13 @@ export default {
   data() {
     return {
       fixed: false,
-      headerHeight: null,
+      isMenu: false,
     }
   },
   setup() {
     return { isDesktop, isMobile }
   },
   mounted() {
-    this.headerHeight = this.$refs.header.offsetHeight
     document.addEventListener('scroll', () => {
       this.fixed = window.pageYOffset > this.$refs.header.offsetHeight
       this.$emit('fixedChange', {
@@ -99,32 +105,27 @@ export default {
           Header.offsetHeight,
         behavior: 'smooth',
       })
-      // this.smoothScroll(
-      //   window.pageYOffset,
-      //   Search.getBoundingClientRect().y + window.pageYOffset
-      // )
     },
-    // smoothScroll(currentPos, lastPos) {
-    //   console.log(currentPos, lastPos)
-    //   let i = currentPos || 0
-    //   if (i <= lastPos) {
-    //     setTimeout(() => {
-    //       window.scrollTo(0, i)
-    //       this.smoothScroll(i + 10, lastPos)
-    //     }, 10)
-    //   }
-    // },
+  },
+  computed: {
+    headerHeight() {
+      return this.$refs.header.offsetHeight
+    },
   },
 }
 </script>
 
-<style>
-.sub-mod {
-  left: 32px;
-  top: 49px;
-  transform: translate(-100%, 0);
-  background-color: #fff !important;
-  min-height: min-content;
+<style lang="scss">
+#headerSub {
+  position: relative;
+  .sub-mod {
+    left: 32px;
+    top: 49px;
+    transform: translate(-100%, 0);
+    background-color: #fff !important;
+    min-height: min-content;
+    width: 380px;
+  }
 }
 </style>
 

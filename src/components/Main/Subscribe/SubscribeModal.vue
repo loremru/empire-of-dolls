@@ -22,14 +22,6 @@ export default {
 }
 </script>
 
-<style>
-.sub-mod {
-  bottom: 0;
-  left: 80px;
-  width: 380px;
-}
-</style>
-
 <style scoped lang="scss">
 .sub-modal {
   padding: 44px 25px 25px;
@@ -38,7 +30,7 @@ export default {
     font-size: 20px;
     font-weight: 500;
     line-height: 1;
-    margin: 0 auto 30px;
+    margin: 0 auto 15px;
     color: #333;
   }
   &__text {

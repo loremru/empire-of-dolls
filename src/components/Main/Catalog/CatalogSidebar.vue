@@ -60,6 +60,14 @@ export default {
 }
 </script>
 
+<style lang="scss">
+.sidebar__subscribe .sub-mod {
+  bottom: 0;
+  left: 80px;
+  width: 380px;
+}
+</style>
+
 <style scoped lang="scss">
 .sidebar {
   min-width: 254px;

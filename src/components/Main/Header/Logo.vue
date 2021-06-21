@@ -1,5 +1,11 @@
 <template>
-  <img src="@/assets/images/logo.svg" alt="" width="187" class="logo" />
+  <img
+    src="@/assets/images/logo.svg"
+    alt=""
+    width="187"
+    class="logo"
+    @click="$router.push('/')"
+  />
 </template>
 
 <script>
@@ -9,6 +15,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.logo {
+  cursor: pointer;
+}
 @media (max-width: $media-table) {
   .logo {
     width: 140px;

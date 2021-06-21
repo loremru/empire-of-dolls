@@ -4,6 +4,7 @@
     v-if="$route.meta.layout === 'with-catalog'"
     :content-offset="contentOffset"
   />
+  <SearchLayout v-else-if="$route.meta.layout === 'search'" />
   <FooterApp />
 </template>
 
@@ -12,8 +13,9 @@ import HeaderApp from './components/Main/Header/HeaderApp'
 import FooterApp from '@/components/Main/Footer/FooterApp'
 import { setDisplayType } from '@/store/display'
 import WithCatalog from '@/layouts/WithCatalog'
+import SearchLayout from '@/layouts/SearchLayout'
 export default {
-  components: { WithCatalog, FooterApp, HeaderApp },
+  components: { SearchLayout, WithCatalog, FooterApp, HeaderApp },
   data() {
     return {
       contentOffset: 0,

@@ -1,8 +1,9 @@
 <template>
-  <div style="width: 100%">
+  <div class="input">
+    <div class="input__extra txt" v-if="extra">{{ extra }}</div>
     <input
-      :style="`height:${height}px;text-align:${align}`"
-      class="subscription-email"
+      :style="`height:${height}px;text-align:${align};font-size: ${fontSize}px`"
+      class="input__input"
       :type="type"
       :value="value"
       @keyup="change"
@@ -16,6 +17,7 @@
 export default {
   name: 'BasicInput',
   props: {
+    extra: String,
     height: {
       type: Number,
       default: 39,
@@ -25,10 +27,14 @@ export default {
       default: 'left',
     },
     placeholder: { type: String },
-    value: String,
+    value: [String, Number],
     type: {
       type: String,
       default: () => 'text',
+    },
+    fontSize: {
+      type: Number,
+      default: () => 13,
     },
   },
   emits: ['update:value'],
@@ -44,10 +50,21 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.subscription-email {
-  border-radius: 7px;
-  border: 1px solid $border-color;
+.input {
   width: 100%;
-  padding: 0 16px;
+  position: relative;
+  &__input {
+    border-radius: 7px;
+    border: 1px solid $border-color;
+    width: 100%;
+    padding: 0 16px;
+  }
+  &__extra {
+    position: absolute;
+    left: 11px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 17px;
+  }
 }
 </style>

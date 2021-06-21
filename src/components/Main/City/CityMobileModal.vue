@@ -28,6 +28,11 @@
         </div>
       </div>
     </div>
+    <div
+      class="empty__content"
+      style="height: 80px"
+      @click="$emit('close')"
+    ></div>
   </Modal>
 </template>
 
@@ -54,7 +59,6 @@ export default {
 .choice {
   padding: 30px 10px;
   width: 100%;
-  margin-bottom: 60px;
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 0 10px 0px #0000009e;
