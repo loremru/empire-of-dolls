@@ -17,24 +17,24 @@
       <p v-if="isAvailable" class="available">В наличии</p>
       <p v-if="!isAvailable" class="not-available">Нет в наличии</p>
       <div class="counter-block flex">
-        <BasicButton @click="count--">-</BasicButton>
+        <BasicButton @click="count--" :height="34">-</BasicButton>
         <div class="itemBody__counter__input">
           <BasicInput align="center" :height="34" v-model:value="count" />
         </div>
-        <BasicButton @click="count++">+</BasicButton>
+        <BasicButton @click="count++" :height="34">+</BasicButton>
       </div>
     </div>
     <div class="itemBody__price">
       <div>
         <p>
-          Цена: <span>{{ CartItem.price }}р</span>
+          Цена: <span>{{ CartItem.price * count }}р</span>
         </p>
         <p>
-          Скидка: <span>{{ CartItem.sale }}р</span>
+          Скидка: <span>{{ CartItem.sale * count }}р</span>
         </p>
       </div>
     </div>
-    <span @click="count = 0" class="itemBody__delete-button"
+    <span @click="deleteCardItem" class="itemBody__delete-button"
       ><img src="@/assets/images/close.svg" alt=""
     /></span>
   </div>
@@ -67,10 +67,16 @@ export default {
       isAvailable: true,
     }
   },
+  methods: {
+    deleteCardItem() {
+      let i = this.CartItem
+      this.$emit('deleteCardItem', i)
+    },
+  },
   watch: {
     count() {
       if (this.count <= 0) {
-        //удаление
+        this.deleteCardItem()
         this.count = 0
       }
     },
