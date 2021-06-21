@@ -19,7 +19,12 @@
       <div class="counter-block flex">
         <BasicButton @click="count--" :height="34">-</BasicButton>
         <div class="itemBody__counter__input">
-          <BasicInput align="center" :height="34" v-model:value="count" />
+          <BasicInput
+            align="center"
+            :padding="'0'"
+            :height="34"
+            v-model:value="count"
+          />
         </div>
         <BasicButton @click="count++" :height="34">+</BasicButton>
       </div>

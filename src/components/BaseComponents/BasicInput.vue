@@ -2,7 +2,7 @@
   <div class="input">
     <div class="input__extra txt" v-if="extra">{{ extra }}</div>
     <input
-      :style="`height:${height}px;text-align:${align};font-size: ${fontSize}px`"
+      :style="`height:${height}px;text-align:${align};font-size: ${fontSize}px;padding:${padding}`"
       class="input__input"
       :type="type"
       :value="value"
@@ -17,6 +17,10 @@
 export default {
   name: 'BasicInput',
   props: {
+    padding: {
+      type: String,
+      default: '0 16px',
+    },
     extra: String,
     height: {
       type: Number,
