@@ -3,7 +3,12 @@
     <div @click="check" class="radio-border">
       <div v-if="isActive" class="radio-checked"></div>
     </div>
-    <span @click="check" class="radio-label">{{ RadioItem.label }}</span>
+    <span
+      @click="check"
+      class="radio-label"
+      :style="`font-size: ${fontSize}px`"
+      >{{ RadioItem.label }}</span
+    >
   </div>
 </template>
 
@@ -15,6 +20,7 @@ export default {
       type: Object,
     },
     isActive: Boolean,
+    fontSize: Number,
   },
   methods: {
     check() {
@@ -31,10 +37,12 @@ export default {
   user-select: none;
 }
 .radio-label {
-  margin-left: 10px;
+  margin-left: 8px;
   font-size: 18px;
-  color: $text-gray;
+  color: $text;
   cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 .radio-border {
   cursor: pointer;

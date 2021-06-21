@@ -16,6 +16,30 @@
       </div>
       <div class="filter__section">
         <div class="filter__text">бренд</div>
+        <Radio
+          v-for="(item, idx) in brand"
+          :is-active="activeBrand === idx"
+          :RadioItem="{ label: item.label }"
+          :key="idx + 'brand'"
+          :font-size="14"
+          @check="() => (activeBrand = idx)"
+        />
+      </div>
+      <div class="filter__section">
+        <div class="filter__text">Размер</div>
+        <div class="flex jcsb">
+          <Radio
+            v-for="(item, idx) in size"
+            :is-active="activeSize === idx"
+            :RadioItem="{ label: item.label }"
+            :key="idx + 'brand'"
+            :font-size="14"
+            @check="() => (activeSize = idx)"
+          />
+        </div>
+      </div>
+      <div class="filter__section">
+        <div class="filter__text">Год выпуска</div>
       </div>
     </div>
   </div>
@@ -23,15 +47,30 @@
 
 <script>
 import PriceSlider from '@/components/Search/Filter/PriceSlider'
+import Radio from '@/components/BaseComponents/Radio'
 export default {
   name: 'Filter',
-  components: { PriceSlider },
+  components: { Radio, PriceSlider },
+  data() {
+    return {
+      brand: [
+        { label: 'Карапуз' },
+        { label: 'Barbie' },
+        { label: 'Огонек' },
+        { label: 'Mattel' },
+      ],
+      activeBrand: 0,
+      size: [{ label: '1/4' }, { label: '1/8' }, { label: '1/12' }],
+      activeSize: 0,
+    }
+  },
 }
 </script>
 
 <style scoped lang="scss">
 .filter {
-  width: 288px;
+  width: 252px;
+  min-width: 252px;
   &__text {
     text-transform: uppercase;
     font-size: 15px;
@@ -49,7 +88,7 @@ export default {
     }
   }
   &__body {
-    padding: 12px 28px;
+    padding: 12px 27px;
   }
   &__section {
     margin-bottom: 24px;

@@ -4,7 +4,10 @@
     v-if="$route.meta.layout === 'with-catalog'"
     :content-offset="contentOffset"
   />
-  <SearchLayout v-else-if="$route.meta.layout === 'search'" />
+  <SearchLayout
+    v-else-if="$route.meta.layout === 'search'"
+    :content-offset="contentOffset"
+  />
   <FooterApp />
 </template>
 
