@@ -1,7 +1,7 @@
 <template>
   <div class="main-content__header flex jcsb aic">
     <div class="flex aic">
-      <CatalogMini />
+      <CatalogMini v-if="!isMobile" />
       <div class="main-content__breadcrumb">
         <Breadcrumb
           :links-list="breadcrumbArray"
@@ -9,7 +9,7 @@
         />
       </div>
     </div>
-    <ConnectionLink />
+    <ConnectionLink v-if="!isMobile" />
   </div>
 </template>
 
@@ -17,6 +17,7 @@
 import ConnectionLink from '@/components/Main/Connection/ConnectionLink'
 import CatalogMini from '@/components/Main/Catalog/CatalogMini'
 import Breadcrumb from '@/components/BaseComponents/Breadcrumb'
+import { isMobile } from '@/store/display'
 export default {
   name: 'MainContentHeader',
   components: { Breadcrumb, CatalogMini, ConnectionLink },
@@ -25,6 +26,11 @@ export default {
       type: Array,
       default: () => [],
     },
+  },
+  setup() {
+    return {
+      isMobile,
+    }
   },
 }
 </script>
@@ -36,6 +42,14 @@ export default {
   }
   &__breadcrumb {
     margin-left: 40px;
+  }
+}
+
+@media (max-width: $media-mobile) {
+  .main-content {
+    &__breadcrumb {
+      margin-left: 0;
+    }
   }
 }
 </style>

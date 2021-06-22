@@ -4,8 +4,18 @@
     :class="{ searchMob: isMobileSearch }"
     :style="`max-width: ${maxWidth}px`"
   >
-    <input type="text" :placeholder="placeholder" />
-    <img src="@/assets/images/search.svg" alt="" class="search__img" />
+    <input
+      type="text"
+      :placeholder="placeholder"
+      @keyup.enter="search"
+      v-model="value"
+    />
+    <img
+      src="@/assets/images/search.svg"
+      alt=""
+      class="search__img"
+      @click="search"
+    />
   </div>
 </template>
 
@@ -19,6 +29,17 @@ export default {
     },
     placeholder: String,
     isMobileSearch: Boolean,
+  },
+  emits: ['search'],
+  data() {
+    return {
+      value: '',
+    }
+  },
+  methods: {
+    search() {
+      if (this.value) this.$emit('search', this.value)
+    },
   },
 }
 </script>

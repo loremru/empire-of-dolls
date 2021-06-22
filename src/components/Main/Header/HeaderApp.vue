@@ -2,12 +2,8 @@
   <div class="header" ref="header" :class="{ header_fixed: fixed }">
     <div class="content">
       <div class="header__head flex jcsb">
-        <div
-          class="header__links flex aic"
-          v-if="isMobile"
-          @click="isMenu = !isMenu"
-        >
-          <a href="#"
+        <div class="header__links flex aic" v-if="isMobile">
+          <a href="#" @click="isMenu = !isMenu"
             ><img src="@/assets/images/menu.svg" alt="" height="13"
           /></a>
           <a href="#" @click.prevent="goToSearch"
@@ -15,7 +11,11 @@
           /></a>
         </div>
         <Logo />
-        <SearchHeader placeholder="Барби" v-if="!isMobile" />
+        <SearchHeader
+          placeholder="Барби"
+          v-if="!isMobile"
+          @search="(val) => $router.push(`/search/${val}`)"
+        />
         <div class="header__socials flex aic" v-if="!isMobile">
           <a href="#" target="_blank"
             ><img src="@/assets/images/telegram.svg" alt=""

@@ -101,3 +101,10 @@ p {
 .no-scroll {
   overflow: hidden;
 }
+
+.hover-block {
+  transition: 0.2s;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+}

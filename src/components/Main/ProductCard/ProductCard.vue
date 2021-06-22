@@ -89,4 +89,20 @@ export default {
     }
   }
 }
+
+@media (max-width: $media-mobile) {
+  .product {
+    &__img {
+      height: 160px;
+    }
+    &__name {
+      margin: 10px 0;
+      font-size: 13px;
+      padding: 0 10px;
+    }
+    &__price {
+      padding: 0 8px 13px;
+    }
+  }
+}
 </style>
