@@ -54,16 +54,6 @@ export default {
   props: {
     CartItem: {
       type: Object,
-      default: function () {
-        return {
-          photoURL: '',
-          dollMaker: 'Компания',
-          article: 'Артикул',
-          rating: 5,
-          price: 5000,
-          sale: 1000,
-        }
-      },
     },
   },
   data() {
@@ -117,7 +107,7 @@ export default {
     p {
       width: 100%;
       margin: 5px 0;
-      color: $text-gray;
+      color: $grey;
       font-size: 18px;
     }
   }
@@ -163,7 +153,7 @@ export default {
     p {
       width: 100%;
       margin: 5px 0;
-      color: $text-gray;
+      color: $grey;
       font-size: 18px;
       span {
         font-weight: 500;

@@ -8,7 +8,7 @@
       :value="value"
       @keyup="change"
       :placeholder="placeholder"
-      required
+      :required="required"
     />
   </div>
 </template>
@@ -39,6 +39,10 @@ export default {
     fontSize: {
       type: Number,
       default: () => 13,
+    },
+    required: {
+      type: Boolean,
+      default: true,
     },
   },
   emits: ['update:value'],

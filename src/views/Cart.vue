@@ -1,5 +1,8 @@
 <template>
-  <Breadcrumb :links-list="LinksForBreadcrumb" />
+  <Breadcrumb
+    style="margin: 5px 0 20px 20px"
+    :links-list="LinksForBreadcrumb"
+  />
   <CartItem
     v-for="i in CartItems"
     :key="i"
@@ -53,6 +56,134 @@
       <a href="#"><img src="@/assets/images/fb.svg" alt="" /></a>
     </div>
   </div>
+  <form class="customer-info">
+    <p class="customer-info__header">
+      Поля отмеченные <span class="pink">*</span> обязательны для заполнения
+    </p>
+    <div class="customer-info__delivery-address">
+      <div class="customer-info__delivery-address__index">
+        <p class="delivery-address__label">Индекс</p>
+        <BasicInput
+          :required="false"
+          :height="26"
+          :align="'center'"
+          :padding="'0'"
+        />
+      </div>
+      <div class="customer-info__delivery-address__region">
+        <p class="delivery-address__label">Область, край или республика</p>
+        <BasicInput :required="false" :height="26" />
+      </div>
+      <div class="customer-info__delivery-address__city">
+        <p class="delivery-address__label">Населенный пункт</p>
+        <BasicInput :required="false" :height="26" />
+      </div>
+      <div class="customer-info__delivery-address__street">
+        <p class="delivery-address__label">Улица</p>
+        <BasicInput :required="false" :height="26" />
+      </div>
+      <div class="customer-info__delivery-address__home">
+        <p class="delivery-address__label">Дом</p>
+        <BasicInput
+          :required="false"
+          :height="26"
+          :align="'center'"
+          :padding="'0'"
+        />
+      </div>
+    </div>
+    <div class="additional-delivery-info">
+      <div class="additional-delivery-info__building">
+        <p class="delivery-address__label">Стр.</p>
+        <BasicInput
+          :required="false"
+          :height="26"
+          :align="'center'"
+          :padding="'0'"
+        />
+      </div>
+      <div class="additional-delivery-info__corpus">
+        <p class="delivery-address__label">Корпус</p>
+        <BasicInput
+          :required="false"
+          :height="26"
+          :align="'center'"
+          :padding="'0'"
+        />
+      </div>
+      <div class="additional-delivery-info__apartment">
+        <p class="delivery-address__label">Кв.\офис</p>
+        <BasicInput
+          :required="false"
+          :height="26"
+          :align="'center'"
+          :padding="'0'"
+        />
+      </div>
+      <div class="additional-delivery-info__entrance">
+        <p class="delivery-address__label">Подъезд</p>
+        <BasicInput
+          :required="false"
+          :height="26"
+          :align="'center'"
+          :padding="'0'"
+        />
+      </div>
+    </div>
+    <div class="customer-info__personal-info">
+      <div class="customer-info__personal-info__surname">
+        <p class="delivery-address__label">
+          Фамилия<span class="pink">*</span>
+        </p>
+        <BasicInput :height="26" />
+      </div>
+      <div class="customer-info__personal-info__name">
+        <p class="delivery-address__label">Имя<span class="pink">*</span></p>
+        <BasicInput :height="26" />
+      </div>
+      <div class="customer-info__personal-info__patronymic">
+        <p class="delivery-address__label">
+          Отчество<span class="pink">*</span>
+        </p>
+        <BasicInput :height="26" />
+      </div>
+      <div class="customer-info__personal-info__mail">
+        <p class="delivery-address__label">E-mail<span class="pink">*</span></p>
+        <BasicInput :height="26" type="email" />
+      </div>
+      <div class="customer-info__personal-info__phone">
+        <p class="delivery-address__label">
+          Номер телефона<span class="pink">*</span>
+        </p>
+        <BasicInput :height="26" />
+      </div>
+    </div>
+    <p class="user-agreement">
+      Нажимая кнопку “Заказать”, я подтверждаю свою дееспособность,даю согласие
+      на обработку моих персональных данных. <a href="#">подробнее</a>
+    </p>
+    <div class="customer-info__submit">
+      <BasicButton>ЗАКАЗАТЬ</BasicButton>
+    </div>
+    <p class="customer-info__prepayment-info">
+      При отправке заказа наложенным платежом Почта России взимает 4% от
+      оценочной стоимости заказа (эти 4% включены в расчетную стоимость
+      доставки).
+    </p>
+
+    <p class="customer-info__prepayment-info">
+      Кроме этих 4%, Почта России взимает комиссию в размере 2% (но не менее 50
+      рублей) при получении заказа, отправленного наложенным платежом (за
+      денежный перевод оплаты заказа), данные по состоянию на 15.05.2016.
+    </p>
+
+    <p class="customer-info__prepayment-info">
+      Таким образом, при отправке заказа по предоплате, Ваша выгода составляет
+      до 6% от стоимости заказа. Убедитесь в этом сами - просто измените сумму
+      аванса при доставке Почтой или EMS и вы увидите, как сильно изменяется
+      Стоимость доставки.
+    </p>
+  </form>
 </template>
 
 <script>
@@ -89,6 +220,7 @@ export default {
           rating: 4,
           price: 6000,
           sale: 1000,
+          id: 1,
         },
         {
           photoURL: '',
@@ -97,6 +229,7 @@ export default {
           rating: 3,
           price: 8000,
           sale: 2000,
+          id: 2,
         },
       ],
       RadioArray: [
@@ -127,8 +260,8 @@ export default {
   },
   methods: {
     deleteCardItem(i) {
-      const qwe = this.CartItems.findIndex((el) => el == i)
-      this.CartItems.splice(qwe, 1)
+      const itemToDelete = this.CartItems.findIndex((el) => el.id === i.id)
+      this.CartItems.splice(itemToDelete, 1)
     },
   },
 }
@@ -231,6 +364,92 @@ export default {
     a {
       margin: 0 7px;
     }
+  }
+}
+.customer-info {
+  background: #ffffff;
+  padding: 34px;
+  &__header {
+    margin-bottom: 20px;
+    font-size: 18px;
+    color: $grey;
+  }
+  .delivery-address__label {
+    text-align: center;
+    font-size: 18px;
+    color: $grey;
+  }
+  &__delivery-address {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    &__index {
+      flex-basis: 0;
+      flex-grow: 1;
+      padding: 0 4px;
+    }
+    &__region {
+      flex-basis: 0;
+      flex-grow: 3;
+      padding: 0 4px;
+    }
+    &__city {
+      flex-basis: 0;
+      flex-grow: 2;
+      padding: 0 4px;
+    }
+    &__street {
+      flex-basis: 0;
+      flex-grow: 2;
+      padding: 0 4px;
+    }
+    &__home {
+      flex-basis: 0;
+      flex-grow: 1;
+      padding: 0 4px;
+    }
+  }
+  .additional-delivery-info {
+    display: flex;
+    width: 50%;
+    margin-bottom: 10px;
+    > div {
+      padding: 0 4px;
+    }
+  }
+  &__personal-info {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    .delivery-address__label {
+      width: 80%;
+      text-align: left;
+    }
+    > div {
+      display: flex;
+      margin: 5px 0;
+      align-items: center;
+    }
+  }
+  .user-agreement {
+    font-size: 15px;
+    color: $grey;
+    margin-top: 10px;
+    a {
+      border-bottom: 1px solid #000;
+      color: #000;
+      font-weight: 500;
+    }
+  }
+  &__submit {
+    text-align: center;
+    margin: 30px 0 15px 0;
+  }
+  &__prepayment-info {
+    margin: 15px 0;
+    color: $grey;
+    font-size: 15px;
+    line-height: 1;
   }
 }
 </style>
