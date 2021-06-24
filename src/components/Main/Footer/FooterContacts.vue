@@ -49,7 +49,7 @@ export default {
   font-weight: 600;
   color: $text;
 }
-@media (max-width: $media-table) {
+@media (max-width: $media-tablet) {
   .FooterContacts {
     display: flex;
     padding: 25px 0;

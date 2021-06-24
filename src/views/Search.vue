@@ -60,7 +60,7 @@ export default {
   }
 }
 
-@media (max-width: $media-table - 100) {
+@media (max-width: $media-tablet - 100) {
   .search-grid {
     grid-template-columns: 1fr 1fr;
   }

@@ -29,7 +29,7 @@ export default {
     }
   }
 }
-@media (max-width: $media-table) {
+@media (max-width: $media-tablet) {
   .improvementMessage {
     a {
       margin-left: 24px;

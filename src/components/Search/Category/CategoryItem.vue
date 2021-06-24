@@ -15,6 +15,7 @@ export default {
 
 <style scoped lang="scss">
 .catItem {
+  cursor: pointer;
   &__image {
     width: 100%;
     border-radius: 4px;

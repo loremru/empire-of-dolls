@@ -3,6 +3,8 @@ import Home from '../views/Home.vue'
 import Cabinet from '../views/Cabinet'
 import Cart from '../views/Cart'
 import Search from '../views/Search'
+import Categories from '@/views/Categories'
+import Product from '@/views/Product'
 
 const routes = [
   {
@@ -36,6 +38,50 @@ const routes = [
     component: Search,
     meta: {
       layout: 'search',
+    },
+  },
+  {
+    path: '/categories',
+    name: 'Categories',
+    component: Categories,
+    meta: {
+      layout: 'with-catalog',
+      tableBreadCrumb: [
+        {
+          text: 'Главная',
+          pageLink: '/',
+        },
+        {
+          text: 'Барби',
+          pageLink: '/categories',
+        },
+      ],
+    },
+  },
+  {
+    path: '/product/:id',
+    name: 'Product',
+    component: Product,
+    meta: {
+      layout: 'with-catalog',
+      tableBreadCrumb: [
+        {
+          text: 'Главная',
+          pageLink: '/',
+        },
+        {
+          text: 'Барби',
+          pageLink: '/categories',
+        },
+        {
+          text: 'Новинки Барби',
+          pageLink: '/categories',
+        },
+        {
+          text: 'Скиппер няня',
+          pageLink: '/product/123',
+        },
+      ],
     },
   },
 ]

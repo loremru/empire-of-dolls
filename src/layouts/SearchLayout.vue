@@ -11,7 +11,6 @@
 </template>
 
 <script>
-import { isDesktop, isMobile, isTable } from '@/store/display'
 import MainContentHeader from '@/components/Main/MainContentHeader'
 import CategorySlider from '@/components/Search/Category/CategorySlider'
 export default {
@@ -35,13 +34,6 @@ export default {
           pageLink: `/search/${this.$route.params.id}`,
         },
       ],
-    }
-  },
-  setup() {
-    return {
-      isMobile,
-      isDesktop,
-      isTable,
     }
   },
 }

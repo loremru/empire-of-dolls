@@ -18,7 +18,7 @@ export default {
 .logo {
   cursor: pointer;
 }
-@media (max-width: $media-table) {
+@media (max-width: $media-tablet) {
   .logo {
     width: 140px;
   }

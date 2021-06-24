@@ -8,6 +8,8 @@
       type="text"
       :placeholder="placeholder"
       @keyup.enter="search"
+      @focus="$emit('focus')"
+      @blur="$emit('blur')"
       v-model="value"
     />
     <img
@@ -30,7 +32,7 @@ export default {
     placeholder: String,
     isMobileSearch: Boolean,
   },
-  emits: ['search'],
+  emits: ['search', 'focus', 'blur'],
   data() {
     return {
       value: '',

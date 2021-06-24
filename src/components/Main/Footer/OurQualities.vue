@@ -90,7 +90,7 @@ export default {
   margin: 40px auto 0 auto;
   width: 80%;
 }
-@media (max-width: $media-table) {
+@media (max-width: $media-tablet) {
   .qualities-item_text_description {
     font-size: 16.5px;
   }

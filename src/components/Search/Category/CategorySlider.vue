@@ -19,7 +19,7 @@ import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/swiper.scss'
 import SliderArrows from '@/components/BaseComponents/SliderArrows'
 import CategoryItem from '@/components/Search/Category/CategoryItem'
-import { isDesktop, isTable } from '@/store/display'
+import { isDesktop, isTablet } from '@/store/display'
 
 SwiperCore.use([Controller])
 export default {
@@ -30,6 +30,20 @@ export default {
       swiper: null,
     }
   },
+  props: {
+    slidesDesktop: {
+      type: Number,
+      default: 9,
+    },
+    slidesTablet: {
+      type: Number,
+      default: 6,
+    },
+    slidesMobile: {
+      type: Number,
+      default: 3,
+    },
+  },
   methods: {
     swiperInit(swiper) {
       this.swiper = swiper
@@ -37,7 +51,11 @@ export default {
   },
   computed: {
     slidesPerRow() {
-      return isDesktop.value ? 9 : isTable.value ? 6 : 3
+      return isDesktop.value
+        ? this.slidesDesktop
+        : isTablet.value
+        ? this.slidesTablet
+        : this.slidesMobile
     },
   },
 }
