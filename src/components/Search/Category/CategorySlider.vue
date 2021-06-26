@@ -19,7 +19,7 @@ import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/swiper.scss'
 import SliderArrows from '@/components/BaseComponents/SliderArrows'
 import CategoryItem from '@/components/Search/Category/CategoryItem'
-import { isDesktop, isTable } from '@/store/display'
+import { isDesktop, isTablet } from '@/store/display'
 
 SwiperCore.use([Controller])
 export default {
@@ -37,7 +37,7 @@ export default {
   },
   computed: {
     slidesPerRow() {
-      return isDesktop.value ? 9 : isTable.value ? 6 : 3
+      return isDesktop.value ? 9 : isTablet.value ? 6 : 3
     },
   },
 }

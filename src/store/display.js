@@ -9,14 +9,14 @@ const display = {
 export const displayType = ref('desktop')
 
 export const isMobile = ref(false)
-export const isTable = ref(false)
+export const isTablet = ref(false)
 export const isDesktop = ref(true)
 
 export const setDisplayType = () => {
   if (window.outerWidth > display.table) {
     displayType.value = 'desktop'
     isMobile.value = false
-    isTable.value = false
+    isTablet.value = false
     isDesktop.value = true
   } else if (
     window.outerWidth <= display.table &&
@@ -24,12 +24,12 @@ export const setDisplayType = () => {
   ) {
     displayType.value = 'table'
     isMobile.value = false
-    isTable.value = true
+    isTablet.value = true
     isDesktop.value = false
   } else if (window.outerWidth <= display.mobile) {
     displayType.value = 'mobile'
     isMobile.value = true
-    isTable.value = false
+    isTablet.value = false
     isDesktop.value = false
   }
 }

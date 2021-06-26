@@ -78,11 +78,11 @@
         <p class="delivery-address__label">Населенный пункт</p>
         <BasicInput :required="false" :height="26" />
       </div>
-      <div class="customer-info__delivery-address__street">
+      <div v-if="isDesktop" class="customer-info__delivery-address__street">
         <p class="delivery-address__label">Улица</p>
         <BasicInput :required="false" :height="26" />
       </div>
-      <div class="customer-info__delivery-address__home">
+      <div v-if="isDesktop" class="customer-info__delivery-address__home">
         <p class="delivery-address__label">Дом</p>
         <BasicInput
           :required="false"
@@ -93,6 +93,19 @@
       </div>
     </div>
     <div class="additional-delivery-info">
+      <div v-if="isTablet" class="additional-delivery-info__street">
+        <p class="delivery-address__label">Улица</p>
+        <BasicInput :required="false" :height="26" />
+      </div>
+      <div v-if="isTablet" class="additional-delivery-info__home">
+        <p class="delivery-address__label">Дом</p>
+        <BasicInput
+          :required="false"
+          :height="26"
+          :align="'center'"
+          :padding="'0'"
+        />
+      </div>
       <div class="additional-delivery-info__building">
         <p class="delivery-address__label">Стр.</p>
         <BasicInput
@@ -192,6 +205,7 @@ import CartItem from '@/components/Cart/CartItem'
 import Radio from '@/components/BaseComponents/Radio'
 import BasicInput from '@/components/BaseComponents/BasicInput'
 import BasicButton from '@/components/BaseComponents/BasicButton'
+import { isDesktop, isMobile, isTablet } from '@/store/display'
 
 export default {
   name: 'Cart',
@@ -257,6 +271,9 @@ export default {
       CartWithPromoCost: 0,
       TotalCost: 0,
     }
+  },
+  setup() {
+    return { isDesktop: isDesktop, isMobile: isMobile, isTablet: isTablet }
   },
   methods: {
     deleteCardItem(i) {
@@ -450,6 +467,21 @@ export default {
     color: $grey;
     font-size: 15px;
     line-height: 1;
+  }
+}
+@media (max-width: $media-tablet) {
+  .social-promo__header {
+    p {
+      font-size: 17px;
+    }
+  }
+  .customer-info {
+    .delivery-address__label {
+      font-size: 14px;
+    }
+    .additional-delivery-info {
+      width: 100%;
+    }
   }
 }
 </style>

@@ -5,9 +5,9 @@
       <FooterSubscribeAlert />
       <FooterSubscribeForm />
     </div>
-    <div v-if="isTable" class="content">
+    <div v-if="isTablet" class="content">
       <SubscriptionFormText />
-      <FooterContacts v-if="isTable" />
+      <FooterContacts v-if="isTablet" />
     </div>
   </div>
   <div v-if="isMobile" class="MobileFooterBottom">
@@ -23,7 +23,7 @@
 import FooterContacts from '@/components/Main/Footer/FooterContacts'
 import FooterSubscribeAlert from '@/components/Main/Footer/FooterSubscribeAlert'
 import FooterSubscribeForm from '@/components/Main/Footer/FooterSubscribeForm'
-import { isDesktop, isMobile, isTable } from '@/store/display'
+import { isDesktop, isMobile, isTablet } from '@/store/display'
 import SubscriptionFormText from '@/components/Main/Footer/SubscriptionFormText'
 export default {
   name: 'FooterBottom',
@@ -34,7 +34,7 @@ export default {
     FooterContacts,
   },
   setup() {
-    return { isDesktop: isDesktop, isMobile: isMobile, isTable: isTable }
+    return { isDesktop: isDesktop, isMobile: isMobile, isTablet: isTablet }
   },
 }
 </script>

@@ -3,7 +3,7 @@
     <div class="flex">
       <CatalogSidebar v-if="isDesktop" />
       <div id="contentOfPage">
-        <MainContentHeader v-if="isTable" />
+        <MainContentHeader v-if="isTablet" />
         <router-view />
       </div>
     </div>
@@ -12,7 +12,7 @@
 
 <script>
 import CatalogSidebar from '@/components/Main/Catalog/CatalogSidebar'
-import { isDesktop, isTable } from '@/store/display'
+import { isDesktop, isTablet } from '@/store/display'
 import MainContentHeader from '@/components/Main/MainContentHeader'
 export default {
   name: 'WithCatalog',
@@ -26,7 +26,7 @@ export default {
   setup() {
     return {
       isDesktop,
-      isTable,
+      isTablet: isTablet,
     }
   },
 }

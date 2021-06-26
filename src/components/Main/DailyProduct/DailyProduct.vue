@@ -25,7 +25,7 @@
             <p class="daily__offer__price__current">2500р</p>
             <p class="daily__offer__price__past">5200р</p>
           </div>
-          <BasicButton :height="isTable ? 37 : 49">КУПИТЬ</BasicButton>
+          <BasicButton :height="isTablet ? 37 : 49">КУПИТЬ</BasicButton>
         </div>
       </div>
       <p class="tac daily__content__descriptor">
@@ -41,13 +41,13 @@ import Rating from '@/components/BaseComponents/Rating'
 import DailyProductTag from '@/components/Main/DailyProduct/DailyProductTag'
 import BasicButton from '@/components/BaseComponents/BasicButton'
 import DailyDiscount from '@/components/Main/DailyProduct/DailyDiscount'
-import { isTable } from '@/store/display'
+import { isTablet } from '@/store/display'
 export default {
   name: 'DailyProduct',
   components: { DailyDiscount, BasicButton, DailyProductTag, Rating },
   setup() {
     return {
-      isTable,
+      isTablet: isTablet,
     }
   },
 }
