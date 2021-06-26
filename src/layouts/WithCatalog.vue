@@ -40,7 +40,7 @@ export default {
   flex-grow: 1;
   min-width: 0;
 }
-@media (min-width: $media-table) {
+@media (min-width: $media-tablet) {
   #contentOfPage {
     padding-left: 7px;
   }

@@ -40,7 +40,7 @@ export default {
   }
 }
 
-@media (max-width: $media-table) {
+@media (max-width: $media-tablet) {
   .notification__circle {
     width: 15px;
     height: 15px;

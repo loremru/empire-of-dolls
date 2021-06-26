@@ -24,7 +24,7 @@ export default {
   }
 }
 
-@media (max-width: $media-table) {
+@media (max-width: $media-tablet) {
   .nav {
     a {
       font-size: 15px;

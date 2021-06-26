@@ -142,7 +142,7 @@ export default {
   }
 }
 
-@media (max-width: $media-desktop) and (min-width: $media-table + 1) {
+@media (max-width: $media-desktop) and (min-width: $media-tablet + 1) {
   .daily {
     &__img {
       min-width: 180px;
@@ -168,7 +168,7 @@ export default {
   }
 }
 
-@media (max-width: $media-table) {
+@media (max-width: $media-tablet) {
   .daily {
     &__content {
       padding-top: 9px;

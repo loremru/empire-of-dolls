@@ -67,7 +67,7 @@ export default {
     padding: 0 18px 20px;
   }
 }
-@media (max-width: $media-desktop) and (min-width: $media-table + 1) {
+@media (max-width: $media-desktop) and (min-width: $media-tablet + 1) {
   .product {
     &__name {
       padding: 0 20px;
@@ -78,7 +78,7 @@ export default {
   }
 }
 
-@media (max-width: $media-table) {
+@media (max-width: $media-tablet) {
   .product {
     &__img {
       height: 224px;

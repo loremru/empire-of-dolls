@@ -34,7 +34,7 @@ export default {
 .FooterSubscribeForm {
   padding: 0 15px;
 }
-@media (max-width: $media-table) {
+@media (max-width: $media-tablet) {
   .FooterSubscribeForm {
     width: 50%;
   }

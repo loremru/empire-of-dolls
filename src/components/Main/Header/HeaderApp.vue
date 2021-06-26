@@ -156,7 +156,7 @@ export default {
     z-index: 50;
   }
 }
-@media (max-width: $media-table) {
+@media (max-width: $media-tablet) {
   .header {
     &__bottom {
       padding-left: 0;

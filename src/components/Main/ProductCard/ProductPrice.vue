@@ -39,7 +39,7 @@ export default {
   }
 }
 
-@media (max-width: $media-table) {
+@media (max-width: $media-tablet) {
   .product {
     &__current-price {
       font-size: 19px;
