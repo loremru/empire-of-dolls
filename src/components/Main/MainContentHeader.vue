@@ -45,6 +45,14 @@ export default {
   }
 }
 
+@media (max-width: $media-tablet) {
+  .main-content {
+    &__breadcrumb {
+      margin-left: 13px;
+    }
+  }
+}
+
 @media (max-width: $media-mobile) {
   .main-content {
     &__breadcrumb {

@@ -4,6 +4,7 @@
       <BasicInput
         v-model:value="EmailToSubscribe"
         placeholder="example@mail.ru"
+        style="margin-right: 10px"
       />
       <BasicButton>ПОДПИСАТЬСЯ</BasicButton>
     </form>

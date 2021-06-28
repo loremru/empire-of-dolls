@@ -1,5 +1,5 @@
 <template>
-  <div class="product">
+  <div class="product" @click="$router.push('/product/123')">
     <div class="product__img">
       <img src="@/assets/images/product.png" alt="" />
       <img

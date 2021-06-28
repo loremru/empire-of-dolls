@@ -43,9 +43,9 @@ export default {
   flex-grow: 1;
   min-width: 0;
 }
-@media (min-width: $media-tablet) {
+@media (min-width: $media-tablet + 1) {
   #contentOfPage {
-    padding-left: 0px;
+    padding-left: 7px;
   }
 }
 @media (max-width: $media-mobile) {

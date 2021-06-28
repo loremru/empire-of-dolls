@@ -136,9 +136,6 @@ export default {
         margin-left: 16px;
       }
     }
-    button {
-      margin-left: 0;
-    }
   }
 }
 
