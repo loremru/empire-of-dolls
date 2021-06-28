@@ -8,7 +8,7 @@
 import ThisPageImprovement from '@/components/Main/Footer/ThisPageImprovement'
 import OurQualities from '@/components/Main/Footer/OurQualities'
 import FooterBottom from '@/components/Main/Footer/FooterBottom'
-import { isDesktop, isMobile } from '@/store/display'
+import { isDesktop, isMobile, isTablet } from '@/store/display'
 export default {
   name: 'FooterApp',
   components: {
@@ -17,7 +17,7 @@ export default {
     ThisPageImprovement,
   },
   setup() {
-    return { isDesktop: isDesktop, isMobile: isMobile }
+    return { isDesktop, isMobile, isTablet }
   },
 }
 </script>

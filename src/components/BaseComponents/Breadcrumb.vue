@@ -28,10 +28,9 @@ export default {
 
 <style scoped lang="scss">
 .breadcrumb-item:not(:last-of-type) {
-  border-bottom: 1px solid $text-gray;
+  border-bottom: 1px solid $grey;
 }
 .breadcrumb {
-  //margin: 10px 0 0 30px;
   font-size: 13.5px;
   span {
     margin: 0 5px;
@@ -40,7 +39,7 @@ export default {
     display: none;
   }
   * {
-    color: $text-gray;
+    color: $grey;
   }
 }
 </style>

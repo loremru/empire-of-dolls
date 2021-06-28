@@ -102,6 +102,10 @@ p {
   overflow: hidden;
 }
 
+.pink {
+  color: $pink;
+}
+
 .hover-block {
   transition: 0.2s;
   &:hover {

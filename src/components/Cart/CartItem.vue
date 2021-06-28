@@ -19,7 +19,12 @@
       <div class="counter-block flex">
         <BasicButton @click="count--" :height="34">-</BasicButton>
         <div class="itemBody__counter__input">
-          <BasicInput align="center" :height="34" v-model:value="count" />
+          <BasicInput
+            align="center"
+            :padding="'0'"
+            :height="34"
+            v-model:value="count"
+          />
         </div>
         <BasicButton @click="count++" :height="34">+</BasicButton>
       </div>
@@ -49,16 +54,6 @@ export default {
   props: {
     CartItem: {
       type: Object,
-      default: function () {
-        return {
-          photoURL: '',
-          dollMaker: 'Компания',
-          article: 'Артикул',
-          rating: 5,
-          price: 5000,
-          sale: 1000,
-        }
-      },
     },
   },
   data() {
@@ -112,7 +107,7 @@ export default {
     p {
       width: 100%;
       margin: 5px 0;
-      color: $text-gray;
+      color: $grey;
       font-size: 18px;
     }
   }
@@ -158,7 +153,7 @@ export default {
     p {
       width: 100%;
       margin: 5px 0;
-      color: $text-gray;
+      color: $grey;
       font-size: 18px;
       span {
         font-weight: 500;
