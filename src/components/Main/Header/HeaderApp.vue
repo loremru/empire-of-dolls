@@ -2,12 +2,8 @@
   <div class="header" ref="header" :class="{ header_fixed: fixed }">
     <div class="content">
       <div class="header__head flex jcsb">
-        <div
-          class="header__links flex aic"
-          v-if="isMobile"
-          @click="isMenu = !isMenu"
-        >
-          <a href="#"
+        <div class="header__links flex aic" v-if="isMobile">
+          <a href="#" @click="isMenu = !isMenu"
             ><img src="@/assets/images/menu.svg" alt="" height="13"
           /></a>
           <a href="#" @click.prevent="goToSearch"
@@ -15,7 +11,14 @@
           /></a>
         </div>
         <Logo />
-        <SearchHeader placeholder="Барби" v-if="!isMobile" />
+        <SearchHeader
+          placeholder="Барби"
+          v-if="!isMobile"
+          @search="search"
+          @focus="openSearch"
+          @blur="closeSearch"
+        />
+        <PopularSearch v-if="isPopular" @close="closeSearch" />
         <div class="header__socials flex aic" v-if="!isMobile">
           <a href="#" target="_blank"
             ><img src="@/assets/images/telegram.svg" alt=""
@@ -63,10 +66,12 @@ import ConnectionLink from '@/components/Main/Connection/ConnectionLink'
 import { isDesktop, isMobile } from '@/store/display'
 import Subscribe from '@/components/Main/Subscribe/Subscribe'
 import MobileMenu from '@/components/Main/MobileMenu/MobileMenu'
+import PopularSearch from '@/components/Search/PopularSearch/PopularSearch'
 export default {
   name: 'HeaderApp',
   emits: ['fixedChange'],
   components: {
+    PopularSearch,
     MobileMenu,
     Subscribe,
     ConnectionLink,
@@ -80,6 +85,7 @@ export default {
     return {
       fixed: false,
       isMenu: false,
+      isPopular: false,
     }
   },
   setup() {
@@ -105,6 +111,16 @@ export default {
           Header.offsetHeight,
         behavior: 'smooth',
       })
+    },
+    openSearch() {
+      this.isPopular = true
+    },
+    closeSearch() {
+      this.isPopular = false
+    },
+    search(val) {
+      this.$router.push(`/search/${val}`)
+      this.isPopular = false
     },
   },
   computed: {

@@ -8,13 +8,23 @@
       src="@/assets/images/product-cart.svg"
       alt=""
       class="product__buy__cart"
+      v-if="!buyBtn"
     />
+    <BasicButton v-else uppercase>Купить</BasicButton>
   </div>
 </template>
 
 <script>
+import BasicButton from '@/components/BaseComponents/BasicButton'
 export default {
   name: 'ProductPrice',
+  components: { BasicButton },
+  props: {
+    buyBtn: {
+      type: Boolean,
+      default: false,
+    },
+  },
 }
 </script>
 

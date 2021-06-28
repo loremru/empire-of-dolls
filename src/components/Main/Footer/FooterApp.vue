@@ -17,7 +17,7 @@ export default {
     ThisPageImprovement,
   },
   setup() {
-    return { isDesktop: isDesktop, isMobile: isMobile, isTablet: isTablet }
+    return { isDesktop, isMobile, isTablet }
   },
 }
 </script>

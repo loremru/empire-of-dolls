@@ -40,7 +40,7 @@ export default {
   setup() {
     return {
       isDesktop,
-      isTablet: isTablet,
+      isTablet,
     }
   },
 }

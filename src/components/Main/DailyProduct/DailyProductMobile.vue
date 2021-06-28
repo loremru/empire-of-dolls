@@ -1,5 +1,8 @@
 <template>
-  <div class="daily-mob round-block flex jcsb">
+  <div
+    class="daily-mob round-block flex jcsb"
+    @click="$router.push('/product/123')"
+  >
     <div class="daily-mob__image">
       <img src="@/assets/images/daily-mobile.png" alt="" />
       <DailyDiscount styles="top: 2px; left: 6px;">60%</DailyDiscount>

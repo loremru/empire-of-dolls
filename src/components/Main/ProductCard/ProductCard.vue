@@ -1,5 +1,5 @@
 <template>
-  <div class="product">
+  <div class="product" @click="$router.push('/product/123')">
     <div class="product__img">
       <img src="@/assets/images/product.png" alt="" />
       <img
@@ -86,6 +86,22 @@ export default {
     &__name {
       padding: 0 20px;
       margin: 20px 0;
+    }
+  }
+}
+
+@media (max-width: $media-mobile) {
+  .product {
+    &__img {
+      height: 160px;
+    }
+    &__name {
+      margin: 10px 0;
+      font-size: 13px;
+      padding: 0 10px;
+    }
+    &__price {
+      padding: 0 8px 13px;
     }
   }
 }

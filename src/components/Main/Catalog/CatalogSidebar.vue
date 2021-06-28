@@ -34,6 +34,8 @@ export default {
     return {
       isFixedSub: false,
       isBottomSub: false,
+      subPosY: 0,
+      Footer: null,
     }
   },
   setup() {
@@ -42,20 +44,26 @@ export default {
   mounted() {
     if (isDesktop.value) {
       setTimeout(() => {
-        const Footer = document.querySelector('.improvementMessage')
+        this.Footer = document.querySelector('.improvementMessage')
         this.subPosY =
           this.$refs.sub.getBoundingClientRect().top + window.pageYOffset
-        document.addEventListener('scroll', () => {
-          this.isBottomSub =
-            Footer.getBoundingClientRect().y - window.innerHeight <= 0
-          this.isFixedSub =
-            window.pageYOffset +
-              window.innerHeight -
-              (60 + this.$refs.sub.offsetHeight) >=
-              this.subPosY && !this.isBottomSub
-        })
+        document.addEventListener('scroll', this.fixSub)
       }, 200)
     }
+  },
+  beforeUnmount() {
+    document.removeEventListener('scroll', this.fixSub)
+  },
+  methods: {
+    fixSub() {
+      this.isBottomSub =
+        this.Footer.getBoundingClientRect().y - window.innerHeight <= 0
+      this.isFixedSub =
+        window.pageYOffset +
+          window.innerHeight -
+          (60 + this.$refs.sub.offsetHeight) >=
+          this.subPosY && !this.isBottomSub
+    },
   },
 }
 </script>

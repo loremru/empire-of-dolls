@@ -3,7 +3,10 @@
     <div class="flex">
       <CatalogSidebar v-if="isDesktop" />
       <div id="contentOfPage">
-        <MainContentHeader v-if="isTablet" />
+        <MainContentHeader
+          v-if="isTablet"
+          :breadcrumb-array="$route.meta.tableBreadCrumb || []"
+        />
         <router-view />
       </div>
     </div>
@@ -26,7 +29,7 @@ export default {
   setup() {
     return {
       isDesktop,
-      isTablet: isTablet,
+      isTablet,
     }
   },
 }
@@ -40,7 +43,7 @@ export default {
   flex-grow: 1;
   min-width: 0;
 }
-@media (min-width: $media-tablet) {
+@media (min-width: $media-tablet + 1) {
   #contentOfPage {
     padding-left: 7px;
   }

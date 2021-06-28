@@ -30,6 +30,20 @@ export default {
       swiper: null,
     }
   },
+  props: {
+    slidesDesktop: {
+      type: Number,
+      default: 9,
+    },
+    slidesTablet: {
+      type: Number,
+      default: 6,
+    },
+    slidesMobile: {
+      type: Number,
+      default: 3,
+    },
+  },
   methods: {
     swiperInit(swiper) {
       this.swiper = swiper
@@ -37,7 +51,11 @@ export default {
   },
   computed: {
     slidesPerRow() {
-      return isDesktop.value ? 9 : isTablet.value ? 6 : 3
+      return isDesktop.value
+        ? this.slidesDesktop
+        : isTablet.value
+        ? this.slidesTablet
+        : this.slidesMobile
     },
   },
 }

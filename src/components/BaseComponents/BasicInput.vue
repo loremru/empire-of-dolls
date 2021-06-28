@@ -2,10 +2,11 @@
   <div class="input">
     <div class="input__extra txt" v-if="extra">{{ extra }}</div>
     <input
-      :style="`height:${height}px;text-align:${align};font-size: ${fontSize}px;padding:${padding}`"
+      :style="`height:${height}px;text-align:${align};font-size: ${fontSize}px; padding:${padding};`"
       class="input__input"
       :type="type"
       :value="value"
+      :maxlength="max"
       @keyup="change"
       :placeholder="placeholder"
       :required="required"
@@ -44,6 +45,7 @@ export default {
       type: Boolean,
       default: true,
     },
+    max: Number,
   },
   emits: ['update:value'],
   methods: {
@@ -65,7 +67,6 @@ export default {
     border-radius: 7px;
     border: 1px solid $border-color;
     width: 100%;
-    padding: 0 16px;
   }
   &__extra {
     position: absolute;

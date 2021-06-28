@@ -2,7 +2,9 @@
   <div class="city-mob flex fxdc jcsb aic">
     <p class="txt tac">Ваш город - Пермь?</p>
     <div class="flex city-mob__buttons">
-      <BasicButton :height="27" uppercase>Да</BasicButton>
+      <BasicButton :height="27" style="margin-right: 10px" uppercase
+        >Да</BasicButton
+      >
       <BasicButton :height="27" @click="isCityModal = true" uppercase
         >Выбрать другой</BasicButton
       >

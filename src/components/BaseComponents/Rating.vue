@@ -1,5 +1,5 @@
 <template>
-  <div class="rating">
+  <div class="rating flex">
     <img
       :src="require(`@/assets/images/rating_${mark}.svg`)"
       v-for="(mark, idx) in likeArray"
