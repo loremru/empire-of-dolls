@@ -1,5 +1,6 @@
 <template>
   <Breadcrumb
+    v-if="!isMobile"
     style="margin: 5px 0 20px 20px"
     :links-list="LinksForBreadcrumb"
   />
@@ -46,7 +47,7 @@
       </div>
     </div>
   </div>
-  <div class="social-promo">
+  <div v-if="!isMobile" class="social-promo">
     <div class="social-promo__header">
       <p>Поделитесь выбором с друзьями и получите скидку 50 р!</p>
       <img src="@/assets/images/arrow-white.svg" alt="" />
