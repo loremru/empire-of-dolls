@@ -309,6 +309,7 @@ export default {
     }
     &__promo-input {
       align-items: center;
+      display: flex;
       .input-border {
         width: 205px;
         display: inline-block;
@@ -317,6 +318,7 @@ export default {
       button {
         padding: 0;
         width: 25px;
+        margin-left: 10px;
         img {
           width: 10px;
         }
@@ -407,12 +409,12 @@ export default {
     }
     &__region {
       flex-basis: 0;
-      flex-grow: 3;
+      flex-grow: 3.5;
       padding: 0 4px;
     }
     &__city {
       flex-basis: 0;
-      flex-grow: 2;
+      flex-grow: 2.2;
       padding: 0 4px;
     }
     &__street {
