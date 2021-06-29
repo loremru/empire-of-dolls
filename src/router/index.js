@@ -22,6 +22,16 @@ const routes = [
     component: Cabinet,
     meta: {
       layout: 'with-catalog',
+      tableBreadCrumb: [
+        {
+          text: 'Главная',
+          pageLink: '/',
+        },
+        {
+          text: 'Личный кабинет',
+          pageLink: '/cabinet',
+        },
+      ],
     },
   },
   {

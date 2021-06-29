@@ -155,6 +155,10 @@ export default {
   &-slider {
     position: relative;
   }
+  &__info {
+    flex-grow: 1;
+    height: 100%;
+  }
 }
 
 @media (max-width: $media-tablet) {
