@@ -4,8 +4,11 @@
   </BreadcrumbContainer>
   <div class="cabinet__content flex" v-if="!isMobile">
     <div class="cabinet__page">
-      <CabinetHeader />
-      <CabinetUser />
+      <CabinetHeader @pageChange="togglePage" />
+      <CabinetUser v-if="page === 0" />
+      <template v-else>
+        <OrderCard />
+      </template>
     </div>
     <div class="cabinet__adds">
       <DailyProductVertical />
@@ -21,9 +24,11 @@ import CabinetUser from '@/components/Cabinet/CabinetUser'
 import { isTablet, isMobile } from '@/store/display'
 import DailyProductVertical from '@/components/Main/DailyProduct/DailyProductVertical'
 import CabinetMobileMenu from '@/components/Cabinet/Mobile/CabinetMobileMenu'
+import OrderCard from '@/components/Cabinet/OrderCard'
 export default {
   name: 'Home',
   components: {
+    OrderCard,
     CabinetMobileMenu,
     DailyProductVertical,
     CabinetUser,
@@ -31,11 +36,21 @@ export default {
     BreadcrumbContainer,
     Breadcrumb,
   },
+  data() {
+    return {
+      page: 0,
+    }
+  },
   setup() {
     return {
       isTablet,
       isMobile,
     }
+  },
+  methods: {
+    togglePage(page) {
+      this.page = page
+    },
   },
 }
 </script>

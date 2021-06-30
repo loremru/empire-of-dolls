@@ -112,3 +112,9 @@ p {
     background-color: rgba(0, 0, 0, 0.04);
   }
 }
+
+.text-dots {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

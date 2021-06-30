@@ -6,26 +6,26 @@
       <a class="cabMenu__info__mail">ivanova@yandex.ru</a>
     </div>
     <div class="cabMenu__list">
-      <RouterLink to="/cabinet/" class="cabMenu__item">
+      <RouterLink to="/ordersMobile" class="cabMenu__item">
         <img src="@/assets/images/account/my-orders.svg" alt="" />
         <p>Мои заказы</p>
       </RouterLink>
-      <RouterLink to="/cabinet/" class="cabMenu__item">
+      <RouterLink to="/wishlistMobile" class="cabMenu__item">
         <img src="@/assets/images/account/wish-list.svg" alt="" />
         <p>список желаний</p>
       </RouterLink>
-      <RouterLink to="/cabinet/" class="cabMenu__item">
+      <RouterLink to="/bonuses" class="cabMenu__item">
         <img src="@/assets/images/account/bonus-program.svg" alt="" />
         <p>бонусная программа</p>
       </RouterLink>
-      <RouterLink to="/cabinet/" class="cabMenu__item">
+      <RouterLink to="/accountDataMobile" class="cabMenu__item">
         <img src="@/assets/images/account/user-data.svg" alt="" />
         <p>Личные данные</p>
       </RouterLink>
-      <RouterLink to="/cabinet/" class="cabMenu__item">
+      <a href="#" @click.prevent class="cabMenu__item">
         <img src="@/assets/images/account/logout.svg" alt="" />
         <p>выход</p>
-      </RouterLink>
+      </a>
     </div>
     <div class="cabMenu__sub">
       <p>Узнавайте первыми об акциях и распродажах!</p>

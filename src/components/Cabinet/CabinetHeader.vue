@@ -1,10 +1,10 @@
 <template>
   <div class="cabinet__head round-block">
     <div class="cabinet__head__tabs">
-      <CabinetTabBtn :is-open="page === 0" @click="page = 0"
+      <CabinetTabBtn :is-open="page === 0" @click="togglePage(0)"
         >Личные данные</CabinetTabBtn
       >
-      <CabinetTabBtn :is-open="page === 1" @click="page = 1"
+      <CabinetTabBtn :is-open="page === 1" @click="togglePage(1)"
         >Мои заказы</CabinetTabBtn
       >
     </div>
@@ -20,10 +20,25 @@ import CabinetTabBtn from '@/components/Cabinet/CabinetTabBtn'
 export default {
   name: 'CabinetHeader',
   components: { CabinetTabBtn },
+  emits: ['pageChange'],
   data() {
     return {
       page: 0,
     }
+  },
+  mounted() {
+    const query = Number(this.$route.query.page)
+    if (query >= 0) {
+      this.page = query
+      this.$emit('pageChange', query)
+    }
+  },
+  methods: {
+    togglePage(page) {
+      this.page = page
+      this.$emit('pageChange', page)
+      this.$router.push(`/cabinet?page=${page}`)
+    },
   },
 }
 </script>

@@ -3,7 +3,7 @@
     <div class="content">
       <div class="header__head flex jcsb">
         <div class="header__links flex aic" v-if="isMobile">
-          <a href="#" @click="isMenu = !isMenu"
+          <a href="#" @click.prevent="isMenu = !isMenu"
             ><img src="@/assets/images/menu.svg" alt="" height="13"
           /></a>
           <a href="#" @click.prevent="goToSearch"

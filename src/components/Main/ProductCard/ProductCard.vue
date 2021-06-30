@@ -6,6 +6,14 @@
         src="@/assets/images/product-favorite.svg"
         alt=""
         class="product__favorite"
+        v-if="!close"
+      />
+      <img
+        src="@/assets/images/close.svg"
+        alt=""
+        class="product__favorite"
+        style="width: 15px !important; top: 4px; right: 4px"
+        v-else
       />
     </div>
     <div class="product__content">
@@ -27,6 +35,7 @@ export default {
       type: String,
       required: true,
     },
+    close: Boolean,
   },
 }
 </script>

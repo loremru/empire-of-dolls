@@ -1,5 +1,5 @@
 <template>
-  <textarea class="textarea" @keyup="keyup" />
+  <textarea class="textarea" @keyup="keyup" :placeholder="placeholder" />
 </template>
 
 <script>
@@ -7,6 +7,7 @@ export default {
   name: 'BasicTextarea',
   props: {
     value: String,
+    placeholder: String,
   },
   emits: ['update:value'],
   methods: {
