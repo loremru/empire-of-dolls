@@ -11,6 +11,10 @@ import Bonuses from '@/views/Mobile/Bonuses'
 import WishListMobile from '@/views/Mobile/WishListMobile'
 import WishList from '@/views/WishList'
 import Delivery from '@/views/Delivery'
+import Contacts from '@/views/Contacts'
+import About from '@/views/About'
+import Wholesale from '@/views/Wholesale'
+import Help from '@/views/Help'
 
 const routes = [
   {
@@ -221,6 +225,78 @@ const routes = [
         {
           text: 'Доставка и оплата',
           pageLink: '/delivery',
+        },
+      ],
+    },
+  },
+  {
+    path: '/contacts',
+    name: 'Contacts',
+    component: Contacts,
+    meta: {
+      layout: 'with-catalog',
+      tableBreadCrumb: [
+        {
+          text: 'Главная',
+          pageLink: '/',
+        },
+        {
+          text: 'Контакты Империи кукол',
+          pageLink: '/contacts',
+        },
+      ],
+    },
+  },
+  {
+    path: '/about',
+    name: 'About',
+    component: About,
+    meta: {
+      layout: 'with-catalog',
+      tableBreadCrumb: [
+        {
+          text: 'Главная',
+          pageLink: '/',
+        },
+        {
+          text: 'О нас',
+          pageLink: '/about',
+        },
+      ],
+    },
+  },
+  {
+    path: '/wholesale',
+    name: 'Wholesale',
+    component: Wholesale,
+    meta: {
+      layout: 'with-catalog',
+      tableBreadCrumb: [
+        {
+          text: 'Главная',
+          pageLink: '/',
+        },
+        {
+          text: 'Оптовые продажи',
+          pageLink: '/wholesale',
+        },
+      ],
+    },
+  },
+  {
+    path: '/reviews',
+    name: 'Reviews',
+    component: Help,
+    meta: {
+      layout: 'with-catalog',
+      tableBreadCrumb: [
+        {
+          text: 'Главная',
+          pageLink: '/',
+        },
+        {
+          text: 'Отзывы покупателей',
+          pageLink: '/reviews',
         },
       ],
     },

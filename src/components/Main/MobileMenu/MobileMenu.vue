@@ -38,15 +38,15 @@
         <img src="@/assets/images/mobile-cat/star-cat.svg" alt="" />
         <p>Новинки</p>
       </RouterLink>
-      <RouterLink class="mob-menu__item" to="/">
+      <RouterLink class="mob-menu__item" to="/catalog">
         <img src="@/assets/images/mobile-cat/doll-cat.svg" alt="" />
         <p>каталог кукол</p>
       </RouterLink>
-      <RouterLink class="mob-menu__item" to="/">
+      <RouterLink class="mob-menu__item" to="/about">
         <img src="@/assets/images/mobile-cat/butterfly-cat.svg" alt="" />
         <p>о нас</p>
       </RouterLink>
-      <RouterLink class="mob-menu__item" to="/">
+      <RouterLink class="mob-menu__item" to="/delivery">
         <img src="@/assets/images/mobile-cat/car-cat.svg" alt="" />
         <p>доставка и оплата</p>
       </RouterLink>
@@ -54,11 +54,11 @@
         <img src="@/assets/images/mobile-cat/marker-cat.svg" alt="" />
         <p>где купить</p>
       </RouterLink>
-      <RouterLink class="mob-menu__item" to="/">
+      <RouterLink class="mob-menu__item" to="/reviews">
         <img src="@/assets/images/mobile-cat/info-cat.svg" alt="" />
         <p>отзывы и помощь</p>
       </RouterLink>
-      <RouterLink class="mob-menu__item" to="/"
+      <RouterLink class="mob-menu__item" to="/wholesale"
         ><img src="@/assets/images/mobile-cat/buy-cat.svg" alt="" />
         <p>оптом</p></RouterLink
       >
