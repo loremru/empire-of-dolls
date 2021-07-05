@@ -35,6 +35,7 @@ export default {
   display: flex;
   margin: 10px 0;
   user-select: none;
+  align-items: center;
 }
 .radio-label {
   margin-left: 8px;
@@ -53,6 +54,7 @@ export default {
   align-items: center;
   justify-content: center;
   border-radius: 7px;
+  min-width: 25px;
   .radio-checked {
     width: 15px;
     height: 15px;

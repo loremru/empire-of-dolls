@@ -209,6 +209,9 @@ export default {
 @media (max-width: $media-mobile) {
   .itemBody {
     height: 140px;
+    margin: 0;
+    border-bottom: 1px solid $border-color;
+    border-radius: 0;
     &__counter__input {
       width: 20px;
     }
@@ -239,7 +242,7 @@ export default {
           .final-price {
             font-size: 15px;
             color: $pink;
-            font-weight: 500;
+            font-weight: 600;
           }
         }
         button {
