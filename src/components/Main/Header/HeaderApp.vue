@@ -31,10 +31,10 @@
           /></a>
         </div>
         <div class="header__links flex aic">
-          <RouterLink to="#"
+          <RouterLink to="/wishList"
             ><img src="@/assets/images/like.svg" alt=""
           /></RouterLink>
-          <RouterLink to="#"
+          <RouterLink to="#" @click.prevent="authModalChange('login')"
             ><img src="@/assets/images/key.svg" alt=""
           /></RouterLink>
           <RouterLink to="/cart"
@@ -54,6 +54,8 @@
     </div>
   </div>
   <MobileMenu v-if="isMenu" @close="isMenu = false" />
+
+  <AuthModals :auth-modal="authModal" @authModalChange="authModalChange" />
 </template>
 
 <script>
@@ -67,10 +69,12 @@ import { isDesktop, isMobile } from '@/store/display'
 import Subscribe from '@/components/Main/Subscribe/Subscribe'
 import MobileMenu from '@/components/Main/MobileMenu/MobileMenu'
 import PopularSearch from '@/components/Search/PopularSearch/PopularSearch'
+import AuthModals from '@/components/Main/AuthModals/AuthModals'
 export default {
   name: 'HeaderApp',
   emits: ['fixedChange'],
   components: {
+    AuthModals,
     PopularSearch,
     MobileMenu,
     Subscribe,
@@ -86,6 +90,7 @@ export default {
       fixed: false,
       isMenu: false,
       isPopular: false,
+      authModal: '',
     }
   },
   setup() {
@@ -121,6 +126,9 @@ export default {
     search(val) {
       this.$router.push(`/search/${val}`)
       this.isPopular = false
+    },
+    authModalChange(modal) {
+      this.authModal = modal
     },
   },
   computed: {

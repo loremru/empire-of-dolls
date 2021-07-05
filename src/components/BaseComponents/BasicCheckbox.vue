@@ -4,7 +4,12 @@
     <span class="checkbox__square">
       <img src="@/assets/images/checkbox.png" alt="" v-if="value" />
     </span>
-    <span class="checkbox__label" v-if="label">{{ label }}</span>
+    <span
+      class="checkbox__label"
+      v-if="label"
+      :style="`font-size: ${fontSize}px`"
+      >{{ label }}</span
+    >
   </label>
 </template>
 
@@ -14,6 +19,10 @@ export default {
   props: {
     label: String,
     value: Boolean,
+    fontSize: {
+      type: Number,
+      default: 13.5,
+    },
   },
   emits: ['update:value'],
   methods: {
@@ -43,9 +52,8 @@ export default {
     justify-content: center;
   }
   &__label {
-    font-size: 13.5px;
     line-height: 1;
-    color: #333333;
+    color: $text;
     margin-left: 11px;
     user-select: none;
   }

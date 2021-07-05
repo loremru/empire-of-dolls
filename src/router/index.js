@@ -9,6 +9,8 @@ import MyOrders from '@/views/Mobile/MyOrders'
 import AccountData from '@/views/Mobile/AccountData'
 import Bonuses from '@/views/Mobile/Bonuses'
 import WishListMobile from '@/views/Mobile/WishListMobile'
+import WishList from '@/views/WishList'
+import Delivery from '@/views/Delivery'
 
 const routes = [
   {
@@ -183,6 +185,42 @@ const routes = [
         {
           text: 'Список желаний',
           pageLink: '/wishlistMobile',
+        },
+      ],
+    },
+  },
+  {
+    path: '/wishlist',
+    name: 'WishList',
+    component: WishList,
+    meta: {
+      layout: 'with-catalog',
+      tableBreadCrumb: [
+        {
+          text: 'Главная',
+          pageLink: '/',
+        },
+        {
+          text: 'Избранные товары',
+          pageLink: '/wishList',
+        },
+      ],
+    },
+  },
+  {
+    path: '/delivery',
+    name: 'Delivery',
+    component: Delivery,
+    meta: {
+      layout: 'with-catalog',
+      tableBreadCrumb: [
+        {
+          text: 'Главная',
+          pageLink: '/',
+        },
+        {
+          text: 'Доставка и оплата',
+          pageLink: '/delivery',
         },
       ],
     },
