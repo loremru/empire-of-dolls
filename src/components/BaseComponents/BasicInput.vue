@@ -2,7 +2,7 @@
   <div class="input">
     <div class="input__extra txt" v-if="extra">{{ extra }}</div>
     <input
-      :style="`height:${height}px;text-align:${align};font-size: ${fontSize}px; padding:${padding};`"
+      :style="`height:${height}px;text-align:${align};font-size: ${fontSize}px; padding:${padding}; border-color:${borderColor}`"
       class="input__input"
       :type="type"
       :value="value"
@@ -18,6 +18,10 @@
 export default {
   name: 'BasicInput',
   props: {
+    borderColor: {
+      type: String,
+      default: '#d7c3cd',
+    },
     padding: {
       type: String,
       default: '0 16px',
@@ -65,7 +69,7 @@ export default {
   position: relative;
   &__input {
     border-radius: 7px;
-    border: 1px solid $border-color;
+    border: 1px solid transparent;
     width: 100%;
   }
   &__extra {

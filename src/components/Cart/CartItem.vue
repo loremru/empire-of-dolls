@@ -6,14 +6,41 @@
         alt="doll photo"
       /><!-- :src="CartItem.photoURL" -->
     </div>
-    <div class="itemBody__description">
+    <div v-if="isMobile" class="itemBody__mobile-info">
+      <DailyDiscount>20%</DailyDiscount>
+      <p class="itemBody__mobile-info__item-name">
+        Кукла Пуллип- Вокалоид Хатсуне Мику
+      </p>
+      <div class="itemBody__mobile-info__price">
+        <div class="counter-block flex">
+          <BasicButton @click="count--" :height="28">-</BasicButton>
+          <div class="itemBody__counter__input">
+            <BasicInput
+              borderColor="transparent"
+              align="center"
+              :padding="'0'"
+              :height="28"
+              v-model:value="count"
+            />
+          </div>
+          <BasicButton @click="count++" :height="28">+</BasicButton>
+        </div>
+        <div class="prices">
+          <p class="final-price">{{ CartItem.price * count }}р</p>
+          <p class="old-price">
+            {{ CartItem.sale * count + CartItem.price * count }}р
+          </p>
+        </div>
+      </div>
+    </div>
+    <div v-if="!isMobile" class="itemBody__description">
       <div>
         <p>Производитель: {{ CartItem.dollMaker }}</p>
         <p>Артикул: {{ CartItem.dollMaker }}</p>
         <p>Рейтинг: {{ CartItem.rating }} / 5</p>
       </div>
     </div>
-    <div class="itemBody__counter">
+    <div v-if="!isMobile" class="itemBody__counter">
       <p v-if="isAvailable" class="available">В наличии</p>
       <p v-if="!isAvailable" class="not-available">Нет в наличии</p>
       <div class="counter-block flex">
@@ -29,7 +56,7 @@
         <BasicButton @click="count++" :height="34">+</BasicButton>
       </div>
     </div>
-    <div class="itemBody__price">
+    <div v-if="!isMobile" class="itemBody__price">
       <div>
         <p>
           Цена: <span>{{ CartItem.price * count }}р</span>
@@ -48,9 +75,11 @@
 <script>
 import BasicButton from '@/components/BaseComponents/BasicButton'
 import BasicInput from '@/components/BaseComponents/BasicInput'
+import { isMobile, isTablet, isDesktop } from '@/store/display'
+import DailyDiscount from '@/components/Main/DailyProduct/DailyDiscount'
 export default {
   name: 'CartItem',
-  components: { BasicInput, BasicButton },
+  components: { DailyDiscount, BasicInput, BasicButton },
   props: {
     CartItem: {
       type: Object,
@@ -61,6 +90,9 @@ export default {
       count: 1,
       isAvailable: true,
     }
+  },
+  setup() {
+    return { isDesktop: isDesktop, isMobile: isMobile, isTablet: isTablet }
   },
   methods: {
     deleteCardItem() {
@@ -86,7 +118,7 @@ export default {
   background: #fff;
   display: flex;
   position: relative;
-  > div {
+  > div:not(.itemBody__image) {
     width: 25%;
   }
   &__image {
@@ -171,6 +203,59 @@ export default {
     img {
       width: 20px;
       height: 20px;
+    }
+  }
+}
+@media (max-width: $media-mobile) {
+  .itemBody {
+    height: 140px;
+    margin: 0;
+    border-bottom: 1px solid $border-color;
+    border-radius: 0;
+    &__counter__input {
+      width: 20px;
+    }
+    &__image {
+      width: 40%;
+    }
+    &__mobile-info {
+      width: 60% !important;
+      padding: 15px;
+      &__item-name {
+        margin-top: 50px;
+        font-size: 13px;
+        color: $text;
+        line-height: 13px;
+      }
+      &__price {
+        display: flex;
+        align-items: center;
+        margin-top: 10px;
+        .prices {
+          text-align: center;
+          width: 100%;
+          .old-price {
+            font-size: 11px;
+            color: $text;
+            text-decoration: line-through;
+          }
+          .final-price {
+            font-size: 15px;
+            color: $pink;
+            font-weight: 600;
+          }
+        }
+        button {
+          width: 28px;
+          height: 28px;
+          padding: 0;
+          font-size: 20px;
+          line-height: 18px;
+          background: transparent;
+          border: 1px solid $border-color;
+          color: $border-color;
+        }
+      }
     }
   }
 }
