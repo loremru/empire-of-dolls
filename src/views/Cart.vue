@@ -12,30 +12,27 @@
   />
   <div v-if="isMobile" class="cartItems-count">
     <span
-      >{{ CartItems?.length }} товар{{
-        CartItems.length.toString().split('').pop() == 2 ? 'а' : ''
-      }}{{ CartItems.length.toString().split('').pop() == 3 ? 'а' : ''
-      }}{{ CartItems.length.toString().split('').pop() == 4 ? 'а' : ''
-      }}{{ CartItems.length.toString().split('').pop() == 5 ? 'ов' : ''
-      }}{{ CartItems.length.toString().split('').pop() == 6 ? 'ов' : ''
-      }}{{ CartItems.length.toString().split('').pop() == 7 ? 'ов' : ''
-      }}{{ CartItems.length.toString().split('').pop() == 8 ? 'ов' : ''
-      }}{{ CartItems.length.toString().split('').pop() == 9 ? 'ов' : ''
-      }}{{ CartItems.length.toString().split('').pop() == 0 ? 'ов' : '' }} на
+      >{{ CartItems?.length }} товар{{ cartCountEnding(CartItems?.length) }} на
       сумму:</span
     >
     <span class="cartItems-count__cartCost">{{ CartCost }} р</span>
   </div>
   <div class="delivery-block">
-    <p v-if="isMobile">Накопленная скидка: {{ clientSaleBonus }}%</p>
-    <div v-if="isMobile" class="cart-cost__promo__promo-input">
+    <p v-if="isMobile" style="margin: 10px 0">
+      Накопленная скидка: {{ clientSaleBonus }}%
+    </p>
+    <div
+      v-if="isMobile"
+      style="margin: 10px 0"
+      class="cart-cost__promo__promo-input"
+    >
       <span class="cart-cost__description">Промокод:</span>
       <div class="input-border"><BasicInput :height="25" /></div>
       <BasicButton :height="25"
         ><img src="@/assets/images/arrow-white-down.svg" alt=""
       /></BasicButton>
     </div>
-    <p>Выберите вариант доставки:</p>
+    <p style="margin: 10px 0">Выберите вариант доставки:</p>
     <Radio
       v-for="(el, idx) in RadioArray"
       :RadioItem="el"
@@ -44,24 +41,26 @@
       @check="() => (activeDelivery = idx)"
       :fontSize="isMobile ? 15 : 18"
     />
-    <div class="flex">
-      <p>Дата доставки:</p>
-      <BasicInput
-        :type="'date'"
-        :padding="0"
-        :height="27"
-        style="width: 120px; margin-left: 20px"
-      />
-    </div>
-    <div class="flex">
-      <p>Интервал доставки:</p>
-      <SelectInput
-        :dataArray="dataArray"
-        style="width: 120px; margin-left: 20px"
-      />
-    </div>
-    <p>Стоимость доставки:</p>
-    <p>Итого к оплате:</p>
+    <template v-if="isMobile">
+      <div style="margin: 10px 0" class="flex">
+        <p>Дата доставки:</p>
+        <BasicInput
+          :type="'date'"
+          :padding="0"
+          :height="27"
+          style="width: 120px; margin-left: 20px"
+        />
+      </div>
+      <div style="margin: 10px 0" class="flex">
+        <p>Интервал доставки:</p>
+        <SelectInput
+          :dataArray="dataArray"
+          style="width: 120px; margin-left: 20px"
+        />
+      </div>
+      <p style="margin: 10px 0">Стоимость доставки:</p>
+      <p style="margin: 10px 0">Итого к оплате:</p>
+    </template>
     <div v-if="!isMobile" class="cart-cost">
       <div class="cart-cost__delivery">
         <p class="cart-cost__description">
@@ -225,7 +224,7 @@
       Нажимая кнопку “Заказать”, я подтверждаю свою дееспособность,даю согласие
       на обработку моих персональных данных. <a href="#">подробнее</a>
     </p>
-    <div class="mobile-user-form">
+    <div v-if="isMobile" class="mobile-user-form">
       <div class="flex">
         <BasicInput
           style="margin: 5px"
@@ -277,6 +276,7 @@ import BasicInput from '@/components/BaseComponents/BasicInput'
 import BasicButton from '@/components/BaseComponents/BasicButton'
 import { isDesktop, isMobile, isTablet } from '@/store/display'
 import SelectInput from '@/components/BaseComponents/SelectInput'
+import { cartCountEnding } from '@/store/cartCountEnding'
 
 export default {
   name: 'Cart',
@@ -313,6 +313,69 @@ export default {
           price: 6000,
           sale: 1000,
           id: 1,
+        },
+        {
+          photoURL: '',
+          dollMaker: 'Компания2',
+          article: 'Артикул2',
+          rating: 3,
+          price: 8000,
+          sale: 2000,
+          id: 2,
+        },
+        {
+          photoURL: '',
+          dollMaker: 'Компания2',
+          article: 'Артикул2',
+          rating: 3,
+          price: 8000,
+          sale: 2000,
+          id: 2,
+        },
+        {
+          photoURL: '',
+          dollMaker: 'Компания2',
+          article: 'Артикул2',
+          rating: 3,
+          price: 8000,
+          sale: 2000,
+          id: 2,
+        },
+        {
+          photoURL: '',
+          dollMaker: 'Компания2',
+          article: 'Артикул2',
+          rating: 3,
+          price: 8000,
+          sale: 2000,
+          id: 2,
+        },
+        {
+          photoURL: '',
+          dollMaker: 'Компания2',
+          article: 'Артикул2',
+          rating: 3,
+          price: 8000,
+          sale: 2000,
+          id: 2,
+        },
+        {
+          photoURL: '',
+          dollMaker: 'Компания2',
+          article: 'Артикул2',
+          rating: 3,
+          price: 8000,
+          sale: 2000,
+          id: 2,
+        },
+        {
+          photoURL: '',
+          dollMaker: 'Компания2',
+          article: 'Артикул2',
+          rating: 3,
+          price: 8000,
+          sale: 2000,
+          id: 2,
         },
         {
           photoURL: '',
@@ -368,6 +431,7 @@ export default {
       const itemToDelete = this.CartItems.findIndex((el) => el.id === i.id)
       this.CartItems.splice(itemToDelete, 1)
     },
+    cartCountEnding: cartCountEnding,
   },
 }
 </script>
