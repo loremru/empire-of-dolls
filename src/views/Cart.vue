@@ -12,7 +12,7 @@
   />
   <div v-if="isMobile" class="cartItems-count">
     <span
-      >{{ CartItems?.length }} товар{{ cartCountEnding(CartItems?.length) }} на
+      >{{ CartItems?.length }} {{ cartCountEnding(CartItems?.length) }} на
       сумму:</span
     >
     <span class="cartItems-count__cartCost">{{ CartCost }} р</span>
@@ -276,7 +276,7 @@ import BasicInput from '@/components/BaseComponents/BasicInput'
 import BasicButton from '@/components/BaseComponents/BasicButton'
 import { isDesktop, isMobile, isTablet } from '@/store/display'
 import SelectInput from '@/components/BaseComponents/SelectInput'
-import { cartCountEnding } from '@/store/cartCountEnding'
+import { cartCountEnding } from '@/plugins/cartCountEnding'
 
 export default {
   name: 'Cart',
