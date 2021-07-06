@@ -4,6 +4,7 @@
       <BasicInput
         v-model:value="EmailToSubscribe"
         placeholder="example@mail.ru"
+        style="margin-right: 10px"
       />
       <BasicButton>ПОДПИСАТЬСЯ</BasicButton>
     </form>
@@ -34,7 +35,7 @@ export default {
 .FooterSubscribeForm {
   padding: 0 15px;
 }
-@media (max-width: $media-table) {
+@media (max-width: $media-tablet) {
   .FooterSubscribeForm {
     width: 50%;
   }

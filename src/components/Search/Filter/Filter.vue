@@ -117,7 +117,7 @@ export default {
     }
   }
 }
-@media (max-width: $media-table) {
+@media (max-width: $media-tablet) {
   .filter {
     width: 220px;
     min-width: 220px;

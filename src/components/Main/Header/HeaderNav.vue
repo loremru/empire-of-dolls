@@ -1,10 +1,10 @@
 <template>
   <nav class="nav flex aic jcsb">
     <RouterLink to="/">Главная</RouterLink>
-    <RouterLink to="/">О нас</RouterLink>
-    <RouterLink to="/">Доставка и оплата</RouterLink>
-    <RouterLink to="/">Отзывы и помощь</RouterLink>
-    <RouterLink to="/">Оптом</RouterLink>
+    <RouterLink to="/about">О нас</RouterLink>
+    <RouterLink to="/delivery">Доставка и оплата</RouterLink>
+    <RouterLink to="/reviews">Отзывы и помощь</RouterLink>
+    <RouterLink to="/wholesale">Оптом</RouterLink>
   </nav>
 </template>
 
@@ -24,7 +24,7 @@ export default {
   }
 }
 
-@media (max-width: $media-table) {
+@media (max-width: $media-tablet) {
   .nav {
     a {
       font-size: 15px;

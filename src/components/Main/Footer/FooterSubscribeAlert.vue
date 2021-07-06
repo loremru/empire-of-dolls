@@ -26,7 +26,7 @@ export default {
   margin-left: 20px;
   line-height: 1;
 }
-@media (max-width: $media-table) {
+@media (max-width: $media-tablet) {
   .FooterSubscribeAlert {
     img {
       width: 43px;

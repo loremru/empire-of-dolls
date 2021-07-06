@@ -1,5 +1,5 @@
 <template>
-  <div class="catalog-item flex aic jcsb">
+  <div class="catalog-item flex aic jcsb" @click="$router.push('/categories')">
     <div class="catalog-item__content flex aic">
       <img src="@/assets/images/catalog.png" class="catalog-item__img" alt="" />
       <span><slot></slot></span>

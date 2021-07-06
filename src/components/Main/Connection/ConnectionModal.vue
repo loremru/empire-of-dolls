@@ -11,19 +11,17 @@
           <p>Написать письмо</p>
         </div>
       </div>
-      <div class="connect__buttons">
-        <button>Жалобы</button>
-        <button>Служба поддержки</button>
-      </div>
+      <ConnectButtons :buttons="['Жалобы', 'Служба поддержки']" />
     </div>
   </Modal>
 </template>
 
 <script>
 import Modal from '@/components/Main/Modal'
+import ConnectButtons from '@/components/Main/Connection/ConnectButtons'
 export default {
   name: 'ConnectionModal',
-  components: { Modal },
+  components: { ConnectButtons, Modal },
   emits: ['close'],
 }
 </script>
@@ -69,27 +67,6 @@ export default {
   &__mail {
     img {
       margin-right: 10px;
-    }
-  }
-  &__buttons {
-    height: 55px;
-    border-top: 1px solid #e0d1d9;
-    width: 100%;
-    display: flex;
-    button {
-      cursor: pointer;
-      padding: 17px 17px 25px 17px;
-      color: #000;
-      background-color: transparent;
-      border: none;
-      flex-grow: 1;
-      transition: 0.2s;
-      &:first-child {
-        border-right: 1px solid #e0d1d9;
-      }
-      &:hover {
-        background-color: rgba(0, 0, 0, 0.04);
-      }
     }
   }
 }

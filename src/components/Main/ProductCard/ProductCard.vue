@@ -1,11 +1,19 @@
 <template>
-  <div class="product">
+  <div class="product" @click="$router.push('/product/123')">
     <div class="product__img">
       <img src="@/assets/images/product.png" alt="" />
       <img
         src="@/assets/images/product-favorite.svg"
         alt=""
         class="product__favorite"
+        v-if="!close"
+      />
+      <img
+        src="@/assets/images/close.svg"
+        alt=""
+        class="product__favorite"
+        style="width: 15px !important; top: 4px; right: 4px"
+        v-else
       />
     </div>
     <div class="product__content">
@@ -27,6 +35,7 @@ export default {
       type: String,
       required: true,
     },
+    close: Boolean,
   },
 }
 </script>
@@ -67,7 +76,7 @@ export default {
     padding: 0 18px 20px;
   }
 }
-@media (max-width: $media-desktop) and (min-width: $media-table + 1) {
+@media (max-width: $media-desktop) and (min-width: $media-tablet + 1) {
   .product {
     &__name {
       padding: 0 20px;
@@ -78,7 +87,7 @@ export default {
   }
 }
 
-@media (max-width: $media-table) {
+@media (max-width: $media-tablet) {
   .product {
     &__img {
       height: 224px;

@@ -25,7 +25,7 @@ export default {
     text-decoration: underline;
   }
 }
-@media (max-width: $media-table) {
+@media (max-width: $media-tablet) {
   .subscription-form-text {
     max-width: 640px;
     text-align: center;

@@ -3,7 +3,7 @@
     <div class="content">
       <div class="header__head flex jcsb">
         <div class="header__links flex aic" v-if="isMobile">
-          <a href="#" @click="isMenu = !isMenu"
+          <a href="#" @click.prevent="isMenu = !isMenu"
             ><img src="@/assets/images/menu.svg" alt="" height="13"
           /></a>
           <a href="#" @click.prevent="goToSearch"
@@ -14,8 +14,11 @@
         <SearchHeader
           placeholder="Барби"
           v-if="!isMobile"
-          @search="(val) => $router.push(`/search/${val}`)"
+          @search="search"
+          @focus="openSearch"
+          @blur="closeSearch"
         />
+        <PopularSearch v-if="isPopular" @close="closeSearch" />
         <div class="header__socials flex aic" v-if="!isMobile">
           <a href="#" target="_blank"
             ><img src="@/assets/images/telegram.svg" alt=""
@@ -28,10 +31,10 @@
           /></a>
         </div>
         <div class="header__links flex aic">
-          <RouterLink to="#"
+          <RouterLink to="/wishList"
             ><img src="@/assets/images/like.svg" alt=""
           /></RouterLink>
-          <RouterLink to="#"
+          <RouterLink to="#" @click.prevent="authModalChange('login')"
             ><img src="@/assets/images/key.svg" alt=""
           /></RouterLink>
           <RouterLink to="/cart"
@@ -51,6 +54,8 @@
     </div>
   </div>
   <MobileMenu v-if="isMenu" @close="isMenu = false" />
+
+  <AuthModals :auth-modal="authModal" @authModalChange="authModalChange" />
 </template>
 
 <script>
@@ -63,10 +68,14 @@ import ConnectionLink from '@/components/Main/Connection/ConnectionLink'
 import { isDesktop, isMobile } from '@/store/display'
 import Subscribe from '@/components/Main/Subscribe/Subscribe'
 import MobileMenu from '@/components/Main/MobileMenu/MobileMenu'
+import PopularSearch from '@/components/Search/PopularSearch/PopularSearch'
+import AuthModals from '@/components/Main/AuthModals/AuthModals'
 export default {
   name: 'HeaderApp',
   emits: ['fixedChange'],
   components: {
+    AuthModals,
+    PopularSearch,
     MobileMenu,
     Subscribe,
     ConnectionLink,
@@ -80,6 +89,8 @@ export default {
     return {
       fixed: false,
       isMenu: false,
+      isPopular: false,
+      authModal: '',
     }
   },
   setup() {
@@ -105,6 +116,19 @@ export default {
           Header.offsetHeight,
         behavior: 'smooth',
       })
+    },
+    openSearch() {
+      this.isPopular = true
+    },
+    closeSearch() {
+      this.isPopular = false
+    },
+    search(val) {
+      this.$router.push(`/search/${val}`)
+      this.isPopular = false
+    },
+    authModalChange(modal) {
+      this.authModal = modal
     },
   },
   computed: {
@@ -156,7 +180,7 @@ export default {
     z-index: 50;
   }
 }
-@media (max-width: $media-table) {
+@media (max-width: $media-tablet) {
   .header {
     &__bottom {
       padding-left: 0;

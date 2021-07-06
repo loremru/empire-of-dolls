@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { isDesktop, isMobile, isTable } from '@/store/display'
+import { isDesktop, isTablet } from '@/store/display'
 import MainContentHeader from '@/components/Main/MainContentHeader'
 import CategorySlider from '@/components/Search/Category/CategorySlider'
 export default {
@@ -39,9 +39,8 @@ export default {
   },
   setup() {
     return {
-      isMobile,
       isDesktop,
-      isTable,
+      isTablet,
     }
   },
 }
