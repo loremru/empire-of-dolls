@@ -1,8 +1,8 @@
 <template>
   <div class="product__buy">
     <div class="product__buy__price">
-      <p class="product__current-price">11 659 р</p>
-      <p class="product__old-price">15 659 р</p>
+      <p class="product__current-price">{{ newPrice }} р</p>
+      <p class="product__old-price" v-if="oldPrice !== '0'">{{ oldPrice }} р</p>
     </div>
     <img
       src="@/assets/images/product-cart.svg"
@@ -24,6 +24,8 @@ export default {
       type: Boolean,
       default: false,
     },
+    oldPrice: String,
+    newPrice: String,
   },
 }
 </script>
@@ -35,6 +37,7 @@ export default {
     align-items: center;
     justify-content: space-between;
     width: 100%;
+    height: 41px;
   }
   &__current-price {
     font-size: 22.5px;

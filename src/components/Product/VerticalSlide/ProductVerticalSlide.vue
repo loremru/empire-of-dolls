@@ -1,12 +1,18 @@
 <template>
   <div class="productSlide round-block">
-    <img src="@/assets/images/product-slide.png" alt="" />
+    <img :src="img" alt="" />
   </div>
 </template>
 
 <script>
 export default {
   name: 'ProductVerticalSlide',
+  props: {
+    img: {
+      type: String,
+      required: true,
+    },
+  },
 }
 </script>
 
@@ -15,16 +21,18 @@ export default {
   height: 134px;
   width: 134px;
   display: flex;
-  align-items: flex-end;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  img {
+    width: 90%;
+    height: 90%;
+  }
 }
 @media (max-width: $media-tablet) {
   .productSlide {
     height: auto;
     width: auto;
-    img {
-      width: 100%;
-      height: 100%;
-    }
   }
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="verticalSlider">
-    <div class="verticalSlider__arrow-container">
+    <div v-if="arrayLength > 2" class="verticalSlider__arrow-container">
       <div class="verticalSlider__arrow" @click="prevSlide">
         <img
           src="@/assets/images/main-arrow-prev.svg"
@@ -16,13 +16,13 @@
         @swiper="regSwiper"
         @activeIndexChange="log"
         direction="vertical"
-        loop
         :height="height"
+        :centeredSlides="arrayLength === 1"
       >
         <slot></slot>
       </Swiper>
     </div>
-    <div class="verticalSlider__arrow-container">
+    <div v-if="arrayLength > 2" class="verticalSlider__arrow-container">
       <div
         class="verticalSlider__arrow verticalSlider__arrow_next"
         @click="nextSlide"
@@ -55,6 +55,10 @@ export default {
       type: Number,
       default: 283,
     },
+    arrayLength: {
+      type: Number,
+      default: 0,
+    },
   },
   data() {
     return {
@@ -80,6 +84,12 @@ export default {
   },
 }
 </script>
+
+<style>
+.swiper-container {
+  height: 100%;
+}
+</style>
 
 <style scoped lang="scss">
 .verticalSlider {

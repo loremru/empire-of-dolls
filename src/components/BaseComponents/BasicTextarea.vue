@@ -1,5 +1,10 @@
 <template>
-  <textarea class="textarea" @keyup="keyup" :placeholder="placeholder" />
+  <textarea
+    class="textarea"
+    @keyup="keyup"
+    :placeholder="placeholder"
+    :required="required"
+  />
 </template>
 
 <script>
@@ -8,6 +13,7 @@ export default {
   props: {
     value: String,
     placeholder: String,
+    required: Boolean,
   },
   emits: ['update:value'],
   methods: {

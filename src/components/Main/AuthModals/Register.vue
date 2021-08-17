@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <form class="flex fxdc aic">
+    <form class="flex fxdc aic" @submit.prevent="register">
       <BasicInput
         placeholder="e-mail"
         type="email"
@@ -16,12 +16,14 @@
       <div class="login__checkbox">
         <BasicCheckbox
           label="Запомнить меня"
-          v-model:value="formData.remember"
-          :value="formData.remember"
+          v-model:value="remember"
+          :value="remember"
           :font-size="18"
         />
       </div>
-      <BasicButton :height="49" uppercase>Зарегистрироваться</BasicButton>
+      <BasicButton :disabled="loading" :height="49" uppercase
+        >Зарегистрироваться</BasicButton
+      >
     </form>
   </div>
 </template>
@@ -30,17 +32,36 @@
 import BasicInput from '@/components/BaseComponents/BasicInput'
 import BasicCheckbox from '@/components/BaseComponents/BasicCheckbox'
 import BasicButton from '@/components/BaseComponents/BasicButton'
+import { register } from '@/hooks/auth'
 export default {
   name: 'Register',
   components: { BasicButton, BasicCheckbox, BasicInput },
+  emits: ['close'],
   data() {
     return {
       formData: {
         email: '',
         password: '',
-        remember: false,
       },
+      remember: false,
+      loading: false,
     }
+  },
+  methods: {
+    async register() {
+      try {
+        this.loading = true
+        await register(this.formData)
+        this.$notify({
+          type: 'success',
+          title: 'Вы успешно зарегестрировались',
+        })
+        this.$emit('close')
+      } catch (e) {
+        console.log(e)
+      }
+      this.loading = false
+    },
   },
 }
 </script>

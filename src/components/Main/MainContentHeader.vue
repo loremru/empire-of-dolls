@@ -9,18 +9,16 @@
         />
       </div>
     </div>
-    <ConnectionLink v-if="!isMobile" />
   </div>
 </template>
 
 <script>
-import ConnectionLink from '@/components/Main/Connection/ConnectionLink'
 import CatalogMini from '@/components/Main/Catalog/CatalogMini'
 import Breadcrumb from '@/components/BaseComponents/Breadcrumb'
 import { isMobile } from '@/store/display'
 export default {
   name: 'MainContentHeader',
-  components: { Breadcrumb, CatalogMini, ConnectionLink },
+  components: { Breadcrumb, CatalogMini },
   props: {
     breadcrumbArray: {
       type: Array,

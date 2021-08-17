@@ -7,7 +7,9 @@
       /><!-- :src="CartItem.photoURL" -->
     </div>
     <div v-if="isMobile" class="itemBody__mobile-info">
-      <DailyDiscount>20%</DailyDiscount>
+      <DailyDiscount styles="position: relative; width: 48px;"
+        >20%</DailyDiscount
+      >
       <p class="itemBody__mobile-info__item-name">
         Кукла Пуллип- Вокалоид Хатсуне Мику
       </p>
@@ -195,8 +197,8 @@ export default {
   }
   .itemBody__delete-button {
     position: absolute;
-    top: 12px;
-    right: 17px;
+    top: 11px;
+    right: 11px;
     width: 20px;
     height: 20px;
     cursor: pointer;
@@ -220,9 +222,10 @@ export default {
     }
     &__mobile-info {
       width: 60% !important;
-      padding: 15px;
+      padding: 9px 15px 15px;
+
       &__item-name {
-        margin-top: 50px;
+        margin-top: 5px;
         font-size: 13px;
         color: $text;
         line-height: 13px;

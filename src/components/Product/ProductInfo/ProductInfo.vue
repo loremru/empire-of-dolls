@@ -2,15 +2,20 @@
   <div class="product-info round-block">
     <div class="product-info__desc">
       <div class="product-info__price">
-        <p class="product-info__price__current">11 659 р</p>
-        <p class="product-info__price__old">15 999 р</p>
+        <p class="product-info__price__current">{{ product.price }} р</p>
+        <p
+          class="product-info__price__old"
+          v-if="product.price_discount !== '0'"
+        >
+          {{ product.price_discount }} р
+        </p>
       </div>
       <div class="product-info__desc__content">
         <p class="product-info__text">Производитель:</p>
         <p class="product-info__text">Paola Reina</p>
         <p class="product-info__text">Артикул: 15029pr</p>
-        <p class="product-info__text">Рейтинг: 4.4/35</p>
-        <Rating :mark="4.5" />
+        <p class="product-info__text">Рейтинг: {{ product.raiting }}/35</p>
+        <Rating :mark="Number(product.raiting)" />
       </div>
       <BasicButton :height="isDesktop ? 49 : 37" uppercase
         >КУПИТЬ в 1 клик</BasicButton
@@ -65,6 +70,12 @@ import { isDesktop } from '@/store/display'
 export default {
   name: 'ProductInfo',
   components: { BasicInput, BasicButton, Rating },
+  props: {
+    product: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
     return {
       amount: 1,

@@ -42,12 +42,12 @@ export default {
 
 @media (max-width: $media-tablet) {
   .notification__circle {
-    width: 15px;
-    height: 15px;
+    width: 17px;
+    height: 17px;
     top: -5px;
     right: -5px;
     span {
-      font-size: 9px;
+      font-size: 10px;
     }
   }
 }

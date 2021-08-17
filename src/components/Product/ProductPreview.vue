@@ -3,7 +3,7 @@
     class="preview round-block"
     :style="`height: ${height}; width: ${width}px`"
   >
-    <img src="@/assets/images/product-preview.png" alt="" />
+    <img :src="img" alt="" />
   </div>
 </template>
 
@@ -21,6 +21,7 @@ export default {
       type: Number,
       default: () => (isMiniDesktop.value ? 250 : 368),
     },
+    img: String,
   },
 }
 </script>

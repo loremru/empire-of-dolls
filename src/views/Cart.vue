@@ -540,6 +540,7 @@ export default {
 .customer-info {
   background: #ffffff;
   padding: 34px;
+  margin-bottom: 10px;
   &__header {
     margin-bottom: 20px;
     font-size: 18px;

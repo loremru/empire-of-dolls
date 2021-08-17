@@ -2,10 +2,12 @@
   <div class="dots-slider">
     <Swiper
       :spaceBetween="8"
+      :height="height"
       @swiper="regSwiper"
       :pagination="{ clickable: true }"
       autoplay
       loop
+      autoHeight
     >
       <slot></slot>
     </Swiper>
@@ -22,6 +24,11 @@ SwiperCore.use([Controller, Pagination, Autoplay])
 export default {
   name: 'SliderWithDots',
   components: { Swiper },
+  props: {
+    height: {
+      type: Number,
+    },
+  },
   data() {
     return {
       swiper: null,

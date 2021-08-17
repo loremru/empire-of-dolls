@@ -42,4 +42,10 @@ export default {
     color: $grey;
   }
 }
+
+@media (max-width: $media-mobile) {
+  .breadcrumb {
+    margin-bottom: 10px;
+  }
+}
 </style>

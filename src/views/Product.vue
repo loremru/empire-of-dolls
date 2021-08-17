@@ -1,76 +1,84 @@
 <template>
   <BreadcrumbContainer v-if="!isTablet">
-    <Breadcrumb :links-list="$route.meta.tableBreadCrumb" />
+    <Breadcrumb :links-list="breadcrumbs" />
   </BreadcrumbContainer>
-  <template v-if="!isMobile">
+  <template v-if="!isMobile && product">
     <CategorySlider :slides-desktop="7" />
     <div class="product__content flex aic">
-      <ProductPreview />
+      <ProductPreview :img="product.image" />
       <div class="product__slider" v-if="isDesktop">
-        <VerticalSlider @changeIdx="changeIdx">
-          <SwiperSlide v-for="i in 10" :key="i + '-productSldie'">
-            <ProductVerticalSlide />
+        <VerticalSlider
+          :array-length="product.gallery.length"
+          @changeIdx="changeIdx"
+        >
+          <SwiperSlide
+            v-for="(img, idx) in product.gallery"
+            :key="idx + '-productSldie'"
+          >
+            <ProductVerticalSlide :img="img" />
           </SwiperSlide>
         </VerticalSlider>
       </div>
       <div class="product__info">
-        <ProductInfo />
+        <ProductInfo :product="product" />
         <ProductTabletSlider v-if="isTablet">
-          <SwiperSlide v-for="i in 10" :key="i + 'tablet-product'">
-            <ProductVerticalSlide />
+          <SwiperSlide
+            v-for="(img, idx) in product.gallery"
+            :key="idx + '-productTablet'"
+          >
+            <ProductVerticalSlide :img="img" />
           </SwiperSlide>
         </ProductTabletSlider>
       </div>
     </div>
     <p class="product__name">
-      Кукла Барби (Barbie Skipper Babysitters Inc. Potty Training Playset) -
-      Скиппер няня. Можно купить в нашем интернет-магазине
+      {{ product.description }}
     </p>
-    <MainSection title="ВАМ МОЖЕТ БЫТЬ ИНТЕРЕСНО">
-      <div class="product-slider">
-        <Swiper
-          :spaceBetween="8"
-          :slides-per-view="4"
-          @swiper="(swiper) => registerSliders(0, swiper)"
-          loop
-        >
-          <SwiperSlide v-for="i in 8" :key="i + 'swiper'">
-            <ProductCard title="Кукла Барби, игровой набор" />
-          </SwiperSlide>
-        </Swiper>
-        <SliderArrows
-          :swiper="sliders[0]"
-          :offset="10"
-          top="111px"
-          v-if="sliders[0]"
-        />
-      </div>
-    </MainSection>
-    <MainSection title="недавно просмотренные">
-      <div class="product-slider">
-        <Swiper
-          :spaceBetween="8"
-          :slides-per-view="4"
-          @swiper="(swiper) => registerSliders(1, swiper)"
-          loop
-        >
-          <SwiperSlide v-for="i in 8" :key="i + 'swiper'">
-            <ProductCard title="Кукла Барби, игровой набор" />
-          </SwiperSlide>
-        </Swiper>
-        <SliderArrows
-          :swiper="sliders[1]"
-          :offset="10"
-          top="111px"
-          v-if="sliders[1]"
-        />
-      </div>
-    </MainSection>
+    <!--    <MainSection title="ВАМ МОЖЕТ БЫТЬ ИНТЕРЕСНО">-->
+    <!--      <div class="product-slider">-->
+    <!--        <Swiper-->
+    <!--          :spaceBetween="8"-->
+    <!--          :slides-per-view="4"-->
+    <!--          @swiper="(swiper) => registerSliders(0, swiper)"-->
+    <!--          loop-->
+    <!--        >-->
+    <!--          <SwiperSlide v-for="i in 8" :key="i + 'swiper'">-->
+    <!--            <ProductCard title="Кукла Барби, игровой набор" />-->
+    <!--          </SwiperSlide>-->
+    <!--        </Swiper>-->
+    <!--        <SliderArrows-->
+    <!--          :swiper="sliders[0]"-->
+    <!--          :offset="10"-->
+    <!--          top="111px"-->
+    <!--          v-if="sliders[0]"-->
+    <!--        />-->
+    <!--      </div>-->
+    <!--    </MainSection>-->
+    <!--    <MainSection title="недавно просмотренные">-->
+    <!--      <div class="product-slider">-->
+    <!--        <Swiper-->
+    <!--          :spaceBetween="8"-->
+    <!--          :slides-per-view="4"-->
+    <!--          @swiper="(swiper) => registerSliders(1, swiper)"-->
+    <!--          loop-->
+    <!--        >-->
+    <!--          <SwiperSlide v-for="i in 8" :key="i + 'swiper'">-->
+    <!--            <ProductCard title="Кукла Барби, игровой набор" />-->
+    <!--          </SwiperSlide>-->
+    <!--        </Swiper>-->
+    <!--        <SliderArrows-->
+    <!--          :swiper="sliders[1]"-->
+    <!--          :offset="10"-->
+    <!--          top="111px"-->
+    <!--          v-if="sliders[1]"-->
+    <!--        />-->
+    <!--      </div>-->
+    <!--    </MainSection>-->
   </template>
-  <template v-else>
-    <div class="round-block" style="margin-bottom: 10px">
-      <MobileProductSlider />
-      <MobileProductInfo />
+  <template v-else-if="product">
+    <div class="round-block" style="margin-bottom: 10px; padding-top: 10px">
+      <MobileProductSlider :gallery="[product.image, ...product.gallery]" />
+      <MobileProductInfo :product="product" />
     </div>
   </template>
 </template>
@@ -84,15 +92,18 @@ import VerticalSlider from '@/components/Product/VerticalSlide/VerticalSlider'
 import ProductVerticalSlide from '@/components/Product/VerticalSlide/ProductVerticalSlide'
 import ProductPreview from '@/components/Product/ProductPreview'
 import ProductInfo from '@/components/Product/ProductInfo/ProductInfo'
-import MainSection from '@/components/Main/MainSection'
-import ProductCard from '@/components/Main/ProductCard/ProductCard'
-import SliderArrows from '@/components/BaseComponents/SliderArrows'
+// import MainSection from '@/components/Main/MainSection'
+// import ProductCard from '@/components/Main/ProductCard/ProductCard'
+// import SliderArrows from '@/components/BaseComponents/SliderArrows'
 import SwiperCore, { Controller } from 'swiper'
-import { Swiper, SwiperSlide } from 'swiper/vue'
+import { SwiperSlide } from 'swiper/vue'
 import 'swiper/swiper.scss'
 import ProductTabletSlider from '@/components/Product/ProductTabletSlider'
 import MobileProductSlider from '@/components/Product/Mobile/MobileProductSlider'
 import MobileProductInfo from '@/components/Product/Mobile/MobileProductInfo'
+import { breadcrumbs } from '@/store/main'
+import { getCurrentProduct } from '@/hooks/main'
+import { parseBreadCrumbs } from '@/plugins/makeBreadcrumbs'
 
 SwiperCore.use([Controller])
 
@@ -102,9 +113,9 @@ export default {
     MobileProductInfo,
     MobileProductSlider,
     ProductTabletSlider,
-    SliderArrows,
-    ProductCard,
-    MainSection,
+    // SliderArrows,
+    // ProductCard,
+    // MainSection,
     ProductInfo,
     ProductPreview,
     ProductVerticalSlide,
@@ -112,14 +123,22 @@ export default {
     CategorySlider,
     BreadcrumbContainer,
     Breadcrumb,
-    Swiper,
+    // Swiper,
     SwiperSlide,
   },
   data() {
-    return { sliders: [] }
+    return { sliders: [], product: null }
   },
   setup() {
-    return { isTablet, isMobile, isDesktop }
+    return { isTablet, isMobile, isDesktop, breadcrumbs }
+  },
+  async mounted() {
+    await this.loadPage()
+  },
+  watch: {
+    async $route() {
+      await this.loadPage()
+    },
   },
   methods: {
     changeIdx(idx) {
@@ -133,6 +152,14 @@ export default {
     },
     slideNext(idx) {
       this.sliders[idx].slideNext()
+    },
+
+    async loadPage() {
+      const { breadcrumbs, product } = await getCurrentProduct(
+        this.$route.params.id
+      )
+      this.product = product
+      parseBreadCrumbs(breadcrumbs)
     },
   },
 }

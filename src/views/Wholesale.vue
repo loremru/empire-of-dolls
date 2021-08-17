@@ -68,10 +68,16 @@
 import Breadcrumb from '@/components/BaseComponents/Breadcrumb'
 import BreadcrumbContainer from '@/components/BaseComponents/BreadcrumbContainer'
 import PopularProducts from '@/components/Main/Delivery/PopularProducts'
+import { isTablet } from '@/store/display'
 
 export default {
   name: 'Wholesale',
   components: { PopularProducts, BreadcrumbContainer, Breadcrumb },
+  setup() {
+    return {
+      isTablet,
+    }
+  },
 }
 </script>
 

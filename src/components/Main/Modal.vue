@@ -20,9 +20,13 @@ export default {
       type: String,
     },
     bgZIndex: Number,
+    noScroll: {
+      type: Boolean,
+      default: () => true,
+    },
   },
   mounted() {
-    document.querySelector('body').classList.add('no-scroll')
+    if (this.noScroll) document.querySelector('body').classList.add('no-scroll')
   },
   beforeUnmount() {
     document.querySelector('body').classList.remove('no-scroll')

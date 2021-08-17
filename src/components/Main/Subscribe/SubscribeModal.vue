@@ -1,11 +1,17 @@
 <template>
   <Modal class-of-modal="sub-mod" @close="$emit('close')">
-    <form class="sub-modal flex fxdc jcsb aic">
+    <form @submit.prevent="submit" class="sub-modal flex fxdc jcsb aic">
       <h3 class="sub-modal__head">
         Наши друзья первыми узнают о распродажах и новинках
       </h3>
       <p class="sub-modal__text txt">Куда присылать новости?</p>
-      <BasicInput :height="36" />
+      <BasicInput
+        v-model:value="email"
+        placeholder="Email"
+        type="email"
+        required
+        :height="36"
+      />
       <BasicButton :height="49" uppercase>Подписаться</BasicButton>
     </form>
   </Modal>
@@ -15,10 +21,30 @@
 import Modal from '@/components/Main/Modal'
 import BasicInput from '@/components/BaseComponents/BasicInput'
 import BasicButton from '@/components/BaseComponents/BasicButton'
+import { subscribeToNews } from '@/hooks/main'
 export default {
   name: 'SubscribeModal',
   components: { BasicButton, BasicInput, Modal },
   emits: ['close'],
+  data() {
+    return {
+      email: '',
+    }
+  },
+  methods: {
+    async submit() {
+      try {
+        await subscribeToNews(this.email)
+        this.$notify({
+          title: 'Вы подписались на новости!!',
+          type: 'success',
+        })
+        this.$emit('close')
+      } catch (e) {
+        console.log(e)
+      }
+    },
+  },
 }
 </script>
 

@@ -18,7 +18,11 @@
           @focus="openSearch"
           @blur="closeSearch"
         />
-        <PopularSearch v-if="isPopular" @close="closeSearch" />
+        <PopularSearch
+          v-if="!isMobile"
+          v-show="isPopular"
+          @close="closeSearch"
+        />
         <div class="header__socials flex aic" v-if="!isMobile">
           <a href="#" target="_blank"
             ><img src="@/assets/images/telegram.svg" alt=""
@@ -121,7 +125,9 @@ export default {
       this.isPopular = true
     },
     closeSearch() {
-      this.isPopular = false
+      setTimeout(() => {
+        this.isPopular = false
+      }, 100)
     },
     search(val) {
       this.$router.push(`/search/${val}`)
@@ -185,22 +191,28 @@ export default {
     &__bottom {
       padding-left: 0;
     }
-    &__links {
-      min-width: 108px;
-    }
-  }
-}
-@media (max-width: 410px) {
-  .header {
+
     &__links {
       min-width: auto;
       a {
         margin: 0 4px;
       }
       img {
-        height: 16px;
+        height: 23px;
       }
     }
+  }
+}
+@media (max-width: 410px) {
+  .header {
+    &__links {
+      a {
+        margin: 0 2px;
+      }
+    }
+  }
+  .logo {
+    width: 135px;
   }
 }
 </style>

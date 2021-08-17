@@ -13,6 +13,8 @@
     :content-offset="contentOffset"
   />
   <FooterApp />
+
+  <notifications position="bottom right" />
 </template>
 
 <script>
@@ -70,5 +72,16 @@ export default {
       )
     },
   },
+  watch: {
+    $route() {
+      window.scrollTo(0, 0)
+    },
+  },
 }
 </script>
+
+<style lang="scss">
+.notification-title {
+  font-size: 17px !important;
+}
+</style>

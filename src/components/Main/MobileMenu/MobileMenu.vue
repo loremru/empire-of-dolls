@@ -88,12 +88,17 @@ export default {
       setTimeout(() => this.$emit('close'), 250)
     },
   },
+  watch: {
+    $route() {
+      this.$emit('close')
+    },
+  },
 }
 </script>
 
 <style scoped lang="scss">
 .mob-menu {
-  position: absolute;
+  position: fixed;
   z-index: 600;
   background-color: #fff;
   width: 100%;

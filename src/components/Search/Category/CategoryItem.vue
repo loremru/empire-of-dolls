@@ -1,21 +1,30 @@
 <template>
-  <div class="catItem">
+  <div class="catItem" @click="$router.push(`/categories?id=${category.cid}`)">
     <div class="catItem__image">
-      <img src="@/assets/images/category-item.png" alt="" />
+      <img :src="category.image" alt="" />
     </div>
-    <p class="txt tac"><slot></slot></p>
+    <p class="txt tac">{{ category.name }}</p>
   </div>
 </template>
 
 <script>
 export default {
   name: 'CategoryItem',
+  props: {
+    category: {
+      type: Object,
+      required: true,
+    },
+  },
 }
 </script>
 
 <style scoped lang="scss">
 .catItem {
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   &__image {
     width: 100%;
     border-radius: 4px;
@@ -25,7 +34,7 @@ export default {
     }
   }
   .txt {
-    margin-top: 8px;
+    margin: 8px 0;
   }
 }
 </style>

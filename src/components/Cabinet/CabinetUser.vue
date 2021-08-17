@@ -146,6 +146,9 @@ export default {
     margin-top: 10px;
     display: flex;
     justify-content: center;
+    .subscription-button {
+      margin-bottom: 12px;
+    }
   }
 }
 

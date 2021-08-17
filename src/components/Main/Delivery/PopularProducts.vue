@@ -2,8 +2,8 @@
   <div class="delivery__right" v-if="!isMobile">
     <h3 class="mini-header" v-if="isDesktop">ПОПУЛЯРНЫЕ ТОВАРЫ</h3>
     <ProductCard
-      title="Кукла Барби, игровой набор"
-      v-for="i in amount"
+      v-for="(prod, i) in products"
+      :product="prod"
       :key="i + 'prod-right'"
     />
   </div>
@@ -12,6 +12,7 @@
 <script>
 import ProductCard from '@/components/Main/ProductCard/ProductCard'
 import { isDesktop, isMobile } from '@/store/display'
+import { getPopularProducts } from '@/hooks/main'
 export default {
   name: 'PopularProducts',
   components: { ProductCard },
@@ -21,11 +22,19 @@ export default {
       default: 3,
     },
   },
+  data() {
+    return {
+      products: [],
+    }
+  },
   setup() {
     return {
       isDesktop,
       isMobile,
     }
+  },
+  async mounted() {
+    this.products = (await getPopularProducts()).splice(0, this.amount)
   },
 }
 </script>

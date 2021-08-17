@@ -9,9 +9,14 @@
       />
     </div>
     <div class="catalog-mini__menu" v-if="isMenuOpen">
-      <div class="catalog-mini__item" v-for="i in 10" :key="i">
-        <img src="@/assets/images/catalog.png" alt="" />
-        <p>LOL</p>
+      <div
+        class="catalog-mini__item"
+        v-for="cat in categories"
+        :key="cat.cid"
+        @click="openCat(cat.cid)"
+      >
+        <img :src="cat.image" alt="" />
+        <p>{{ cat.name }}</p>
       </div>
     </div>
   </div>
@@ -23,12 +28,27 @@
 </template>
 
 <script>
+import { getCategories } from '@/hooks/main'
+
 export default {
   name: 'CatalogMini',
   data() {
     return {
       isMenuOpen: false,
+      categories: [],
     }
+  },
+  async mounted() {
+    this.categories = await getCategories()
+  },
+  methods: {
+    close() {
+      this.isMenuOpen = false
+    },
+    openCat(id) {
+      this.close()
+      this.$router.push(`/categories?id=${id}`)
+    },
   },
 }
 </script>
@@ -75,11 +95,13 @@ export default {
     padding: 0 20px;
     display: flex;
     align-items: center;
-    margin-bottom: 4px;
+    margin-bottom: 7px;
     cursor: pointer;
     img {
       margin-right: 24px;
       width: 40px;
+      height: 40px;
+      object-fit: contain;
     }
     p {
       font-size: 14px;

@@ -1,8 +1,8 @@
 <template>
-  <div class="catalog-item flex aic jcsb" @click="$router.push('/categories')">
+  <div class="catalog-item flex aic jcsb" @click="isCatalog = true">
     <div class="catalog-item__content flex aic">
-      <img src="@/assets/images/catalog.png" class="catalog-item__img" alt="" />
-      <span><slot></slot></span>
+      <img :src="category.image" class="catalog-item__img" alt="" />
+      <span>{{ category.name }}</span>
     </div>
     <div class="catalog-item__arrow">
       <svg
@@ -33,11 +33,29 @@
       </svg>
     </div>
   </div>
+  <CatalogModal
+    :categories="category.subcat"
+    v-if="isCatalog"
+    @close="isCatalog = false"
+  />
 </template>
 
 <script>
+import CatalogModal from '@/components/Main/Catalog/CatalogModal'
 export default {
   name: 'CatalogItem',
+  components: { CatalogModal },
+  props: {
+    category: {
+      type: Object,
+      required: true,
+    },
+  },
+  data() {
+    return {
+      isCatalog: false,
+    }
+  },
 }
 </script>
 
@@ -46,12 +64,26 @@ export default {
   cursor: pointer;
   margin-bottom: 8px;
   padding-right: 21px;
+  position: relative;
   &__img {
     margin-right: 17px;
+    width: 52px;
+    height: 52px;
+    border-radius: 100%;
+    object-fit: contain;
   }
   &__arrow {
     svg {
       width: 9px;
+    }
+  }
+  &__content {
+    width: calc(100% - 9px);
+    span {
+      width: 80%;
+      margin-right: 10px;
+      font-size: 15px;
+      line-height: 1.2;
     }
   }
 }

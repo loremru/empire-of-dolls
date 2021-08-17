@@ -1,29 +1,47 @@
 <template>
   <div class="addReview round-block">
     <h3>Добавить отзыв</h3>
-    <form class="addReview__form">
+    <form class="addReview__form" @submit.prevent="submit">
       <div class="flex">
         <div class="addReview__left">
           <BasicInput placeholder="Заголовок отзыва" :height="25" />
           <div class="addReview__line">
             <div class="addReview__name">Имя <span>*</span></div>
-            <BasicInput :height="25" type="name" />
+            <BasicInput
+              :height="25"
+              type="name"
+              v-model:value="formData.name"
+            />
           </div>
           <div class="addReview__line">
             <div class="addReview__name">Город <span>*</span></div>
-            <BasicInput :height="25" type="city" />
+            <BasicInput
+              :height="25"
+              type="city"
+              v-model:value="formData.city"
+            />
           </div>
           <div class="addReview__line">
             <div class="addReview__name">Email <span>*</span></div>
-            <BasicInput :height="25" type="mail" />
+            <BasicInput
+              :height="25"
+              type="email"
+              v-model:value="formData.email"
+            />
           </div>
         </div>
         <div class="addReview__right">
-          <BasicTextarea placeholder="Текст отзыва" />
+          <BasicTextarea
+            placeholder="Текст отзыва"
+            required
+            v-model:value="formData.text"
+          />
         </div>
       </div>
       <div class="addReview__button flex jcc">
-        <BasicButton :height="49" uppercase>ДОБАВИТЬ ОТЗЫВ</BasicButton>
+        <BasicButton :disabled="loading" :height="49" uppercase
+          >ДОБАВИТЬ ОТЗЫВ</BasicButton
+        >
       </div>
     </form>
   </div>
@@ -33,9 +51,45 @@
 import BasicInput from '@/components/BaseComponents/BasicInput'
 import BasicTextarea from '@/components/BaseComponents/BasicTextarea'
 import BasicButton from '@/components/BaseComponents/BasicButton'
+import { makeReview } from '@/hooks/reviews'
 export default {
   name: 'AddReview',
   components: { BasicButton, BasicTextarea, BasicInput },
+  data() {
+    return {
+      formData: {
+        name: '',
+        email: '',
+        city: '',
+        text: '',
+      },
+      loading: false,
+    }
+  },
+  methods: {
+    async submit() {
+      try {
+        if (!this.loading) {
+          this.loading = true
+          await makeReview(this.formData)
+          this.$notify({
+            text: 'Отзыв оставлен',
+            type: 'success',
+          })
+          this.formData = {
+            name: '',
+            email: '',
+            city: '',
+            text: '',
+          }
+        }
+      } catch (e) {
+        console.log(e)
+      } finally {
+        this.loading = false
+      }
+    },
+  },
 }
 </script>
 
@@ -91,10 +145,14 @@ export default {
     }
     &__right {
       width: 100%;
-      margin-top: 25px;
+      margin-top: 12px;
+      display: flex;
     }
     &__form > .flex {
       flex-direction: column;
+    }
+    &__button {
+      margin-top: 12px;
     }
   }
 }

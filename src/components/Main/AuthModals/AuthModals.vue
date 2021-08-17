@@ -4,7 +4,7 @@
     title="Регистрация"
     @close="closeAuthModal"
   >
-    <template #content><Register /></template>
+    <template #content><Register @close="closeAuthModal" /></template>
     <template #buttons>
       <ConnectButtons
         :buttons="['Войти']"
