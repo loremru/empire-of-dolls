@@ -52,7 +52,7 @@ export default {
 <style scoped lang="scss">
 .OurQualities {
   background: #fff;
-  border-top: 2px solid $border-color;
+  border-top: 1px solid $border-color;
   padding: 25px 0;
 }
 .qualities {
@@ -74,10 +74,10 @@ export default {
   font-weight: 600;
 }
 .qualities-item_text_description {
-  font-size: 18.5px;
+  font-size: 16px;
 }
 .qualities-end {
-  height: 2px;
+  height: 1px;
   background: linear-gradient(
     to right,
     #ffffff,
@@ -92,10 +92,10 @@ export default {
 }
 @media (max-width: $media-tablet) {
   .qualities-item_text_description {
-    font-size: 16.5px;
+    font-size: 15px;
   }
   .qualities-item_text_header {
-    font-size: 16.5px;
+    font-size: 15px;
   }
 }
 </style>

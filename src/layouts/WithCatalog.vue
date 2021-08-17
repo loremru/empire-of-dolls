@@ -5,7 +5,7 @@
       <div id="contentOfPage">
         <MainContentHeader
           v-if="isTablet"
-          :breadcrumb-array="$route.meta.tableBreadCrumb || []"
+          :breadcrumb-array="$route.meta.tableBreadCrumb || breadcrumbs"
         />
         <router-view />
       </div>
@@ -17,6 +17,7 @@
 import CatalogSidebar from '@/components/Main/Catalog/CatalogSidebar'
 import { isDesktop, isTablet } from '@/store/display'
 import MainContentHeader from '@/components/Main/MainContentHeader'
+import { breadcrumbs } from '@/store/main'
 export default {
   name: 'WithCatalog',
   components: { MainContentHeader, CatalogSidebar },
@@ -30,6 +31,7 @@ export default {
     return {
       isDesktop,
       isTablet,
+      breadcrumbs,
     }
   },
 }

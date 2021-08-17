@@ -128,3 +128,16 @@ p {
   color: #000;
   text-transform: uppercase;
 }
+
+::-webkit-scrollbar {
+  border-radius: 0;
+  width: 6px;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: $pink;
+}
+::-webkit-scrollbar-track {
+  border-radius: 0;
+  background-color: #ececec;
+}

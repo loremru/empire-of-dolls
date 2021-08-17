@@ -1,7 +1,11 @@
 <template>
-  <div class="product" @click="$router.push('/product/123')">
+  <div
+    class="product"
+    @click.prevent="$router.push(`/product/${product.pid}`)"
+    v-if="product"
+  >
     <div class="product__img">
-      <img src="@/assets/images/product.png" alt="" />
+      <img :src="product.image" alt="" />
       <img
         src="@/assets/images/product-favorite.svg"
         alt=""
@@ -12,14 +16,17 @@
         src="@/assets/images/close.svg"
         alt=""
         class="product__favorite"
-        style="width: 15px !important; top: 4px; right: 4px"
+        style="width: 15px !important; top: 7px; right: 7px"
         v-else
       />
     </div>
     <div class="product__content">
-      <p class="product__name">{{ title }}</p>
+      <p class="product__name">{{ product.name }}</p>
       <div class="product__price">
-        <ProductPrice />
+        <ProductPrice
+          :new-price="product.price"
+          :old-price="product.price_discount"
+        />
       </div>
     </div>
   </div>
@@ -33,6 +40,9 @@ export default {
   props: {
     title: {
       type: String,
+    },
+    product: {
+      type: Object,
       required: true,
     },
     close: Boolean,
@@ -46,6 +56,9 @@ export default {
   background-color: #ffffff;
   overflow: hidden;
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   &__img {
     width: 100%;
     height: 249px;
@@ -61,15 +74,19 @@ export default {
     padding: 0 40px;
     text-align: center;
     color: $text;
-    margin: 28px 0;
     line-height: 1;
+
+    height: 90px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
   }
   &__favorite {
     position: absolute;
     top: 10px;
     right: 14px;
-    width: 30px !important;
-    height: 27px !important;
+    width: 24px !important;
+    height: auto !important;
     object-fit: contain !important;
   }
   &__price {
@@ -94,7 +111,6 @@ export default {
     }
     &__name {
       padding: 0 20px;
-      margin: 20px 0;
     }
   }
 }
@@ -105,9 +121,9 @@ export default {
       height: 160px;
     }
     &__name {
-      margin: 10px 0;
       font-size: 13px;
       padding: 0 10px;
+      height: 70px;
     }
     &__price {
       padding: 0 8px 13px;

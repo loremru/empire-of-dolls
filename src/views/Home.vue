@@ -11,8 +11,11 @@
             @swiper="(swiper) => registerSliders(0, swiper)"
             loop
           >
-            <SwiperSlide v-for="i in 8" :key="i + 'swiper'">
-              <ProductCard title="Кукла Барби, игровой набор" />
+            <SwiperSlide
+              v-for="(prod, i) in popularProducts[0]"
+              :key="i + 'swiper'"
+            >
+              <ProductCard :product="prod" />
             </SwiperSlide>
           </Swiper>
           <SliderArrows
@@ -31,8 +34,11 @@
             @swiper="(swiper) => registerSliders(1, swiper)"
             loop
           >
-            <SwiperSlide v-for="i in 8" :key="i + 'swiper1'">
-              <ProductCard title="Кукла Барби, игровой набор" />
+            <SwiperSlide
+              v-for="(prod, i) in popularProducts[1]"
+              :key="i + 'swiper1'"
+            >
+              <ProductCard :product="prod" />
             </SwiperSlide>
           </Swiper>
           <SliderArrows
@@ -51,8 +57,11 @@
             @swiper="(swiper) => registerSliders(2, swiper)"
             loop
           >
-            <SwiperSlide v-for="i in 8" :key="i + 'swiper2'">
-              <ProductCard title="Кукла Барби, игровой набор" />
+            <SwiperSlide
+              v-for="(prod, i) in popularProducts[2]"
+              :key="i + 'swiper2'"
+            >
+              <ProductCard :product="prod" />
             </SwiperSlide>
           </Swiper>
           <SliderArrows
@@ -73,15 +82,23 @@
       <div id="searchMobile">
         <SearchHeader is-mobile-search />
       </div>
-      <SliderWithDots>
-        <SwiperSlide v-for="i in 10" :key="i + 'daily-mob'">
-          <div class="dots-slider__item">
-            <DailyProductMobile />
+      <SliderWithDots v-if="dailyProducts.length">
+        <SwiperSlide
+          v-for="i in dailyProducts"
+          :key="i.data.pid + 'daily-mob'"
+          style="height: 100%"
+        >
+          <div class="dots-slider__item" style="height: 100%">
+            <DailyProductMobile :product="i.data" />
           </div>
         </SwiperSlide>
       </SliderWithDots>
       <SearchCityBtn />
-      <CategoryMobile v-for="i in 10" :key="i + 'cat'" />
+      <CategoryMobile
+        v-for="i in categories"
+        :category="i"
+        :key="i.cid + 'cat'"
+      />
     </template>
   </div>
 </template>
@@ -104,6 +121,11 @@ import DailyProductMobile from '@/components/Main/DailyProduct/DailyProductMobil
 import SliderWithDots from '@/components/Main/SliderWithDots'
 import SearchCityBtn from '@/components/Main/SearchCityBtn'
 import CategoryMobile from '@/components/Main/CategoryMobile'
+import {
+  getCategories,
+  getDailyProducts,
+  getPopularProducts,
+} from '@/hooks/main'
 SwiperCore.use([Controller])
 export default {
   name: 'Home',
@@ -127,11 +149,27 @@ export default {
   data() {
     return {
       sliders: [],
+      dailyProducts: [],
+      categories: [],
+
+      popularProducts: [],
     }
   },
   setup() {
     return {
       isMobile,
+    }
+  },
+  async mounted() {
+    const array = await getPopularProducts()
+    this.popularProducts.push(array.splice(0, 4))
+    this.popularProducts.push(array.splice(0, 4))
+    this.popularProducts.push(array.splice(0, 4))
+    console.log(this.popularProducts)
+    if (isMobile.value) {
+      this.dailyProducts = await getDailyProducts()
+      this.categories = await getCategories()
+      console.log(this.categories)
     }
   },
   methods: {

@@ -31,7 +31,7 @@ export default {
   position: relative;
   img {
     width: 100%;
-    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.25);
+    filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.25));
   }
 }
 </style>

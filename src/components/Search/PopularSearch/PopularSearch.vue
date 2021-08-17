@@ -1,40 +1,32 @@
 <template>
-  <div class="bg" @click="$emit('close')"></div>
-  <div class="popular">
-    <div class="content flex aifs">
-      <div class="popular__req">
-        <h4 class="popular__req__head">Популярные запросы</h4>
-        <p class="txt">лол</p>
-        <p class="txt">Блайз</p>
-        <p class="txt">Барби</p>
-        <p class="txt">Монстер хай</p>
-        <p class="txt">ПУЛИП</p>
-        <p class="txt">монстр хай</p>
-        <p class="txt">LOL</p>
-        <p class="txt">ПУЛЛИП</p>
-        <p class="txt">Bts</p>
-        <p class="txt">LOL OMG</p>
-        <p class="txt">paola reina</p>
-        <p class="txt">Лол омг</p>
-        <p class="txt">Гарри поттер</p>
-      </div>
-      <div class="popular__body">
-        <div class="popular__body__head flex aic jcsb">
-          <h3>Выбор покупателей</h3>
-          <img
-            src="@/assets/images/close.svg"
-            alt=""
-            class="popular__close"
-            width="18"
-            @click="$emit('close')"
-          />
+  <div>
+    <div class="bg" @click="$emit('close')"></div>
+    <div class="popular">
+      <div class="content flex aifs">
+        <div class="popular__req">
+          <h4 class="popular__req__head">Популярные запросы</h4>
+          <p class="txt" v-for="(i, idx) in queries" :key="idx">
+            {{ i.query_name }}
+          </p>
         </div>
-        <div class="popular__body__products">
-          <ProductCard
-            title="Кукла Барби, игровой набор"
-            v-for="i in isTablet ? 3 : 4"
-            :key="i + 'req_pop'"
-          />
+        <div class="popular__body">
+          <div class="popular__body__head flex aic jcsb">
+            <h3>Выбор покупателей</h3>
+            <img
+              src="@/assets/images/close.svg"
+              alt=""
+              class="popular__close"
+              width="18"
+              @click="$emit('close')"
+            />
+          </div>
+          <div class="popular__body__products" @click="$emit('close')">
+            <ProductCard
+              v-for="prod in products"
+              :key="prod.pid"
+              :product="prod"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -44,14 +36,28 @@
 <script>
 import ProductCard from '@/components/Main/ProductCard/ProductCard'
 import { isTablet } from '@/store/display'
+import { getPopularSearch } from '@/hooks/search'
 export default {
   name: 'PopularSearch',
   components: { ProductCard },
   emits: ['close'],
   setup() {
     return {
-      isTablet: isTablet,
+      isTablet,
     }
+  },
+  data() {
+    return {
+      queries: [],
+      products: [],
+    }
+  },
+  async mounted() {
+    const { queries, products } = await getPopularSearch()
+    this.queries = queries
+    this.products = products.filter((i, idx) =>
+      isTablet.value ? idx <= 2 : idx <= 3
+    )
   },
 }
 </script>

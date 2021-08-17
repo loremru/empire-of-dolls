@@ -1,7 +1,9 @@
 <template>
   <button
     class="subscription-button"
+    :class="{ 'subscription-button_disabled': disabled }"
     :style="`height: ${height}px;` + (uppercase && `text-transform: uppercase`)"
+    :disabled="disabled"
   >
     <slot></slot>
   </button>
@@ -16,6 +18,7 @@ export default {
       default: 39,
     },
     uppercase: Boolean,
+    disabled: Boolean,
   },
 }
 </script>
@@ -29,6 +32,9 @@ export default {
   cursor: pointer;
   padding: 0 20px;
   font-size: 15px;
+  &_disabled {
+    background: #d043a940;
+  }
 }
 
 @media (max-width: $media-tablet) {

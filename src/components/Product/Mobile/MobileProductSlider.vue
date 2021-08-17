@@ -3,10 +3,10 @@
     <div class="prod-mob__star">
       <img src="@/assets/images/product-favorite.svg" alt="" />
     </div>
-    <SliderWithDots>
-      <SwiperSlide v-for="i in 4" :key="i + 'product-mob'">
+    <SliderWithDots :height="300">
+      <SwiperSlide v-for="(img, idx) in gallery" :key="idx + 'product-mob'">
         <div class="prod-mob__item">
-          <img src="@/assets/images/product-mobile.png" alt="" />
+          <img :src="img" alt="" />
         </div>
       </SwiperSlide>
     </SliderWithDots>
@@ -19,12 +19,19 @@ import { SwiperSlide } from 'swiper/vue'
 export default {
   name: 'MobileProductSlider',
   components: { SliderWithDots, SwiperSlide },
+  props: {
+    gallery: {
+      type: Array,
+      default: () => [],
+    },
+  },
 }
 </script>
 
 <style scoped lang="scss">
 .prod-mob {
   position: relative;
+  //height: 300px;
   &__star {
     position: absolute;
     top: 11px;

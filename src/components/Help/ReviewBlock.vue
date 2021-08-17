@@ -3,25 +3,18 @@
     <div class="review__author">
       <img src="@/assets/images/review-author.png" alt="" />
       <div>
-        <p class="review__name">Юлия</p>
-        <p class="review__text">Нижний Новгород</p>
+        <p class="review__name">{{ review.name }}</p>
+        <p class="review__text">{{ review.city }}</p>
       </div>
     </div>
     <div class="review__body">
       <Rating :mark="4.5" />
       <div class="review__header flex aic jcsb">
         <p>Все нормально</p>
-        <p>03.09.2020, 09:34:19</p>
+        <p>{{ review.date }}, {{ review.time }}</p>
       </div>
       <p class="review__text">
-        Добрый день! Купила Куклу L.O.L. Surprise! O.M.G. Swag Fashion Doll with
-        20 Surprises для внучки на седьмой день рождения. Радости и восторгу не
-        было предела. Кукла очень красивая, высокого качества, внучка разглядела
-        ноготочки, пальчики,и все время подчеркивала, что они, как настоящие.
-        Все 20 сюрпризов тут же примерила и осталась очень довольна. Мы тоже
-        довольны выбранным магазином. он не разочаровал. Доставка была быстрая,
-        каждый этап доставки сопровождался оповещением. Упаковка надежная.
-        Спасибо магазину за доставленную радость!
+        {{ review.text }}
       </p>
     </div>
   </div>
@@ -32,6 +25,12 @@ import Rating from '@/components/BaseComponents/Rating'
 export default {
   name: 'ReviewBlock',
   components: { Rating },
+  props: {
+    review: {
+      type: Object,
+      required: true,
+    },
+  },
 }
 </script>
 
@@ -64,6 +63,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    flex-grow: 1;
     > * {
       margin-bottom: 10px;
     }

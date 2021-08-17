@@ -49,16 +49,6 @@ const routes = [
     component: Categories,
     meta: {
       layout: 'with-catalog',
-      tableBreadCrumb: [
-        {
-          text: 'Главная',
-          pageLink: '/',
-        },
-        {
-          text: 'Барби',
-          pageLink: '/categories',
-        },
-      ],
     },
   },
   {
@@ -67,24 +57,6 @@ const routes = [
     component: Product,
     meta: {
       layout: 'with-catalog',
-      tableBreadCrumb: [
-        {
-          text: 'Главная',
-          pageLink: '/',
-        },
-        {
-          text: 'Барби',
-          pageLink: '/categories',
-        },
-        {
-          text: 'Новинки Барби',
-          pageLink: '/categories',
-        },
-        {
-          text: 'Скиппер няня',
-          pageLink: '/product/123',
-        },
-      ],
     },
   },
   {

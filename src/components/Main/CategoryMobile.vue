@@ -1,15 +1,23 @@
 <template>
   <div class="category flex aic jcsb round-block">
     <div class="category__img">
-      <img src="@/assets/images/sections/section(1).png" alt="" />
+      <img :src="category.image" alt="" />
     </div>
     <div class="category__body">
-      <h3 class="category__name">Игрушки LOL</h3>
-      <p class="category__link">Игрушки LOL</p>
-      <p class="category__link">O.M.G. Большие куклы (24 см)</p>
-      <p class="category__link">Winter Disco - Зимняя Дискотека</p>
-      <p class="category__link">4 серия -Декодер</p>
-      <p class="category__link">5 серия - Makeover</p>
+      <h3
+        class="category__name"
+        @click="$router.push(`/categories?id=${category.cid}`)"
+      >
+        {{ category.name }}
+      </h3>
+      <router-link
+        class="category__link"
+        v-for="subcat in category.subcat"
+        :key="subcat.cid"
+        :to="`/categories?id=${subcat.cid}`"
+      >
+        {{ subcat.name }}
+      </router-link>
     </div>
   </div>
 </template>
@@ -17,6 +25,12 @@
 <script>
 export default {
   name: 'CategoryMobile',
+  props: {
+    category: {
+      type: Object,
+      required: true,
+    },
+  },
 }
 </script>
 
@@ -24,8 +38,7 @@ export default {
 .category {
   width: 100%;
   overflow: hidden;
-  max-height: 163px;
-  height: 163px;
+  min-height: 163px;
   margin: 0 auto 9px;
   &__img {
     min-width: 162px;
@@ -36,7 +49,7 @@ export default {
     img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
     }
   }
   &__body {
@@ -57,6 +70,7 @@ export default {
     font-size: 13px;
     line-height: 0.92;
     color: $text;
+    margin-top: 7px;
   }
 }
 </style>

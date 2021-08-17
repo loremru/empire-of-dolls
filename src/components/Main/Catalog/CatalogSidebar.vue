@@ -6,7 +6,11 @@
       <img src="@/assets/images/catalog-arrow.svg" width="9" alt="" />
     </div>
     <div class="sidebar__content">
-      <CatalogItem v-for="i in 10" :key="i">LOL</CatalogItem>
+      <CatalogItem
+        v-for="(item, idx) in categories"
+        :key="idx"
+        :category="item"
+      />
     </div>
 
     <div
@@ -26,6 +30,7 @@
 <script>
 import CatalogItem from '@/components/Main/Catalog/CatalogItem'
 import Subscribe from '@/components/Main/Subscribe/Subscribe'
+import { getCategories } from '@/hooks/main'
 const { isDesktop } = require('@/store/display')
 export default {
   name: 'CatalogSidebar',
@@ -36,12 +41,16 @@ export default {
       isBottomSub: false,
       subPosY: 0,
       Footer: null,
+
+      categories: [],
     }
   },
   setup() {
     return { isDesktop }
   },
-  mounted() {
+  async mounted() {
+    this.categories = await getCategories()
+
     if (isDesktop.value) {
       setTimeout(() => {
         this.Footer = document.querySelector('.improvementMessage')
@@ -79,6 +88,7 @@ export default {
 <style scoped lang="scss">
 .sidebar {
   min-width: 254px;
+  max-width: 254px;
   position: relative;
   &__sell {
     background-color: $pink;

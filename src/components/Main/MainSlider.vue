@@ -1,12 +1,18 @@
 <template>
   <div class="main-slider" ref="mainSlider">
-    <Swiper :slides-per-view="4" :spaceBetween="8" @swiper="swiperInit" loop>
-      <SwiperSlide v-for="i in 10" :key="i">
-        <div class="main-slider__item">
-          <img
-            :src="require(`@/assets/images/sections/section(${i}).png`)"
-            alt=""
-          />
+    <Swiper
+      :slides-per-view="4"
+      :spaceBetween="8"
+      autoHeight
+      @swiper="swiperInit"
+      loop
+    >
+      <SwiperSlide v-for="(i, idx) in slides" :key="idx" style="height: 100%">
+        <div
+          class="main-slider__item"
+          @click="$router.push(`/categories?id=${i.cid}`)"
+        >
+          <img :src="i.image" alt="" />
         </div>
       </SwiperSlide>
     </Swiper>
@@ -25,6 +31,7 @@ import SwiperCore, { Controller } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/swiper.scss'
 import SliderArrows from '@/components/BaseComponents/SliderArrows'
+import { getMainSlider } from '@/hooks/main'
 
 SwiperCore.use([Controller])
 export default {
@@ -33,7 +40,12 @@ export default {
   data() {
     return {
       swiper: null,
+
+      slides: [],
     }
+  },
+  async mounted() {
+    this.slides = await getMainSlider()
   },
   methods: {
     swiperInit(swiper) {
@@ -49,8 +61,13 @@ export default {
   width: 100%;
   overflow: hidden;
   position: relative;
+  height: 200px;
   &__item {
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
     img {
       width: 100%;
     }

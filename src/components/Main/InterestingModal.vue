@@ -4,13 +4,13 @@
       <h3 class="tac">Вам может быть интересно</h3>
       <div class="int__container">
         <ProductCard
-          title="Кукла Барби, игровой набор"
-          v-for="i in isTablet ? 3 : 4"
-          :key="i + 'int'"
+          v-for="prod in filteredProducts"
+          :product="prod"
+          :key="prod.pid"
         />
       </div>
       <div class="int__btn flex jcc">
-        <BasicButton :height="49" uppercase
+        <BasicButton :height="49" uppercase @click.prevent="addAllToCart"
           >ДОБАВИТЬ ВСЕ ТОВАРЫ В КОРЗИНУ</BasicButton
         >
       </div>
@@ -23,6 +23,7 @@ import Modal from '@/components/Main/Modal'
 import ProductCard from '@/components/Main/ProductCard/ProductCard'
 import BasicButton from '@/components/BaseComponents/BasicButton'
 import { isTablet } from '@/store/display'
+import { getInterestingProducts } from '@/hooks/main'
 export default {
   name: 'InterestingModal',
   components: { BasicButton, ProductCard, Modal },
@@ -31,6 +32,28 @@ export default {
     return {
       isTablet,
     }
+  },
+  data() {
+    return {
+      products: [],
+    }
+  },
+  async mounted() {
+    this.products = await getInterestingProducts()
+  },
+  computed: {
+    filteredProducts() {
+      return isTablet.value ? this.products.slice(0, 3) : this.products
+    },
+  },
+  methods: {
+    addAllToCart() {
+      this.$notify({
+        title: 'Товары добавлены в корзину',
+        type: 'success',
+      })
+      this.$emit('close')
+    },
   },
 }
 </script>
@@ -43,6 +66,7 @@ export default {
   width: 90%;
   max-width: 1024px;
   background-color: #f8f6f7 !important;
+  position: fixed !important;
 }
 </style>
 
