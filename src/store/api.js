@@ -3,6 +3,7 @@ import App from '@/main.js'
 
 const config = {
   baseURL: process.env.VUE_APP_BASEURL,
+  Authorization: localStorage.getItem('Authorization'),
 }
 
 const api = axios.create(config)
@@ -13,11 +14,21 @@ api.interceptors.response.use(
   },
   (error) => {
     App.$notify({
-      title: 'Произошла непредвиденная ошибка',
+      title: error.response.data.error
+        ? error.response.data.error
+        : 'Произошла непредвиденная ошибка',
       type: 'error',
     })
     return Promise.reject(error)
   }
 )
 
-export default api
+const updateAxiosOptions = (token) => {
+  localStorage.setItem('Authorization', token)
+  api.defaults.headers.Authorization = `Bearer ${token}`
+  api.defaults.headers.common['Authorization'] = `Bearer ${token}`
+}
+
+updateAxiosOptions(localStorage.getItem('Authorization'))
+
+export { api, updateAxiosOptions }

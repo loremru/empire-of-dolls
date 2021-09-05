@@ -49,18 +49,21 @@ export default {
   },
   methods: {
     async register() {
-      try {
-        this.loading = true
-        await register(this.formData)
-        this.$notify({
-          type: 'success',
-          title: 'Вы успешно зарегестрировались',
-        })
-        this.$emit('close')
-      } catch (e) {
-        console.log(e)
+      if (!this.loading) {
+        try {
+          this.loading = true
+          await register(this.formData)
+          this.$notify({
+            type: 'success',
+            title: 'Вы успешно зарегестрировались',
+          })
+          this.$emit('close')
+        } catch (e) {
+          console.log(e)
+        } finally {
+          this.loading = false
+        }
       }
-      this.loading = false
     },
   },
 }

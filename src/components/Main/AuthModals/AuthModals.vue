@@ -18,7 +18,7 @@
     title="Вход на сайт"
     @close="closeAuthModal"
   >
-    <template #content><Login /></template>
+    <template #content><Login @close="closeAuthModal" /></template>
     <template #buttons>
       <ConnectButtons
         :buttons="['Восстановить пароль', 'Регистрация']"

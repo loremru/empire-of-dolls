@@ -1,4 +1,4 @@
-import api from '@/store/api'
+import { api } from '@/store/api'
 
 export const getCategories = async () => {
   try {

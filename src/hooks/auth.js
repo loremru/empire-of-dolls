@@ -1,4 +1,4 @@
-import api from '@/store/api'
+import { api, updateAxiosOptions } from '@/store/api'
 
 export const register = async (formData) => {
   try {
@@ -11,7 +11,9 @@ export const register = async (formData) => {
 
 export const login = async (formData) => {
   try {
-    return (await api.post('/login', formData)).data
+    const { token } = (await api.post('/login', formData)).data
+    updateAxiosOptions(token)
+    return token
   } catch (e) {
     console.log(e)
     throw e
