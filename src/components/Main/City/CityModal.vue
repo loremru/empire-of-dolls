@@ -2,315 +2,47 @@
   <Modal class-of-modal="cityModal" @close="$emit('close')">
     <div class="cityModal__content flex fxdc">
       <h3 class="cityModal__head">Выберите свой город</h3>
-
-      <div class="flex fxdc fxww" style="height: 170px" v-if="!fullModal">
-        <p>Санкт-Петербург</p>
-        <p>Москва</p>
-        <p>Великий Новгород</p>
-        <p>Выборг</p>
-        <p>Гатчина</p>
-        <p>Луга</p>
-        <p>Кингисепп</p>
-        <p>Петрозаводск</p>
-        <p>Тверь</p>
-        <p>Калуга</p>
-        <p>Владимир</p>
-        <p>Рязань</p>
-        <p>Тула</p>
-      </div>
-
-      <div class="citySlider" v-else>
-        <SearchHeader placeholder="Введите название города" />
-        <div class="citySlider__wrapper">
-          <img
-            src="@/assets/images/arrow-city.svg"
-            alt=""
-            class="arrow arrow_prev"
-            style="transform: rotateZ(180deg)"
-            @click="prevSlide"
-          />
-          <Swiper
-            ref="swiperCity"
-            @swiper="setControlledSwiper"
-            :width="430"
-            loop
+      <div class="citySlider">
+        <SearchHeader
+          placeholder="Введите название города"
+          @search="searchCityByString"
+        />
+        <div v-if="foundCities">
+          <span style="display: inline-block; margin-top: 10px"
+            >Название города</span
           >
-            <SwiperSlide
-              ><div class="city-slide flex fxdc fxww">
-                <div class="city-slide__item">
-                  <p class="city-slide__letter">А</p>
-                  <p>Абакан</p>
-                  <p>Альметьевск</p>
-                  <p>Артем</p>
-                </div>
-                <div class="city-slide__item">
-                  <p class="city-slide__letter">А</p>
-                  <p>Абакан</p>
-                  <p>Альметьевск</p>
-                  <p>Артем</p>
-                </div>
-                <div class="city-slide__item">
-                  <p class="city-slide__letter">А</p>
-                  <p>Абакан</p>
-                  <p>Альметьевск</p>
-                  <p>Артем</p>
-                </div>
-                <div class="city-slide__item">
-                  <p class="city-slide__letter">А</p>
-                  <p>Абакан</p>
-                  <p>Альметьевск</p>
-                  <p>Артем</p>
-                </div>
-                <div class="city-slide__item">
-                  <p class="city-slide__letter">А</p>
-                  <p>Абакан</p>
-                  <p>Альметьевск</p>
-                  <p>Артем</p>
-                </div>
-                <div class="city-slide__item">
-                  <p class="city-slide__letter">А</p>
-                  <p>Абакан</p>
-                  <p>Альметьевск</p>
-                  <p>Артем</p>
-                </div>
-                <div class="city-slide__item">
-                  <p class="city-slide__letter">А</p>
-                  <p>Абакан</p>
-                  <p>Альметьевск</p>
-                  <p>Артем</p>
-                </div>
-              </div></SwiperSlide
-            >
-            <SwiperSlide
-              ><div class="city-slide flex fxdc fxww">
-                <div class="city-slide__item">
-                  <p class="city-slide__letter">А</p>
-                  <p>Абакан</p>
-                  <p>Альметьевск</p>
-                  <p>Артем</p>
-                </div>
-                <div class="city-slide__item">
-                  <p class="city-slide__letter">А</p>
-                  <p>Абакан</p>
-                  <p>Альметьевск</p>
-                  <p>Артем</p>
-                </div>
-                <div class="city-slide__item">
-                  <p class="city-slide__letter">А</p>
-                  <p>Абакан</p>
-                  <p>Альметьевск</p>
-                  <p>Артем</p>
-                </div>
-                <div class="city-slide__item">
-                  <p class="city-slide__letter">А</p>
-                  <p>Абакан</p>
-                  <p>Альметьевск</p>
-                  <p>Артем</p>
-                </div>
-                <div class="city-slide__item">
-                  <p class="city-slide__letter">А</p>
-                  <p>Абакан</p>
-                  <p>Альметьевск</p>
-                  <p>Артем</p>
-                </div>
-                <div class="city-slide__item">
-                  <p class="city-slide__letter">А</p>
-                  <p>Абакан</p>
-                  <p>Альметьевск</p>
-                  <p>Артем</p>
-                </div>
-                <div class="city-slide__item">
-                  <p class="city-slide__letter">А</p>
-                  <p>Абакан</p>
-                  <p>Альметьевск</p>
-                  <p>Артем</p>
-                </div>
-              </div></SwiperSlide
-            >
-            <SwiperSlide
-              ><div class="city-slide flex fxdc fxww">
-                <div class="city-slide__item">
-                  <p class="city-slide__letter">А</p>
-                  <p>Абакан</p>
-                  <p>Альметьевск</p>
-                  <p>Артем</p>
-                </div>
-                <div class="city-slide__item">
-                  <p class="city-slide__letter">А</p>
-                  <p>Абакан</p>
-                  <p>Альметьевск</p>
-                  <p>Артем</p>
-                </div>
-                <div class="city-slide__item">
-                  <p class="city-slide__letter">А</p>
-                  <p>Абакан</p>
-                  <p>Альметьевск</p>
-                  <p>Артем</p>
-                </div>
-                <div class="city-slide__item">
-                  <p class="city-slide__letter">А</p>
-                  <p>Абакан</p>
-                  <p>Альметьевск</p>
-                  <p>Артем</p>
-                </div>
-                <div class="city-slide__item">
-                  <p class="city-slide__letter">А</p>
-                  <p>Абакан</p>
-                  <p>Альметьевск</p>
-                  <p>Артем</p>
-                </div>
-                <div class="city-slide__item">
-                  <p class="city-slide__letter">А</p>
-                  <p>Абакан</p>
-                  <p>Альметьевск</p>
-                  <p>Артем</p>
-                </div>
-                <div class="city-slide__item">
-                  <p class="city-slide__letter">А</p>
-                  <p>Абакан</p>
-                  <p>Альметьевск</p>
-                  <p>Артем</p>
-                </div>
-              </div></SwiperSlide
-            >
-            <SwiperSlide
-              ><div class="city-slide flex fxdc fxww">
-                <div class="city-slide__item">
-                  <p class="city-slide__letter">А</p>
-                  <p>Абакан</p>
-                  <p>Альметьевск</p>
-                  <p>Артем</p>
-                </div>
-                <div class="city-slide__item">
-                  <p class="city-slide__letter">А</p>
-                  <p>Абакан</p>
-                  <p>Альметьевск</p>
-                  <p>Артем</p>
-                </div>
-                <div class="city-slide__item">
-                  <p class="city-slide__letter">А</p>
-                  <p>Абакан</p>
-                  <p>Альметьевск</p>
-                  <p>Артем</p>
-                </div>
-                <div class="city-slide__item">
-                  <p class="city-slide__letter">А</p>
-                  <p>Абакан</p>
-                  <p>Альметьевск</p>
-                  <p>Артем</p>
-                </div>
-                <div class="city-slide__item">
-                  <p class="city-slide__letter">А</p>
-                  <p>Абакан</p>
-                  <p>Альметьевск</p>
-                  <p>Артем</p>
-                </div>
-                <div class="city-slide__item">
-                  <p class="city-slide__letter">А</p>
-                  <p>Абакан</p>
-                  <p>Альметьевск</p>
-                  <p>Артем</p>
-                </div>
-                <div class="city-slide__item">
-                  <p class="city-slide__letter">А</p>
-                  <p>Абакан</p>
-                  <p>Альметьевск</p>
-                  <p>Артем</p>
-                </div>
-              </div></SwiperSlide
-            >
-            <SwiperSlide
-              ><div class="city-slide flex fxdc fxww">
-                <div class="city-slide__item">
-                  <p class="city-slide__letter">А</p>
-                  <p>Абакан</p>
-                  <p>Альметьевск</p>
-                  <p>Артем</p>
-                </div>
-                <div class="city-slide__item">
-                  <p class="city-slide__letter">А</p>
-                  <p>Абакан</p>
-                  <p>Альметьевск</p>
-                  <p>Артем</p>
-                </div>
-                <div class="city-slide__item">
-                  <p class="city-slide__letter">А</p>
-                  <p>Абакан</p>
-                  <p>Альметьевск</p>
-                  <p>Артем</p>
-                </div>
-                <div class="city-slide__item">
-                  <p class="city-slide__letter">А</p>
-                  <p>Абакан</p>
-                  <p>Альметьевск</p>
-                  <p>Артем</p>
-                </div>
-                <div class="city-slide__item">
-                  <p class="city-slide__letter">А</p>
-                  <p>Абакан</p>
-                  <p>Альметьевск</p>
-                  <p>Артем</p>
-                </div>
-                <div class="city-slide__item">
-                  <p class="city-slide__letter">А</p>
-                  <p>Абакан</p>
-                  <p>Альметьевск</p>
-                  <p>Артем</p>
-                </div>
-                <div class="city-slide__item">
-                  <p class="city-slide__letter">А</p>
-                  <p>Абакан</p>
-                  <p>Альметьевск</p>
-                  <p>Артем</p>
-                </div>
-              </div></SwiperSlide
-            >
-          </Swiper>
-          <img
-            src="@/assets/images/arrow-city.svg"
-            alt=""
-            class="arrow arrow_next"
-            @click="nextSlide"
-          />
+          <select
+            v-model="selectedCity"
+            v-if="foundCities"
+            style="margin-top: 10px; width: 100%"
+            @change="updateCityById"
+          >
+            <option disabled value="">Выберите город</option>
+            <option v-for="city in foundCities" :key="city.id" :value="city">
+              {{ city.name }}
+            </option>
+          </select>
         </div>
       </div>
-
-      <a
-        href="#"
-        class="cityModal__showAll"
-        v-if="!fullModal"
-        @click.prevent="fullModal = true"
-        >Показать все города</a
-      >
-      <a
-        href="#"
-        class="cityModal__showAll"
-        style="margin: 0 auto; display: block"
-        v-else
-        @click.prevent="fullModal = false"
-        >Скрыть все города</a
-      >
     </div>
   </Modal>
 </template>
 
 <script>
 import Modal from '@/components/Main/Modal'
-import SwiperCore, { Controller } from 'swiper'
-import { Swiper, SwiperSlide } from 'swiper/vue'
-import 'swiper/swiper.scss'
 import SearchHeader from '@/components/Main/Header/SearchHeader'
-
-SwiperCore.use([Controller])
+import { searchCityByName, updateCityById } from '@/hooks/main'
 
 export default {
   name: 'CityModal',
-  components: { SearchHeader, Modal, Swiper, SwiperSlide },
-  emits: ['close'],
+  components: { SearchHeader, Modal },
+  emits: ['close', 'onCitySelect', 'getUserData'],
   data() {
     return {
       fullModal: false,
       swiper: null,
+      selectedCity: null,
+      foundCities: null,
     }
   },
   methods: {
@@ -322,6 +54,15 @@ export default {
     },
     setControlledSwiper(swiper) {
       this.swiper = swiper
+    },
+    async searchCityByString(city) {
+      this.foundCities = (await searchCityByName(city)).city_list
+    },
+    async updateCityById() {
+      await updateCityById(this.selectedCity.id)
+      this.$emit('close')
+      this.$emit('getUserData')
+      this.$router.go()
     },
   },
 }

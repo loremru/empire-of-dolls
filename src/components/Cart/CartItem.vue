@@ -1,70 +1,84 @@
 <template>
   <div class="itemBody">
     <div class="itemBody__image">
-      <img
-        src="../../assets/images/sections/section(1).png"
-        alt="doll photo"
-      /><!-- :src="CartItem.photoURL" -->
+      <img :src="CartItem.image" alt="doll photo" />
     </div>
     <div v-if="isMobile" class="itemBody__mobile-info">
       <DailyDiscount styles="position: relative; width: 48px;"
         >20%</DailyDiscount
       >
       <p class="itemBody__mobile-info__item-name">
-        Кукла Пуллип- Вокалоид Хатсуне Мику
+        {{ CartItem.name }}
       </p>
-      <div class="itemBody__mobile-info__price">
+      <div class="itemBody__mobile-info__price" v-if="isAvailable">
         <div class="counter-block flex">
-          <BasicButton @click="count--" :height="28">-</BasicButton>
+          <BasicButton
+            @click="$emit('decCount', CartItem)"
+            :height="28"
+            :disabled="count == 1"
+            >-</BasicButton
+          >
           <div class="itemBody__counter__input">
             <BasicInput
               borderColor="transparent"
               align="center"
               :padding="'0'"
               :height="28"
-              v-model:value="count"
+              :value="count"
             />
           </div>
-          <BasicButton @click="count++" :height="28">+</BasicButton>
+          <BasicButton @click="$emit('incCount', CartItem)" :height="28"
+            >+</BasicButton
+          >
         </div>
         <div class="prices">
-          <p class="final-price">{{ CartItem.price * count }}р</p>
+          <p class="final-price">{{ CartItem.price_clean * count }}р</p>
           <p class="old-price">
-            {{ CartItem.sale * count + CartItem.price * count }}р
+            {{ CartItem.price_clean * count + CartItem.price_clean * count }}р
           </p>
         </div>
       </div>
+      <div v-else>
+        <p class="not-available" style="color: red">Нет в наличии</p>
+      </div>
     </div>
-    <div v-if="!isMobile" class="itemBody__description">
+    <div v-if="!isMobile && productInfo" class="itemBody__description">
       <div>
-        <p>Производитель: {{ CartItem.dollMaker }}</p>
-        <p>Артикул: {{ CartItem.dollMaker }}</p>
-        <p>Рейтинг: {{ CartItem.rating }} / 5</p>
+        <p>Производитель: {{ productInfo.brand }}</p>
+        <p>Артикул: {{ CartItem.code }}</p>
+        <p>Рейтинг: {{ productInfo.raiting }} / 5</p>
       </div>
     </div>
     <div v-if="!isMobile" class="itemBody__counter">
       <p v-if="isAvailable" class="available">В наличии</p>
       <p v-if="!isAvailable" class="not-available">Нет в наличии</p>
-      <div class="counter-block flex">
-        <BasicButton @click="count--" :height="34">-</BasicButton>
+      <div class="counter-block flex" v-if="isAvailable">
+        <BasicButton
+          @click="$emit('decCount', CartItem)"
+          :disabled="count == 1"
+          :height="34"
+          >-</BasicButton
+        >
         <div class="itemBody__counter__input">
           <BasicInput
             align="center"
             :padding="'0'"
             :height="34"
-            v-model:value="count"
+            :value="count"
           />
         </div>
-        <BasicButton @click="count++" :height="34">+</BasicButton>
+        <BasicButton @click="$emit('incCount', CartItem)" :height="34"
+          >+</BasicButton
+        >
       </div>
     </div>
     <div v-if="!isMobile" class="itemBody__price">
       <div>
         <p>
-          Цена: <span>{{ CartItem.price * count }}р</span>
+          Цена: <span>{{ CartItem.price_clean * count }}р</span>
         </p>
         <p>
-          Скидка: <span>{{ CartItem.sale * count }}р</span>
+          Скидка: <span>{{ CartItem.price_discount_clean * count }}р</span>
         </p>
       </div>
     </div>
@@ -79,6 +93,8 @@ import BasicButton from '@/components/BaseComponents/BasicButton'
 import BasicInput from '@/components/BaseComponents/BasicInput'
 import { isMobile, isTablet, isDesktop } from '@/store/display'
 import DailyDiscount from '@/components/Main/DailyProduct/DailyDiscount'
+import { getCurrentProduct } from '@/hooks/main'
+
 export default {
   name: 'CartItem',
   components: { DailyDiscount, BasicInput, BasicButton },
@@ -86,12 +102,19 @@ export default {
     CartItem: {
       type: Object,
     },
+    count: {
+      type: Number,
+    },
   },
   data() {
     return {
-      count: 1,
-      isAvailable: true,
+      productInfo: null,
+      isAvailable: this.count ? true : false,
     }
+  },
+  async mounted() {
+    const { product } = await getCurrentProduct(+this.CartItem.pid)
+    this.productInfo = product
   },
   setup() {
     return { isDesktop: isDesktop, isMobile: isMobile, isTablet: isTablet }
@@ -100,14 +123,6 @@ export default {
     deleteCardItem() {
       let i = this.CartItem
       this.$emit('deleteCardItem', i)
-    },
-  },
-  watch: {
-    count() {
-      if (this.count <= 0) {
-        this.deleteCardItem()
-        this.count = 0
-      }
     },
   },
 }

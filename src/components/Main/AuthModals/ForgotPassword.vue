@@ -1,9 +1,9 @@
 <template>
   <div class="login">
-    <form class="flex fxdc aic">
+    <form class="flex fxdc aic" @submit.prevent="forgotPass">
       <BasicInput
         placeholder="e-mail или телефон"
-        v-model:value="formData.input"
+        v-model:value="formData.email"
         :height="37"
       />
       <BasicButton :height="49" uppercase>восстановить пароль</BasicButton>
@@ -14,15 +14,29 @@
 <script>
 import BasicInput from '@/components/BaseComponents/BasicInput'
 import BasicButton from '@/components/BaseComponents/BasicButton'
+import { changePassword } from '@/hooks/auth'
 export default {
   name: 'ForgotPassword',
   components: { BasicButton, BasicInput },
   data() {
     return {
       formData: {
-        input: '',
+        email: '',
       },
     }
+  },
+  methods: {
+    async forgotPass() {
+      try {
+        await changePassword(this.formData)
+        this.$notify({
+          type: 'success',
+          title: 'Вы успешно изменили пароль',
+        })
+      } catch (e) {
+        console.log(e)
+      }
+    },
   },
 }
 </script>

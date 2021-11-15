@@ -8,6 +8,7 @@
       :value="value"
       :maxlength="max"
       @keyup="change"
+      @change="change"
       :placeholder="placeholder"
       :required="required"
     />

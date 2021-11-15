@@ -9,6 +9,7 @@
         :font-size="15"
         v-model:value="price[0]"
         style="margin-right: 6px"
+        @update:value="test"
       />
       <BasicInput
         :height="25"
@@ -16,6 +17,7 @@
         align="right"
         :font-size="15"
         v-model:value="price[1]"
+        @update:value="test"
       />
     </div>
   </div>
@@ -30,9 +32,14 @@ export default {
   components: { BasicInput, Slider },
   data() {
     return {
-      price: [0, 64000],
       max: 64000,
+      price: [0, 64000],
     }
+  },
+  methods: {
+    test(e) {
+      console.log(e)
+    },
   },
 }
 </script>

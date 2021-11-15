@@ -53,11 +53,8 @@ export default {
         try {
           this.loading = true
           await login(this.formData)
-          this.$notify({
-            type: 'success',
-            title: 'Вы успешно вошли в аккаунт',
-          })
           this.$emit('close')
+          this.$emit('login')
         } catch (e) {
           console.log(e)
         } finally {

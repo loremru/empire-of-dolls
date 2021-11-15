@@ -10,13 +10,14 @@
     </div>
     <div class="cabinet__head__bonus">
       <h3>Мои бонусы:</h3>
-      <span>83</span>
+      <span v-if="userPersonal">{{ userPersonal.user_bonus }}</span>
     </div>
   </div>
 </template>
 
 <script>
 import CabinetTabBtn from '@/components/Cabinet/CabinetTabBtn'
+import { getUserPersonal } from '@/hooks/main'
 export default {
   name: 'CabinetHeader',
   components: { CabinetTabBtn },
@@ -24,9 +25,11 @@ export default {
   data() {
     return {
       page: 0,
+      userPersonal: null,
     }
   },
-  mounted() {
+  async mounted() {
+    this.userPersonal = (await getUserPersonal()).user
     const query = Number(this.$route.query.page)
     if (query >= 0) {
       this.page = query

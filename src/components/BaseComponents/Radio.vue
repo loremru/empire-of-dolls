@@ -7,7 +7,7 @@
       @click="check"
       class="radio-label"
       :style="`font-size: ${fontSize}px`"
-      >{{ RadioItem.label }}</span
+      >{{ RadioItem.label || RadioItem.name }}</span
     >
   </div>
 </template>

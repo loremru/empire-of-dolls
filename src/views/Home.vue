@@ -15,7 +15,11 @@
               v-for="(prod, i) in popularProducts[0]"
               :key="i + 'swiper'"
             >
-              <ProductCard :product="prod" />
+              <ProductCard
+                :product="prod"
+                @get-update="toggleFavoriteProductStatus"
+                @updateProductInCart="updateProductInCart"
+              />
             </SwiperSlide>
           </Swiper>
           <SliderArrows
@@ -38,7 +42,11 @@
               v-for="(prod, i) in popularProducts[1]"
               :key="i + 'swiper1'"
             >
-              <ProductCard :product="prod" />
+              <ProductCard
+                :product="prod"
+                @get-update="toggleFavoriteProductStatus"
+                @updateProductInCart="updateProductInCart"
+              />
             </SwiperSlide>
           </Swiper>
           <SliderArrows
@@ -61,7 +69,11 @@
               v-for="(prod, i) in popularProducts[2]"
               :key="i + 'swiper2'"
             >
-              <ProductCard :product="prod" />
+              <ProductCard
+                :product="prod"
+                @get-update="toggleFavoriteProductStatus"
+                @updateProductInCart="updateProductInCart"
+              />
             </SwiperSlide>
           </Swiper>
           <SliderArrows
@@ -126,6 +138,7 @@ import {
   getDailyProducts,
   getPopularProducts,
 } from '@/hooks/main'
+
 SwiperCore.use([Controller])
 export default {
   name: 'Home',
@@ -146,12 +159,12 @@ export default {
     Swiper,
     SwiperSlide,
   },
+  emits: ['updateProductInCart'],
   data() {
     return {
       sliders: [],
       dailyProducts: [],
       categories: [],
-
       popularProducts: [],
     }
   },
@@ -160,17 +173,8 @@ export default {
       isMobile,
     }
   },
-  async mounted() {
-    const array = await getPopularProducts()
-    this.popularProducts.push(array.splice(0, 4))
-    this.popularProducts.push(array.splice(0, 4))
-    this.popularProducts.push(array.splice(0, 4))
-    console.log(this.popularProducts)
-    if (isMobile.value) {
-      this.dailyProducts = await getDailyProducts()
-      this.categories = await getCategories()
-      console.log(this.categories)
-    }
+  mounted() {
+    this.popularUpdate()
   },
   methods: {
     registerSliders(idx, swiper) {
@@ -181,6 +185,24 @@ export default {
     },
     slideNext(idx) {
       this.sliders[idx].slideNext()
+    },
+    async popularUpdate() {
+      const array = await getPopularProducts()
+      this.popularProducts.push(array.popular.splice(0, 4))
+      this.popularProducts.push(array.popular.splice(0, 4))
+      this.popularProducts.push(array.popular.splice(0, 4))
+      if (isMobile.value) {
+        this.dailyProducts = await getDailyProducts()
+        this.categories = await getCategories()
+      }
+    },
+    async toggleFavoriteProductStatus(item) {
+      let items = this.popularProducts.flat()
+      const newItem = items.find((prod) => prod.pid == item.pid)
+      newItem.favorite = !newItem.favorite
+    },
+    updateProductInCart(event) {
+      this.$emit('updateProductInCart', event)
     },
   },
 }

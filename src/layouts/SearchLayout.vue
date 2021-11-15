@@ -4,7 +4,7 @@
       <div id="contentOfPage">
         <MainContentHeader :breadcrumb-array="breadcrumbArray" />
         <CategorySlider />
-        <router-view />
+        <router-view @updateProductInCart="updateProductInCart" />
       </div>
     </div>
   </div>
@@ -42,6 +42,11 @@ export default {
       isDesktop,
       isTablet,
     }
+  },
+  methods: {
+    updateProductInCart(event) {
+      this.$emit('updateProductInCart', event)
+    },
   },
 }
 </script>

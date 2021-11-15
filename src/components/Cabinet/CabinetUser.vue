@@ -1,20 +1,32 @@
 <template>
-  <form class="user round-block">
+  <form class="user round-block" v-if="formData.user">
     <div class="flex user__container">
       <div class="user__column">
         <div class="user__block">
           <h3 class="user__header">Личная информация</h3>
           <div class="user__line">
             <p class="user__line__name">Фамилия</p>
-            <BasicInput :height="25" placeholder="Фамилия" />
+            <BasicInput
+              :height="25"
+              placeholder="Фамилия"
+              v-model:value="formData.user.surname"
+            />
           </div>
           <div class="user__line">
             <p class="user__line__name">Имя</p>
-            <BasicInput :height="25" placeholder="Имя" />
+            <BasicInput
+              :height="25"
+              placeholder="Имя"
+              v-model:value="formData.user.name"
+            />
           </div>
           <div class="user__line">
             <p class="user__line__name">Отчество</p>
-            <BasicInput :height="25" placeholder="Отчество" />
+            <BasicInput
+              :height="25"
+              placeholder="Отчество"
+              v-model:value="formData.user.middle_name"
+            />
           </div>
           <div class="user__line">
             <p class="user__line__name">Дата рождения</p>
@@ -25,15 +37,29 @@
           <h3 class="user__header">Контактная информация</h3>
           <div class="user__line">
             <p class="user__line__name">Телефон</p>
-            <BasicInput :height="25" type="tel" placeholder="Телефон" />
+            <BasicInput
+              :height="25"
+              type="tel"
+              placeholder="Телефон"
+              v-model:value="formData.user.phone"
+            />
           </div>
           <div class="user__line">
             <p class="user__line__name">Почта</p>
-            <BasicInput :height="25" type="email" placeholder="Почта" />
+            <BasicInput
+              :height="25"
+              type="email"
+              placeholder="Почта"
+              v-model:value="formData.user.user_email"
+            />
           </div>
           <div class="user__line">
             <p class="user__line__name">Город</p>
-            <BasicInput :height="25" placeholder="Город" />
+            <BasicInput
+              :height="25"
+              placeholder="Город"
+              v-model:value="formData.user.adress"
+            />
           </div>
         </div>
         <div class="user__block">
@@ -44,6 +70,8 @@
               :height="25"
               type="password"
               placeholder="Новый пароль"
+              v-model:value="formData.user.new_pass"
+              :required="false"
             />
           </div>
           <div class="user__line">
@@ -52,6 +80,8 @@
               :height="25"
               type="password"
               placeholder="Подтвердите пароль"
+              v-model:value="formData.user.conf_pass"
+              :required="false"
             />
           </div>
           <p class="user__text">
@@ -61,19 +91,24 @@
       </div>
       <div class="user__block_textarea">
         <h3 class="user__header">Любимые куклы</h3>
-        <BasicTextarea placeholder="Любимые куклы" />
+        <BasicTextarea
+          placeholder="Любимые куклы"
+          v-model:value="formData.user.favorite_toys"
+        />
         <BasicCheckbox
           style="margin-top: 13px"
-          v-model:value="formData.news"
+          v-model:value="formData.user.news"
           label="Я согласен на получение новостей и рассылок"
         />
       </div>
     </div>
     <div class="user__btn flex fxdc aic">
-      <BasicButton :height="isMobile ? 36 : 49" uppercase
+      <BasicButton
+        :height="isMobile ? 36 : 49"
+        uppercase
+        @click.prevent="updateUserPersonal"
         >Сохранить изменения</BasicButton
       >
-      <RouterLink to="/cabinet" class="txt user__link">Выйти</RouterLink>
     </div>
   </form>
 </template>
@@ -84,13 +119,24 @@ import BasicTextarea from '@/components/BaseComponents/BasicTextarea'
 import BasicCheckbox from '@/components/BaseComponents/BasicCheckbox'
 import BasicButton from '@/components/BaseComponents/BasicButton'
 import { isMobile } from '@/store/display'
+import { getUserPersonal, updateUserPersonal } from '@/hooks/main'
 export default {
   name: 'CabinetUser',
   components: { BasicButton, BasicCheckbox, BasicTextarea, BasicInput },
+  emits: ['updateProductInCart'],
   data() {
     return {
       formData: {
-        news: false,
+        user: {
+          name: '',
+          middle_name: '',
+          surname: '',
+          phone: '',
+          user_email: '',
+          user_city: 0,
+          new_pass: '',
+          favorite_toys: '',
+        },
         inputHeight: 25,
       },
     }
@@ -100,8 +146,22 @@ export default {
       isMobile,
     }
   },
-  mounted() {
+  async mounted() {
     this.inputHeight = isMobile ? 27 : 25
+    this.formData.user = (await getUserPersonal()).user
+  },
+  methods: {
+    async updateUserPersonal() {
+      if (this.formData.user.new_pass) {
+        await updateUserPersonal(this.formData.user)
+      } else {
+        await updateUserPersonal({
+          ...this.formData.user,
+          new_pass: null,
+        })
+      }
+      this.formData.user = (await getUserPersonal()).user
+    },
   },
 }
 </script>

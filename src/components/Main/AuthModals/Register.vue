@@ -55,7 +55,7 @@ export default {
           await register(this.formData)
           this.$notify({
             type: 'success',
-            title: 'Вы успешно зарегестрировались',
+            title: 'Вы успешно зарегистрировались',
           })
           this.$emit('close')
         } catch (e) {

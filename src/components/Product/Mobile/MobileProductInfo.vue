@@ -10,11 +10,7 @@
       <p><span>Производитель:</span> {{ product.brand }}</p>
       <p><span>Артикул:</span> {{ product.pid }}</p>
     </div>
-    <ProductPrice
-      :new-price="product.price"
-      :old-price="product.price_discount"
-      buy-btn
-    />
+    <ProductPrice :product="product" buy-btn />
   </div>
 </template>
 
