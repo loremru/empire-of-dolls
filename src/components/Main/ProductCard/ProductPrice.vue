@@ -1,14 +1,17 @@
 <template>
   <div class="product__buy">
     <div class="product__buy__price">
-      <p class="product__current-price">{{ newPrice }} р</p>
-      <p class="product__old-price" v-if="oldPrice !== '0'">{{ oldPrice }} р</p>
+      <p class="product__current-price">{{ product.price }} р</p>
+      <p class="product__old-price" v-if="product.price__discount !== '0'">
+        {{ product.price_discount }} р
+      </p>
     </div>
     <img
       src="@/assets/images/product-cart.svg"
       alt=""
       class="product__buy__cart"
       v-if="!buyBtn"
+      @click.stop="addToCart"
     />
     <BasicButton v-else uppercase>Купить</BasicButton>
   </div>
@@ -24,8 +27,18 @@ export default {
       type: Boolean,
       default: false,
     },
-    oldPrice: String,
-    newPrice: String,
+    product: {
+      type: Object,
+      required: true,
+    },
+  },
+  methods: {
+    async addToCart() {
+      this.$emit('updateProductInCart', {
+        product: this.product,
+        count: 1,
+      })
+    },
   },
 }
 </script>

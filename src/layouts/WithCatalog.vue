@@ -7,7 +7,7 @@
           v-if="isTablet"
           :breadcrumb-array="$route.meta.tableBreadCrumb || breadcrumbs"
         />
-        <router-view />
+        <router-view @updateProductInCart="updateProductInCart" />
       </div>
     </div>
   </div>
@@ -21,18 +21,19 @@ import { breadcrumbs } from '@/store/main'
 export default {
   name: 'WithCatalog',
   components: { MainContentHeader, CatalogSidebar },
-  props: {
-    contentOffset: {
-      type: Number,
-      default: 0,
-    },
-  },
+  props: ['contentOffset', 'userData'],
+  emits: ['updateProductInCart'],
   setup() {
     return {
       isDesktop,
       isTablet,
       breadcrumbs,
     }
+  },
+  methods: {
+    updateProductInCart(event) {
+      this.$emit('updateProductInCart', event)
+    },
   },
 }
 </script>

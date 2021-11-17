@@ -26,7 +26,8 @@ import DailyProductVertical from '@/components/Main/DailyProduct/DailyProductVer
 import CabinetMobileMenu from '@/components/Cabinet/Mobile/CabinetMobileMenu'
 import OrderCard from '@/components/Cabinet/OrderCard'
 export default {
-  name: 'Home',
+  name: 'Cabinet',
+  emits: ['updateProductInCart'],
   components: {
     OrderCard,
     CabinetMobileMenu,

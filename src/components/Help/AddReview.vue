@@ -4,7 +4,12 @@
     <form class="addReview__form" @submit.prevent="submit">
       <div class="flex">
         <div class="addReview__left">
-          <BasicInput placeholder="Заголовок отзыва" :height="25" />
+          <BasicInput
+            placeholder="Заголовок отзыва"
+            :height="25"
+            v-model:value="formData.title"
+            type="title"
+          />
           <div class="addReview__line">
             <div class="addReview__name">Имя <span>*</span></div>
             <BasicInput
@@ -34,6 +39,7 @@
           <BasicTextarea
             placeholder="Текст отзыва"
             required
+            type="text"
             v-model:value="formData.text"
           />
         </div>
@@ -62,6 +68,7 @@ export default {
         email: '',
         city: '',
         text: '',
+        title: '',
       },
       loading: false,
     }
@@ -81,6 +88,7 @@ export default {
             email: '',
             city: '',
             text: '',
+            title: '',
           }
         }
       } catch (e) {

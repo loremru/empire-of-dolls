@@ -8,11 +8,14 @@
         </SortBtn>
         <Sort />
       </div>
-      <div class="search-grid">
+      <div class="search-grid" v-if="products">
         <ProductCard
-          v-for="i in 20"
-          :key="i + 'product-search'"
-          title="Кукла Барби, игровой набор"
+          v-for="product in products"
+          :product="product"
+          :key="product.pid + 'product-search'"
+          :title="product.name"
+          @get-update="toggleFavoriteProductStatus"
+          @updateProductInCart="updateProductInCart"
         />
       </div>
     </div>
@@ -25,17 +28,64 @@ import ProductCard from '@/components/Main/ProductCard/ProductCard'
 import Sort from '@/components/Sort/Sort'
 import { isMobile } from '@/store/display'
 import SortBtn from '@/components/Sort/SortBtn'
+import { searchProducts } from '@/hooks/search'
 export default {
   name: 'Search',
   components: { SortBtn, Sort, ProductCard, Filter },
   data() {
     return {
       isFilterOpen: false,
+      filters: { filter1: false, filter2: true },
+      products: null,
     }
   },
+  mounted() {
+    this.updateProducts()
+  },
+  methods: {
+    async updateProducts() {
+      if (this.$route.params.id) {
+        const queryProducts = await searchProducts(this.$route.params.id, {
+          price_start: 500,
+          price_end: 1000,
+        })
+        this.products = queryProducts
+      }
+    },
+    async toggleFavoriteProductStatus(item) {
+      let items = this.products.flat()
+      const newItem = items.find((prod) => prod.pid == item.pid)
+      newItem.favorite = !newItem.favorite
+    },
+    updateProductInCart(event) {
+      this.$emit('updateProductInCart', event)
+    },
+  },
+
   setup() {
     return { isMobile }
   },
+  //   const route = useRoute()
+  //   // const products = ref(null)
+
+  //   // const filters = ref({
+  //   //   filter1: false,
+  //   //   filter2: true,
+  //   // })
+
+  //   onMounted(async () => {
+  //     if (route.params.id) {
+  //       const queryProducts = await searchProducts(
+  //         route.params.id,
+  //         this.filters.filter(Boolean)
+  //       )
+  //       this.products = queryProducts
+  //       console.log('query result ', queryProducts)
+  //     }
+  //   })
+
+  //   return { isMobile, products }
+  // },
 }
 </script>
 

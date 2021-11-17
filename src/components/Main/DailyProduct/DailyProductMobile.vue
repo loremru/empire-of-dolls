@@ -12,10 +12,7 @@
     <div class="daily-mob__body flex fxdc jcsb aifs">
       <DailyProductTag />
       <p class="txt">{{ product.name }}</p>
-      <ProductPrice
-        :new-price="product.price"
-        :old-price="product.price_discount"
-      />
+      <ProductPrice :product="product" />
     </div>
   </div>
 </template>

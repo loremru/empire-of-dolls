@@ -8,10 +8,13 @@
     </div>
     <div class="wish__grid">
       <ProductCard
-        title="Кукла Барби, игровой набор"
         close
-        v-for="i in 8"
-        :key="i + 'wish'"
+        v-for="i in favoriteProducts"
+        :product="i"
+        :key="i.pid + 'wish'"
+        :title="i.name"
+        @get-update="toggleFavoriteProductStatus"
+        @updateProductInCart="updateProductInCart"
       />
     </div>
   </div>
@@ -22,13 +25,37 @@ import BreadcrumbContainer from '@/components/BaseComponents/BreadcrumbContainer
 import Breadcrumb from '@/components/BaseComponents/Breadcrumb'
 import ProductCard from '@/components/Main/ProductCard/ProductCard'
 import { isTablet } from '@/store/display'
+import { getFavorites } from '@/hooks/main'
+
 export default {
   name: 'WishList',
   components: { ProductCard, Breadcrumb, BreadcrumbContainer },
+  data() {
+    return {
+      favoriteProducts: null,
+    }
+  },
   setup() {
     return {
       isTablet,
     }
+  },
+  mounted() {
+    this.updateProducts()
+  },
+  methods: {
+    async updateProducts() {
+      this.favoriteProducts = await getFavorites()
+    },
+    async toggleFavoriteProductStatus(item) {
+      const remainingFavoriteProducts = this.favoriteProducts
+        .flat()
+        .filter((prod) => prod.pid != item.pid)
+      this.favoriteProducts = remainingFavoriteProducts
+    },
+    updateProductInCart(event) {
+      this.$emit('updateProductInCart', event)
+    },
   },
 }
 </script>

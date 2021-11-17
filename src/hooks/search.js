@@ -8,3 +8,18 @@ export const getPopularSearch = async () => {
     throw e
   }
 }
+
+export const searchProducts = async (query, params) => {
+  try {
+    const searchParams = new URLSearchParams(params)
+    const { products } = (
+      await api.post(`/search/products?${searchParams.toString()}`, {
+        query,
+      })
+    ).data
+    return products
+  } catch (e) {
+    console.log(e)
+    throw e
+  }
+}

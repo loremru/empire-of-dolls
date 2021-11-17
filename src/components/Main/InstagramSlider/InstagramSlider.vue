@@ -12,8 +12,8 @@
         :spaceBetween="8"
         loop
       >
-        <SwiperSlide v-for="i in 8" :key="i + 'swiper12'">
-          <InstagramSlide />
+        <SwiperSlide v-for="slide in slides" :key="slide.alias + 'swiper12'">
+          <InstagramSlide :slide="slide" />
         </SwiperSlide>
       </Swiper>
       <SliderArrows
@@ -33,7 +33,7 @@ import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/swiper.scss'
 import SliderArrows from '@/components/BaseComponents/SliderArrows'
 import InstagramSlide from '@/components/Main/InstagramSlider/InstagramSlide'
-
+import { getMainSlider } from '@/hooks/main'
 SwiperCore.use([Controller])
 export default {
   name: 'InstagramSlider',
@@ -46,7 +46,11 @@ export default {
   data() {
     return {
       swiper: null,
+      slides: null,
     }
+  },
+  async mounted() {
+    this.slides = await getMainSlider()
   },
   methods: {
     registerSlider(swiper) {

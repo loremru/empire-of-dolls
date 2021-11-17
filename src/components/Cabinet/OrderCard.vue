@@ -1,16 +1,17 @@
 <template>
-  <div class="order round-block">
+  <div class="order round-block" v-for="order in orders" :key="order.oid">
     <div
       class="order__head hover-block"
       @click="toggleCard"
       :style="isOpen && 'border-color: #d7c3cd;'"
     >
-      <p class="txt order__id">#11014060</p>
-      <p class="txt order__name text-dots">
-        Горджусс - Я люблю тебя маленький кролик (32 см)
+      <p class="txt order__id" title="Номер заказа">#{{ order.fake_oid }}</p>
+      <p class="txt order__name text-dots" title="Наименование">
+        {{ order.products[0].name }}
       </p>
-      <p class="txt order__date">03.09.2020</p>
-      <p class="txt order__price">150 000 ₽</p>
+      <p class="txt order__date" title="Дата заказа">{{ order.date }}</p>
+      <p class="txt order__time" title="Время заказа">{{ order.time }}</p>
+      <p class="txt order__price" title="К оплате">{{ order.total }} ₽</p>
       <div
         class="order__arrow"
         :style="isOpen && 'transform: rotateZ(180deg);'"
@@ -19,33 +20,44 @@
       </div>
     </div>
     <div class="order__body" :class="{ order__body_active: isOpen }">
-      <p class="order__fullName">
-        <span class="order__cell__name">Полное наименование: </span>
-        <span>Горджусс - Я люблю тебя маленький кролик (32 см)</span>
-      </p>
+      <div class="order__fullName">
+        <span class="order__cell__name">Полное наименование товаров: </span>
+        <p v-for="product in order.products" :key="product.alias">
+          {{ product.name }}
+        </p>
+      </div>
       <div class="flex fxww jcsb aic">
         <div class="order__cell">
-          <p class="order__cell__name">кол-во</p>
-          <p class="txt"><b>1009</b></p>
+          <p class="order__cell__name">Кол-во</p>
+          <p class="txt">
+            <b>{{ order.products.length }}</b>
+          </p>
         </div>
         <div class="order__cell">
           <p class="order__cell__name">Доставка</p>
-          <p class="txt"><b>700р</b></p>
+          <p class="txt">
+            <b>{{ order.ship_cost }}р</b>
+          </p>
         </div>
         <div class="order__cell">
           <p class="order__cell__name">Скидка</p>
-          <p class="txt"><b>200р</b></p>
+          <p class="txt">
+            <b>{{ order.discount_sum }}р</b>
+          </p>
         </div>
         <div class="order__cell">
           <p class="order__cell__name">К оплате</p>
-          <p class="txt"><b>150000р</b></p>
+          <p class="txt">
+            <b>{{ order.total_pay }}р</b>
+          </p>
         </div>
         <div class="order__cell">
           <p class="order__cell__name">
-            Оплата заказа банковской картой на сайте Империи Кукол
+            {{ order.payment }}
           </p>
-          <p class="txt"><b>ОТКАЗ</b></p>
-          <p class="pink">Не оплачен</p>
+          <p class="txt">
+            <b>{{ order.status }}</b>
+          </p>
         </div>
         <!--      <div class="order__cell">-->
         <!--        <p class="txt"><b>ОТКАЗ</b></p>-->
@@ -57,12 +69,18 @@
 </template>
 
 <script>
+import { getUserOrders } from '@/hooks/main'
 export default {
   name: 'OrderCard',
   data() {
     return {
       isOpen: false,
+      orders: null,
     }
+  },
+  async mounted() {
+    const response = await getUserOrders()
+    this.orders = response.orders
   },
   methods: {
     toggleCard() {
@@ -111,7 +129,7 @@ export default {
     overflow: hidden;
     padding: 0 31px 0 20px;
     &_active {
-      height: 206px;
+      min-height: 226px;
       padding: 20px 31px 20px 20px;
     }
   }

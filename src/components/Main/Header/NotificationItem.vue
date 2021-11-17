@@ -2,7 +2,7 @@
   <div class="notification flex">
     <slot></slot>
     <div class="notification__circle">
-      <span>{{ amount }}</span>
+      <span>{{ productsInCartCount }}</span>
     </div>
   </div>
 </template>
@@ -10,12 +10,7 @@
 <script>
 export default {
   name: 'NotificationItem',
-  props: {
-    amount: {
-      type: Number,
-      default: 4,
-    },
-  },
+  props: ['productsInCartCount'],
 }
 </script>
 

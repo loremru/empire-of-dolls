@@ -38,17 +38,26 @@
           <RouterLink to="/wishList"
             ><img src="@/assets/images/like.svg" alt=""
           /></RouterLink>
-          <RouterLink to="#" @click.prevent="authModalChange('login')"
-            ><img src="@/assets/images/key.svg" alt=""
-          /></RouterLink>
+          <template v-if="userData.is_guest == 1">
+            <RouterLink to="#" @click.prevent="authModalChange('login')"
+              ><img src="@/assets/images/key.svg" alt=""
+            /></RouterLink>
+          </template>
+          <template v-else>
+            <HeaderProfile @userLogout="logout" />
+          </template>
           <RouterLink to="/cart"
-            ><NotificationItem
+            ><NotificationItem :productsInCartCount="productsInCartCount"
               ><img src="@/assets/images/cart.svg" alt="" /></NotificationItem
           ></RouterLink>
         </div>
       </div>
       <div class="header__bottom flex jcsb aic" v-if="!fixed && !isMobile">
-        <City />
+        <City
+          :city="selectedCity"
+          @onCitySelect="onCitySelect"
+          @getUserData="getUserData"
+        />
         <HeaderNav />
         <ConnectionLink v-if="isDesktop" />
         <div id="headerSub" v-else>
@@ -59,7 +68,11 @@
   </div>
   <MobileMenu v-if="isMenu" @close="isMenu = false" />
 
-  <AuthModals :auth-modal="authModal" @authModalChange="authModalChange" />
+  <AuthModals
+    :auth-modal="authModal"
+    @authModalChange="authModalChange"
+    @login="login"
+  />
 </template>
 
 <script>
@@ -74,9 +87,10 @@ import Subscribe from '@/components/Main/Subscribe/Subscribe'
 import MobileMenu from '@/components/Main/MobileMenu/MobileMenu'
 import PopularSearch from '@/components/Search/PopularSearch/PopularSearch'
 import AuthModals from '@/components/Main/AuthModals/AuthModals'
+import HeaderProfile from '@/components/Main/Header/HeaderProfile'
+
 export default {
   name: 'HeaderApp',
-  emits: ['fixedChange'],
   components: {
     AuthModals,
     PopularSearch,
@@ -88,7 +102,10 @@ export default {
     NotificationItem,
     SearchHeader,
     Logo,
+    HeaderProfile,
   },
+  props: ['userData', 'selectedCity'],
+  emits: ['fixedChange', 'getUserData', 'logout', 'onCitySelect'],
   data() {
     return {
       fixed: false,
@@ -100,7 +117,7 @@ export default {
   setup() {
     return { isDesktop, isMobile }
   },
-  mounted() {
+  async mounted() {
     document.addEventListener('scroll', () => {
       this.fixed = window.pageYOffset > this.$refs.header.offsetHeight
       this.$emit('fixedChange', {
@@ -136,10 +153,29 @@ export default {
     authModalChange(modal) {
       this.authModal = modal
     },
+    async getUserData() {
+      this.$emit('getUserData')
+    },
+    async logout() {
+      this.$emit('logout')
+    },
+    onCitySelect(city) {
+      this.$emit('onCitySelect', city)
+    },
+    login() {
+      this.$router.go()
+      this.$notify({
+        type: 'success',
+        title: 'Вы успешно вошли в аккаунт',
+      })
+    },
   },
   computed: {
     headerHeight() {
       return this.$refs.header.offsetHeight
+    },
+    productsInCartCount() {
+      return this.userData.cart_count
     },
   },
 }

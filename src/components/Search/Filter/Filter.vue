@@ -80,6 +80,9 @@ export default {
     document.removeEventListener('click', this.closeIfContain)
   },
   methods: {
+    updateSliderPrice(prices) {
+      console.log('prices updated ', prices)
+    },
     closeIfContain(e) {
       if (!this.$refs?.filter?.contains(e.target)) this.$emit('close')
     },

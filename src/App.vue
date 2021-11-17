@@ -1,19 +1,32 @@
 <template>
-  <HeaderApp @fixedChange="fixedHeaderChange" />
-  <InterestingModal
-    @close="isInteresting = false"
-    v-if="isInteresting && !isMobile"
-  />
-  <WithCatalog
-    v-if="$route.meta.layout === 'with-catalog'"
-    :content-offset="contentOffset"
-  />
-  <SearchLayout
-    v-else-if="$route.meta.layout === 'search'"
-    :content-offset="contentOffset"
-  />
-  <FooterApp />
+  <template v-if="userData">
+    <HeaderApp
+      :userData="userData"
+      :selectedCity="selectedCity"
+      @fixedChange="fixedHeaderChange"
+      @getUserData="getUserData"
+      @logout="logout"
+    />
 
+    <InterestingModal
+      @close="isInteresting = false"
+      v-if="isInteresting && !isMobile"
+    />
+    <WithCatalog
+      v-if="$route.meta.layout === 'with-catalog'"
+      :content-offset="contentOffset"
+      :userData="userData"
+      @updateProductInCart="updateProductInCart"
+      @logout="logout"
+    />
+    <SearchLayout
+      v-else-if="$route.meta.layout === 'search'"
+      :content-offset="contentOffset"
+      @updateProductInCart="updateProductInCart"
+    />
+    <FooterApp />
+  </template>
+  <template v-else>Загрузка...</template>
   <notifications position="bottom right" />
 </template>
 
@@ -25,6 +38,9 @@ import WithCatalog from '@/layouts/WithCatalog'
 import SearchLayout from '@/layouts/SearchLayout'
 import InterestingModal from '@/components/Main/InterestingModal'
 import { isMobile } from '@/store/display'
+import { getUserInfo } from '@/hooks/auth'
+import { addToCart, logout } from '@/hooks/main'
+
 export default {
   components: {
     InterestingModal,
@@ -37,6 +53,8 @@ export default {
     return {
       contentOffset: 0,
       isInteresting: false,
+      userData: null,
+      selectedCity: null,
     }
   },
   setup() {
@@ -44,11 +62,12 @@ export default {
       isMobile,
     }
   },
-  mounted() {
+  async mounted() {
     setDisplayType()
     window.addEventListener('resize', setDisplayType)
 
-    setTimeout(() => {
+    await this.getUserData()
+    setTimeout(async () => {
       const storage = localStorage.getItem('isInteresting')
       if (storage) {
         const [val, date] = storage.split(' ')
@@ -70,6 +89,26 @@ export default {
         'isInteresting',
         `1 ${new Date().getTime() + 259200000}`
       )
+    },
+    async getUserData() {
+      this.userData = await getUserInfo()
+      this.selectedCity = this.userData.user_city_name
+    },
+    async logout() {
+      await logout()
+      window.localStorage.clear()
+      this.userData = null
+      this.getUserData()
+    },
+    async updateProductInCart(event) {
+      if (event.product && event.count) {
+        await addToCart(event.product.pid, event.count)
+      }
+      if (event.dec) {
+        this.userData.cart_count--
+        return
+      }
+      this.userData.cart_count++
     },
   },
   watch: {

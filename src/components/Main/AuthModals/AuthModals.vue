@@ -18,7 +18,9 @@
     title="Вход на сайт"
     @close="closeAuthModal"
   >
-    <template #content><Login @close="closeAuthModal" /></template>
+    <template #content
+      ><Login @close="closeAuthModal" @login="loginHandler"
+    /></template>
     <template #buttons>
       <ConnectButtons
         :buttons="['Восстановить пароль', 'Регистрация']"
@@ -65,13 +67,16 @@ export default {
   props: {
     authModal: String,
   },
-  emits: ['authModalChange'],
+  emits: ['authModalChange', 'login'],
   methods: {
     openAuthModal(modal) {
       this.$emit('authModalChange', modal)
     },
     closeAuthModal() {
       this.$emit('authModalChange', '')
+    },
+    loginHandler() {
+      this.$emit('login')
     },
   },
 }

@@ -7,16 +7,18 @@
     <div class="product__img">
       <img :src="product.image" alt="" />
       <img
+        @click.stop="favoriteHandler(product.pid)"
         src="@/assets/images/product-favorite.svg"
         alt=""
         class="product__favorite"
-        v-if="!close"
+        v-if="!product.favorite"
       />
       <img
         src="@/assets/images/close.svg"
         alt=""
         class="product__favorite"
         style="width: 15px !important; top: 7px; right: 7px"
+        @click.stop="favoriteHandler(product.pid, 1)"
         v-else
       />
     </div>
@@ -24,8 +26,8 @@
       <p class="product__name">{{ product.name }}</p>
       <div class="product__price">
         <ProductPrice
-          :new-price="product.price"
-          :old-price="product.price_discount"
+          :product="product"
+          @updateProductInCart="updateProductInCart"
         />
       </div>
     </div>
@@ -34,6 +36,8 @@
 
 <script>
 import ProductPrice from '@/components/Main/ProductCard/ProductPrice'
+import { addToFavorite, deleteFromFavorite } from '@/hooks/main'
+
 export default {
   name: 'ProductCard',
   components: { ProductPrice },
@@ -46,6 +50,22 @@ export default {
       required: true,
     },
     close: Boolean,
+  },
+  methods: {
+    async favoriteHandler(pid, status) {
+      if (!status) {
+        await addToFavorite(pid).then(() => {
+          this.$emit('getUpdate', this.product)
+        })
+      } else {
+        await deleteFromFavorite(pid).then(() => {
+          this.$emit('getUpdate', this.product)
+        })
+      }
+    },
+    updateProductInCart(event) {
+      this.$emit('updateProductInCart', event)
+    },
   },
 }
 </script>
